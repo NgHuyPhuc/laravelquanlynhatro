@@ -31,12 +31,15 @@ class CreateHoaDonPhongTrosTable extends Migration
             $table->boolean('dung_mang'); // check xem phong co dung mang hay khong thong qua bang phong_tros
             $table->string('tien_dien_string'); // Tiền điện * giá (lưu = chữ)
             $table->string('tien_nuoc_string'); // Tiền nước * giá (lưu = chữ)
+            $table->string('chi_phi_phat_sinh'); // lưu text chi phí phát sinh
             $table->integer('tien_dien_int');// Tổng tiền điện (lưu = số int)
             $table->integer('tien_nuoc_int');// Tổng tiền nước ( lưu = số int)
+            $table->integer('tien_phat_sinh');// Tổng tiền điện (lưu = số int)
             $table->integer('so_tien_phai_tra'); // Tổng tiền phải trả (lưu bằng số int) 
-
+            $table->integer('so_tien_da_thanh_toan');// Số tiền đã thanh toán của hóa đơn này
+            $table->integer('so_du'); // Số dư của hóa đơn này
+            
             $table->tinyInteger('trang_thai')->default(0); // mac dinh la 0 chua thanh toan
-
             $table->timestamps();
         });
     }
