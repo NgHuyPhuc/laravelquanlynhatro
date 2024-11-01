@@ -13,8 +13,11 @@ class Tang extends Model
         'id_nha_tro',
         'ten_tang',
     ];
-    public function tang()
+    public function nhatro()
     {
         return $this->belongsTo(Tang::class, "id_nha_tro", "id");
+    }
+    public function phongtro(){
+        return $this->hasMany(PhongTro::class ,"id_tang","id");
     }
 }

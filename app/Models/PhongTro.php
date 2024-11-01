@@ -23,4 +23,13 @@ class PhongTro extends Model
     {
         return $this->belongsTo(Tang::class, "id_tang", "id");
     }
+    public function hoadon(){
+        return $this->hasMany(HoaDonPhongTro::class ,"id_phong_tro","id");
+    }
+    public function nguoithue(){
+        return $this->hasMany(ThongTinNguoiThue::class ,"id_phong_tro","id");
+    }
+    public function sodiennuoc(){
+        return $this->hasMany(SoDienNuocTheoPhong::class ,"id_phong_tro","id");
+    }
 }

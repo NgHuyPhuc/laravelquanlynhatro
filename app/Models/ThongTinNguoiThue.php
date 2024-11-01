@@ -22,4 +22,7 @@ class ThongTinNguoiThue extends Model
         'ngay_chuyen_toi_o',
         'ngay_chuyen_di',
     ];
+    public function anhxe(){
+        return $this->hasMany(AnhXe::class ,"id_nguoi_thue","id");
+    }
 }

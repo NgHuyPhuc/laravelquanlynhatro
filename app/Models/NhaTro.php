@@ -12,4 +12,7 @@ class NhaTro extends Model
         'id',
         'ten',
     ];
+    public function tang(){
+        return $this->hasMany(Tang::class ,"id_nha_tro","id");
+    }
 }
