@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Services\NhaTroService\NhaTroService;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,6 +26,11 @@ class AppServiceProvider extends ServiceProvider
                 $app->make(\App\Repositories\Repository\NhaTroRepository::class)
             );
         });
+        $this->app->bind(\App\Services\TangService\TangService::class, function ($app) {
+            return new \App\Services\TangService\TangService(
+                $app->make(\App\Repositories\Repository\TangRepository::class)
+            );
+        });
     }
 
     /**
@@ -34,5 +41,15 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        View::composer('backend.master.layouts.sidebar', function ($view) {
+            // Lấy instance của NhaTroService từ container
+            $nhatroService = $this->app->make(NhaTroService::class);
+            
+            // Gọi phương thức getall để lấy dữ liệu
+            $nhatroData = $nhatroService->getall();
+
+            // Truyền dữ liệu vào view
+            $view->with('nhatroData', $nhatroData);
+        });
     }
 }

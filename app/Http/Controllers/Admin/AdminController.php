@@ -3,12 +3,20 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\NhaTro\NhaTroController;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+    protected $nhatroController;
+    public function __construct(NhaTroController $nhatroController)
+    {
+        $this->nhatroController = $nhatroController;
+    }
     //
     public function index(){
-        return view('backend.index');
+        $data['nhatro'] = $this->nhatroController->getall();
+        // dd($data);
+        return view('backend.index', $data);
     }
 }

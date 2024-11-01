@@ -1,3 +1,9 @@
+{{-- @extends('backend/master/master')
+@section('title', 'Thêm mới nhà trọ')
+@section('main')
+
+@endsection --}}
+
 @extends('backend/master/master')
 @section('title', 'Trang chủ')
 @section('main')

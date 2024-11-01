@@ -23,5 +23,9 @@ class NhaTroService
         ];
         return $this->nhatro->create($data);
     }
+    public function getone($id)
+    {
+        return $this->nhatro->find($id);
+    }
 }
 ?>
