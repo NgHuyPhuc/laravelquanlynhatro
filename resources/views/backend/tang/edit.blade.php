@@ -35,11 +35,11 @@
                             @csrf
                           <div class="form-group">
                             <label for="exampleInputName1">Nhập tên tầng trọ:</label>
-                            <input name="tang" type="text" class="form-control" id="exampleInputName1" value="{{$tang->ten_tang}}" placeholder="Tầng . . .">
+                            <input name="ten_tang" type="text" class="form-control" id="exampleInputName1" value="{{$tang->ten_tang}}" placeholder="Tầng . . .">
                           </div>
                           <div class="form-group">
                             <label for="exampleInputName1">Nhập tầng trọ (Số):</label>
-                            <input name="so" type="number" class="form-control" id="exampleInputName1" value="{{$tang->ten_tang_so}}" placeholder="Tầng . . .">
+                            <input name="ten_tang_so" type="number" class="form-control" id="exampleInputName1" value="{{$tang->ten_tang_so}}" placeholder="Tầng . . .">
                           </div>
                           <button type="submit" class="btn btn-primary mr-2">Submit</button>
                           <button class="btn btn-light">Cancel</button>

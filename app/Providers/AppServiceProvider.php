@@ -31,6 +31,11 @@ class AppServiceProvider extends ServiceProvider
                 $app->make(\App\Repositories\Repository\TangRepository::class)
             );
         });
+        $this->app->bind(\App\Services\PhongTroService\PhongTroService::class, function ($app) {
+            return new \App\Services\PhongTroService\PhongTroService(
+                $app->make(\App\Repositories\Repository\PhongTroRepository::class)
+            );
+        });
     }
 
     /**

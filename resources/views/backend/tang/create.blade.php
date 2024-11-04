@@ -38,12 +38,12 @@
                                     @csrf
                                     <div class="form-group">
                                         <label for="exampleInputName1">Nhập tên tầng trọ:</label>
-                                        <input required name="tang" type="text" class="form-control"
+                                        <input required name="ten_tang" value="{{ old('ten_tang')}}" type="text" class="form-control"
                                             id="exampleInputName1" placeholder="Tên Tầng (Nhập chữ)">
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputName1">Nhập tên tầng (Số):</label>
-                                        <input required name="so" type="number" class="form-control"
+                                        <input required name="ten_tang_so" value="{{ old('ten_tang_so')}}" type="number" class="form-control"
                                             id="exampleInputName1" placeholder="Nhập Số">
                                     </div>
                                     <button type="submit" class="btn btn-primary mr-2">Submit</button>

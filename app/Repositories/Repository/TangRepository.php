@@ -16,7 +16,8 @@ class TangRepository extends BaseRepository implements TangRepositoryInterface
     }
     public function getall($id)
     {
-        return Tang::where('id_nha_tro', $id)->get();
+        // return Tang::where('id_nha_tro', $id)->orderby('ten_tang_so','asc')->get();
+        return Tang::where('id_nha_tro', $id)->orderby('ten_tang_so','desc')->get();
     }
 }
 ?>

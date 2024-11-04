@@ -13,6 +13,7 @@ class ChiPhiDichVu extends Model
         'tien_dien_int',
         'tien_nuoc_int',
         'tien_mang_int',
+        'tien_binh_nuoc',
         'anh_qr_code',
     ];
 }

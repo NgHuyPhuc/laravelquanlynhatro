@@ -13,14 +13,14 @@ class TangService
     }
     public function getall($id)
     {
-        return $this->tang->getall($id);
+        return $this->tang->getall($id);    
     }
     public function create(Request $request,$id)
     {
         $data = [
             'id_nha_tro' => $id,
-            'ten_tang' => $request->tang,
-            'ten_tang_so' => $request->so,
+            'ten_tang' => $request->ten_tang,
+            'ten_tang_so' => $request->ten_tang_so,
         ];
         return $this->tang->create($data);
     }
@@ -30,8 +30,8 @@ class TangService
     }
     public function update(Request $request, $id){
         $data = [
-            'ten_tang' => $request->tang,
-            'ten_tang_so' => $request->so,
+            'ten_tang' => $request->ten_tang,
+            'ten_tang_so' => $request->ten_tang_so,
         ];
         return $this->tang->update($id, $data);
     }

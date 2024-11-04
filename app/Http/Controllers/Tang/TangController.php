@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Tang;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TangCreateRequest;
 use App\Services\TangService\TangService;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -23,7 +24,8 @@ class TangController extends Controller
         $data['id'] = $id;
         return view('backend.tang.create',$data);
     }
-    public function store(Request $request,$id){
+    public function store(TangCreateRequest $request,$id){
+    // public function store(Request $request,$id){
 
         try {
             $this->tangService->create($request,$id);
