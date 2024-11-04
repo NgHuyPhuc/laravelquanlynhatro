@@ -20,6 +20,7 @@ class TangService
         $data = [
             'id_nha_tro' => $id,
             'ten_tang' => $request->tang,
+            'ten_tang_so' => $request->so,
         ];
         return $this->tang->create($data);
     }
@@ -30,6 +31,7 @@ class TangService
     public function update(Request $request, $id){
         $data = [
             'ten_tang' => $request->tang,
+            'ten_tang_so' => $request->so,
         ];
         return $this->tang->update($id, $data);
     }

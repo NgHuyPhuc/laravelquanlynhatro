@@ -20,6 +20,7 @@ class CreatePhongTrosTable extends Migration
 
             $table->string('ten_phong');
             $table->integer('gia_phong');
+            $table->integer('mua_nuoc'); // số lượng bình nước mua / sẽ lấy giá trong chi phi dich vu
             $table->boolean('dung_mang'); // cai nay se dung de dua thong tin sang ben hoa don
             $table->string('anh_hop_dong'); 
             $table->string('so_du'); //Số dư của phòng này này

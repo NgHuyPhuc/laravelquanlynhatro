@@ -37,8 +37,11 @@
                             <tbody>
                                 @foreach ($tang as $index => $item)
                                 <tr>
-                                    <td >
+                                    {{-- <td >
                                         {{$index + 1}}
+                                    </td> --}}
+                                    <td>
+                                      {{ $item->ten_tang_so }}
                                     </td>
                                     <td>
                                       {{ $item->ten_tang }}

@@ -12,6 +12,7 @@ class Tang extends Model
         'id',
         'id_nha_tro',
         'ten_tang',
+        'ten_tang_so',
     ];
     public function nhatro()
     {

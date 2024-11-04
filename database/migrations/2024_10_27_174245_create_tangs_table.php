@@ -19,7 +19,8 @@ class CreateTangsTable extends Migration
             $table->bigInteger('id_nha_tro')->unsigned();
             $table->foreign('id_nha_tro')->references('id')->on('nha_tros');
 
-            $table->string('ten_tang');
+            $table->string('ten_tang'); // ten hiển thị của tầng này
+            $table->integer('ten_tang_so')->unique();// dùng để lưu số thứ tự của tầng này để không phụ thuộc vào id
             $table->timestamps();
         });
     }
