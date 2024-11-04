@@ -36,6 +36,11 @@ class AppServiceProvider extends ServiceProvider
                 $app->make(\App\Repositories\Repository\PhongTroRepository::class)
             );
         });
+        $this->app->bind(\App\Services\ThongTinNguoiThueService\ThongTinNguoiThueService::class, function ($app) {
+            return new \App\Services\ThongTinNguoiThueService\ThongTinNguoiThueService(
+                $app->make(\App\Repositories\Repository\ThongTinNguoiThueRepository::class)
+            );
+        });
     }
 
     /**
