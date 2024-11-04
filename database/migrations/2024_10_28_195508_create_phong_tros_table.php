@@ -20,11 +20,11 @@ class CreatePhongTrosTable extends Migration
 
             $table->string('ten_phong');
             $table->integer('gia_phong');
-            $table->integer('mua_nuoc'); // số lượng bình nước mua / sẽ lấy giá trong chi phi dich vu
-            $table->boolean('dung_mang'); // cai nay se dung de dua thong tin sang ben hoa don
-            $table->string('anh_hop_dong'); 
-            $table->string('so_du'); //Số dư của phòng này này
-            $table->string('mo_ta'); // de viet gi do neu can
+            $table->integer('mua_nuoc')->default(0); // số lượng bình nước mua / sẽ lấy giá trong chi phi dich vu
+            $table->tinyInteger('dung_mang')->default(0); // cai nay se dung de dua thong tin sang ben hoa don
+            $table->string('anh_hop_dong')->default('default.png'); 
+            $table->integer('so_du')->default(0); //Số dư của phòng này này
+            $table->string('mo_ta')->default('Không có'); // de viet gi do neu can
             $table->tinyInteger('trang_thai')->default(0); // mac dinh la 0 - chua duoc thue
             $table->timestamps();
         });

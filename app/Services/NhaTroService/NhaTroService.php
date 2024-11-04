@@ -27,5 +27,8 @@ class NhaTroService
     {
         return $this->nhatro->find($id);
     }
+    public function getTangandPhongTro($id){
+        return $this->nhatro->getTangAndPhongTro($id);
+    }
 }
 ?>

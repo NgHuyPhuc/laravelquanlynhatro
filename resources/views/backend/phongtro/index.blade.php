@@ -1,335 +1,78 @@
 @extends('backend/master/master')
-@section('title', 'Quản lsy phòng trọ')
+@section('title', 'Quản lý phòng trọ')
 @section('main')
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="row">
-            <div class="row">
-                <h4 class="card-title">Quản lý nhà cho thuê 27/9/34</h4>
-                <a href="./suatennhatro.html" class=" ml-3"> Sửa tên</a>
-                <div class="col-12 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Chức năng</h4>
-                            <a href="./themmoitang.html" type="button" class="btn btn-success mb-4">Thêm mới Tầng
-                            </a>
-                            <a href="./themmoiphongtro.html" type="button" class="btn btn-success mb-4">Thêm mới Phòng
-                            </a>
-                            <div type="button" class="btn btn-info mb-4"> Tìm kiếm
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <h3 class="card-title text-uppercase text-danger">Tầng 3</h3>
-                            <div class="row">
-                                <div class="col-md-3 grid-margin stretch-card">
-                                    <div class="card">
-                                        <div class="card-body d-flex flex-column ">
-                                            <div class="mb-2">
-                                                <h4 class="mb-0 ">Phòng: 301</h4>
-                                            </div>
-                                            <h5 class="mb-3">Giá phòng: 2.000.000 đ</h5>
-                                            <div type="button"
-                                                class="btn btn-success btn-rounded btn-fw mb-4">Đang cho
-                                                thuê
-                                            </div>
-                                            <div type="button" class="btn btn-success mb-4">Tiền nhà tháng
-                                                9: Đã thanh toán
-                                            </div>
-                                            <div type="button" class="btn btn-info mb-4">Tiền thừa 2.000 VNĐ
-                                            </div>
-
-                                        </div>
-                                        <div class=" d-flex justify-content-center">
-                                            <a href="./chitietphongtro.html" type="button"
-                                                class="btn btn-outline-info btn-fw justify-content-center mb-4">Xem
-                                                thêm</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 grid-margin stretch-card">
-                                    <div class="card">
-                                        <div class="card-body d-flex flex-column ">
-                                            <div class="mb-2">
-                                                <h4 class="mb-0 ">Phòng: 302</h4>
-                                            </div>
-                                            <h5 class="mb-3">Giá phòng: 2.000.000 đ</h5>
-                                            <div type="button"
-                                                class="btn btn-success btn-rounded btn-fw mb-4">Đang cho
-                                                thuê
-                                            </div>
-                                            <div type="button" class="btn btn-danger mb-4">Tiền nhà tháng 9:
-                                                Chưa thanh toán
-                                            </div>
-                                            <div type="button" class="btn btn-warning mb-4">Tiền nợ 500.000
-                                                VNĐ
-                                            </div>
-                                        </div>
-                                        <div class=" d-flex justify-content-center">
-                                            <a href="#" type="button"
-                                                class="btn btn-outline-info btn-fw justify-content-center mb-4">Xem
-                                                thêm</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 grid-margin stretch-card">
-                                    <div class="card">
-                                        <div class="card-body d-flex flex-column ">
-                                            <div class="mb-2">
-                                                <h4 class="mb-0 ">Phòng: 303</h4>
-                                            </div>
-                                            <h5 class="mb-3">Giá phòng: 2.000.000 đ</h5>
-                                            <div type="button"
-                                                class="btn btn-danger btn-rounded btn-fw mb-4">Chưa cho thuê
-                                            </div>
-
-                                        </div>
-                                        <div class=" d-flex justify-content-center">
-                                            <a href="#" type="button"
-                                                class="btn btn-outline-info btn-fw justify-content-center mb-4">Xem
-                                                thêm</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 grid-margin stretch-card">
-                                    <div class="card">
-                                        <div class="card-body d-flex flex-column ">
-                                            <div class="mb-2">
-                                                <h4 class="mb-0 ">Phòng: 304</h4>
-                                            </div>
-                                            <h5 class="mb-3">Giá phòng: 2.000.000 đ</h5>
-                                            <div type="button"
-                                                class="btn btn-danger btn-rounded btn-fw mb-4">Chưa cho thuê
-                                            </div>
-                                        </div>
-                                        <div class=" d-flex justify-content-center">
-                                            <a href="#" type="button"
-                                                class="btn btn-outline-info btn-fw justify-content-center mb-4">Xem
-                                                thêm</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <h3 class="card-title text-danger text-uppercase ">Tầng 2</h3>
-                            <div class="row">
-                                <div class="col-md-3 grid-margin stretch-card">
-                                    <div class="card">
-                                        <div class="card-body d-flex flex-column ">
-                                            <div class="mb-2">
-                                                <h4 class="mb-0 ">Phòng: 201</h4>
-                                            </div>
-                                            <h5 class="mb-3">Giá phòng: 2.000.000 đ</h5>
-                                            <div type="button"
-                                                class="btn btn-success btn-rounded btn-fw mb-4">Đang cho
-                                                thuê
-                                            </div>
-                                            <div type="button" class="btn btn-success mb-4">Tiền nhà tháng
-                                                9: Đã thanh toán
-                                            </div>
-
-                                        </div>
-                                        <div class=" d-flex justify-content-center">
-                                            <a href="#" type="button"
-                                                class="btn btn-outline-info btn-fw justify-content-center mb-4">Xem
-                                                thêm</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 grid-margin stretch-card">
-                                    <div class="card">
-                                        <div class="card-body d-flex flex-column ">
-                                            <div class="mb-2">
-                                                <h4 class="mb-0 ">Phòng: 202</h4>
-                                            </div>
-                                            <h5 class="mb-3">Giá phòng: 2.000.000 đ</h5>
-                                            <div type="button"
-                                                class="btn btn-danger btn-rounded btn-fw mb-4">Chưa cho thuê
-                                            </div>
-
-                                        </div>
-                                        <div class=" d-flex justify-content-center">
-                                            <a href="#" type="button"
-                                                class="btn btn-outline-info btn-fw justify-content-center mb-4">Xem
-                                                thêm</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 grid-margin stretch-card">
-                                    <div class="card">
-                                        <div class="card-body d-flex flex-column ">
-                                            <div class="mb-2">
-                                                <h4 class="mb-0 ">Phòng: 203</h4>
-                                            </div>
-                                            <h5 class="mb-3">Giá phòng: 2.000.000 đ</h5>
-                                            <div type="button"
-                                                class="btn btn-success btn-rounded btn-fw mb-4">Đang cho
-                                                thuê
-                                            </div>
-                                            <div type="button" class="btn btn-danger mb-4">Tiền nhà tháng 9:
-                                                Chưa thanh toán
-                                            </div>
-                                        </div>
-                                        <div class=" d-flex justify-content-center">
-                                            <a href="#" type="button"
-                                                class="btn btn-outline-info btn-fw justify-content-center mb-4">Xem
-                                                thêm</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 grid-margin stretch-card">
-                                    <div class="card">
-                                        <div class="card-body d-flex flex-column ">
-                                            <div class="mb-2">
-                                                <h4 class="mb-0 ">Phòng: 204</h4>
-                                            </div>
-                                            <h5 class="mb-3">Giá phòng: 2.000.000 đ</h5>
-                                            <div type="button"
-                                                class="btn btn-danger btn-rounded btn-fw mb-4">Chưa cho thuê
-                                            </div>
-                                        </div>
-                                        <div class=" d-flex justify-content-center">
-                                            <a href="#" type="button"
-                                                class="btn btn-outline-info btn-fw justify-content-center mb-4">Xem
-                                                thêm</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-12 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <h3 class="card-title text-uppercase text-danger">Tầng 1</h3>
-                            <div class="row">
-                                <div class="col-md-3 grid-margin stretch-card">
-                                    <div class="card">
-                                        <div class="card-body d-flex flex-column ">
-                                            <div class="mb-2">
-                                                <h4 class="mb-0 ">Phòng: 101</h4>
-                                            </div>
-                                            <h5 class="mb-3">Giá phòng: 2.000.000 đ</h5>
-                                            <div type="button"
-                                                class="btn btn-success btn-rounded btn-fw mb-4">Đang cho
-                                                thuê
-                                            </div>
-                                            <div type="button" class="btn btn-success mb-4">Tiền nhà tháng
-                                                9: Đã thanh toán
-                                            </div>
-
-                                        </div>
-                                        <div class=" d-flex justify-content-center">
-                                            <a href="#" type="button"
-                                                class="btn btn-outline-info btn-fw justify-content-center mb-4">Xem
-                                                thêm</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 grid-margin stretch-card">
-                                    <div class="card">
-                                        <div class="card-body d-flex flex-column ">
-                                            <div class="mb-2">
-                                                <h4 class="mb-0 ">Phòng: 102</h4>
-                                            </div>
-                                            <h5 class="mb-3">Giá phòng: 2.000.000 đ</h5>
-                                            <div type="button"
-                                                class="btn btn-danger btn-rounded btn-fw mb-4">Chưa cho thuê
-                                            </div>
-
-                                        </div>
-                                        <div class=" d-flex justify-content-center">
-                                            <a href="#" type="button"
-                                                class="btn btn-outline-info btn-fw justify-content-center mb-4">Xem
-                                                thêm</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 grid-margin stretch-card">
-                                    <div class="card">
-                                        <div class="card-body d-flex flex-column ">
-                                            <div class="mb-2">
-                                                <h4 class="mb-0 ">Phòng: 103</h4>
-                                            </div>
-                                            <h5 class="mb-3">Giá phòng: 2.000.000 đ</h5>
-                                            <div type="button"
-                                                class="btn btn-success btn-rounded btn-fw mb-4">Đang cho
-                                                thuê
-                                            </div>
-                                            <div type="button" class="btn btn-danger mb-4">Tiền nhà tháng 9:
-                                                Chưa thanh toán
-                                            </div>
-                                        </div>
-                                        <div class=" d-flex justify-content-center">
-                                            <a href="#" type="button"
-                                                class="btn btn-outline-info btn-fw justify-content-center mb-4">Xem
-                                                thêm</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 grid-margin stretch-card">
-                                    <div class="card">
-                                        <div class="card-body d-flex flex-column ">
-                                            <div class="mb-2">
-                                                <h4 class="mb-0 ">Phòng: 104</h4>
-                                            </div>
-                                            <h5 class="mb-3">Giá phòng: 2.000.000 đ</h5>
-                                            <div type="button"
-                                                class="btn btn-danger btn-rounded btn-fw mb-4">Chưa cho thuê
-                                            </div>
-                                        </div>
-                                        <div class=" d-flex justify-content-center">
-                                            <a href="#" type="button"
-                                                class="btn btn-outline-info btn-fw justify-content-center mb-4">Xem
-                                                thêm</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-
-
-            </div>
-            <!-- content-wrapper ends -->
-            <!-- partial:partials/_footer.html -->
-            <footer class="footer">
+            <div class="col-12 grid-margin stretch-card">
                 <div class="card">
-                    <div class="card-body">
-                        <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                            <span
-                                class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright
-                                © 2020 <a href="https://www.bootstrapdash.com/" class="text-muted"
-                                    target="_blank">Bootstrapdash</a>. All rights reserved.</span>
-                            <span
-                                class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center text-muted">Free
-                                <a href="https://www.bootstrapdash.com/" class="text-muted"
-                                    target="_blank">Bootstrap dashboard</a> templates from
-                                Bootstrapdash.com</span>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card-body">
+                                <h4 class="card-title">Chức năng phòng 301</h4>
+                                <div class="template-demo">
+                                    <a href="./themmoinguoithue.html" class="btn btn-info">Thêm mới người
+                                        thuê phòng</a>
+                                    <a href="./xemthongtinnguoithue.html" class="btn btn-info">Xem thông tin người thuê phòng</a>
+                                    <a href="./taohoadontiennha.html" class="btn btn-success">Tạo hóa đơn tiền phòng</a>
+                                    <a href="./xemhoadontiennha.html" class="btn btn-success">Xem hóa đơn tiền phòng</a>
+                                    <a href="{{route('phongtro.suaphong.get',['id' => $id, 'id_phong' => $phongtro->id])}}" class="btn btn-danger">Chỉnh sửa thông tin phòng</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </footer>
-            <!-- partial -->
+            </div>
+            <div class="col-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card-body">
+                                <h4 class="card-title">Thông tin phòng 301</h4>
+                                @if ($phongtro->trang_thai == 0)
+                                    Phòng chưa được cho thuê
+                                @else
+                                <table class="table table-striped">
+                                    <tbody>
+                                        <tr>
+                                            <td class="py-1">
+                                                <h6>Số người thuê:</h6>
+                                            </td>
+                                            <td>
+                                                <h6>{{$phongtro->nguoidangthue->count()}}</h6>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-1">
+                                                <h6>Tiền phòng: </h6>
+                                            </td>
+                                            <td>
+                                                <h6>{{$phongtro->gia_phong}} đ</h6>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-1">
+                                                <h6>Dùng internet: </h6>
+                                            </td>
+                                            <td>
+                                                <h6>{{$phongtro->dung_mang ? 'Có' : 'Không'}}</h6>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="template-demo mt-3">
+                                    <h6>Số người thuê: 3</h6>
+                                    <h6>Tiền phòng: {{$phongtro->gia_phong}} đ</h6>
+                                    <h6>Dùng internet: {{$phongtro->dung_mang ? 'Có' : 'Không'}}</h6>
+                                </div>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <!-- main-panel ends -->
     </div>
-    <!-- page-body-wrapper ends -->
 </div>
 
 @endsection

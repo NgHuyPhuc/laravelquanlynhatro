@@ -15,4 +15,7 @@ class NhaTro extends Model
     public function tang(){
         return $this->hasMany(Tang::class ,"id_nha_tro","id");
     }
+    public function tangdesc(){
+        return $this->hasMany(Tang::class ,"id_nha_tro","id")->orderby('ten_tang_so','desc');
+    }
 }

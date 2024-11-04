@@ -29,6 +29,9 @@ class PhongTro extends Model
     public function nguoithue(){
         return $this->hasMany(ThongTinNguoiThue::class ,"id_phong_tro","id");
     }
+    public function nguoidangthue(){
+        return $this->hasMany(ThongTinNguoiThue::class ,"id_phong_tro","id")->where('trang_thai', 1);
+    }
     public function sodiennuoc(){
         return $this->hasMany(SoDienNuocTheoPhong::class ,"id_phong_tro","id");
     }

@@ -5,6 +5,6 @@ use App\Repositories\BaseRepositoryInterface;
 
 interface NhaTroRepositoryInterface extends BaseRepositoryInterface
 {
-    
+    public function getTangandPhongTro($id);
 }
 ?>

@@ -5,6 +5,6 @@ use App\Repositories\BaseRepositoryInterface;
 
 interface PhongTroRepositoryInterface extends BaseRepositoryInterface
 {
-    
+    public function countnguoi($id);
 }
 ?>

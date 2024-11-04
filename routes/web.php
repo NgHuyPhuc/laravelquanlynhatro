@@ -27,7 +27,7 @@ Route::post('/postthemmoinhatro', [NhaTroController::class, 'store'])->name('nha
 
 // Route::get('/nhatro/{id}', [AdminController::class, 'index']);
 // Route::get('/phongtro', [PhongTroController::class, 'index']);
-Route::prefix('nhatro/{id}')->group(function () {
+Route::middleware('fetch.nhatro')->prefix('nhatro/{id}')->group(function () {
     Route::get('/', [NhaTroController::class, 'show'])->name('nhatro.show');
 
     Route::prefix('tang')->group(function () {
@@ -39,10 +39,20 @@ Route::prefix('nhatro/{id}')->group(function () {
         Route::get('/xoatang/{id_tang}', [TangController::class, 'destroy'])->name('nhatro.xoatang');
     });
 
+    Route::prefix('phong')->group(function () {
+        Route::get('/', [PhongTroController::class, 'index'])->name('nhatro.phong.show');
+        Route::get('/thongtinphong/{id_phong}', [PhongTroController::class, 'info'])->name('nhatro.phong.show.info');
+        Route::get('/themphong', [PhongTroController::class, 'create'])->name('phongtro.themphong');
+        Route::post('/themphong', [PhongTroController::class, 'store'])->name('phongtro.storephong');
+        Route::get('/suaphong/{id_phong}', [PhongTroController::class, 'edit'])->name('phongtro.suaphong.get');
+        Route::post('/suaphong/{id_phong}', [PhongTroController::class, 'update'])->name('phongtro.suaphong.post');
+        Route::get('/xoaphong/{id_phong}', [PhongTroController::class, 'destroy'])->name('phongtro.xoaphong');
+    });
+
 
     // Định nghĩa URL để hiển thị chi tiết phòng trọ
-    Route::get('/phongtro', [AdminController::class, 'show'])->name('phongtro.show.all');
-    Route::get('/themmoiphongtro', [AdminController::class, 'show'])->name('phongtro.create');
-    Route::post('/themmoiphongtro', [AdminController::class, 'show'])->name('phongtro.store');
-    Route::get('/phongtro/{roomId}', [AdminController::class, 'show'])->name('nhatro.phongtro.show');
+    // Route::get('/phongtro', [AdminController::class, 'show'])->name('phongtro.show.all');
+    // Route::get('/themmoiphongtro', [AdminController::class, 'show'])->name('phongtro.create');
+    // Route::post('/themmoiphongtro', [AdminController::class, 'show'])->name('phongtro.store');
+    // Route::get('/phongtro/{roomId}', [AdminController::class, 'show'])->name('nhatro.phongtro.show');
 });

@@ -14,5 +14,9 @@ class NhaTroRepository extends BaseRepository implements NhaTroRepositoryInterfa
     {
         parent::__construct($nhatro);
     }
+    public function getTangandPhongTro($id){
+        $nhatro = NhaTro::with(['tangdesc.phongtro'])->find($id);
+        return $nhatro;
+    }
 }
 ?>
