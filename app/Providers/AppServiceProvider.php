@@ -41,6 +41,16 @@ class AppServiceProvider extends ServiceProvider
                 $app->make(\App\Repositories\Repository\ThongTinNguoiThueRepository::class)
             );
         });
+        $this->app->bind(\App\Services\ChiPhiDichVuService\ChiPhiDichVuService::class, function ($app) {
+            return new \App\Services\ChiPhiDichVuService\ChiPhiDichVuService(
+                $app->make(\App\Repositories\Repository\ChiPhiDichVuRepository::class)
+            );
+        });
+        $this->app->bind(\App\Services\HoaDonService\HoaDonService::class, function ($app) {
+            return new \App\Services\HoaDonService\HoaDonService(
+                $app->make(\App\Repositories\Repository\HoaDonRepository::class)
+            );
+        });
     }
 
     /**

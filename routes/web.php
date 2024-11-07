@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\HoaDonPhongTro\HoaDonPhongTroController;
 use App\Http\Controllers\NhaTro\NhaTroController;
 use App\Http\Controllers\PhongTro\PhongTroController;
 use App\Http\Controllers\Tang\TangController;
@@ -59,10 +60,18 @@ Route::middleware('fetch.nhatro')->prefix('nhatro/{id}')->group(function () {
             Route::post('/suanguoithue/{id_nguoi_thue}', [ThongTinNguoiThueController::class, 'update'])->name('nguoitro.suanguoi.post');
             Route::get('/xoanguoi/{id_nguoi_thue}', [ThongTinNguoiThueController::class, 'destroy'])->name('nguoitro.xoanguoi');
         });
+        Route::prefix('/{id_phong}/hoadon')->group(function () {
+            // Route::get('/', [HoaDonPhongTroController::class, 'index'])->name('nhatro.phong.nguoithue.show.all.info');
+            Route::get('/all', [HoaDonPhongTroController::class, 'infoall'])->name('phong.hoadon.danhsach.all');
+            Route::get('/thongtin/{id_hoadon}', [HoaDonPhongTroController::class, 'info'])->name('nhatro.phong.hoadon.show.1.info');
+            Route::get('/themhoadon', [HoaDonPhongTroController::class, 'create'])->name('phongtro.hoadon.themhoadon');
+            Route::post('/themhoadon', [HoaDonPhongTroController::class, 'store'])->name('phongtro.hoadon.storehoadon');
+            Route::get('/suahoadon/{id_hoadon}', [HoaDonPhongTroController::class, 'edit'])->name('hoadontro.suahoadon.get');
+            Route::post('/suahoadon/{id_hoadon}', [HoaDonPhongTroController::class, 'update'])->name('hoadontro.suahoadon.post');
+            Route::get('/xoahoadon/{id_hoadon}', [HoaDonPhongTroController::class, 'destroy'])->name('hoadontro.xoahoadon');
+        });
     });
     
-
-
     // Định nghĩa URL để hiển thị chi tiết phòng trọ
     // Route::get('/phongtro', [AdminController::class, 'show'])->name('phongtro.show.all');
     // Route::get('/themmoiphongtro', [AdminController::class, 'show'])->name('phongtro.create');
