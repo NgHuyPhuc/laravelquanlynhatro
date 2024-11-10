@@ -22,7 +22,8 @@ class CreateSoDienNuocTheoPhongsTable extends Migration
             $table->date('date');
             $table->integer('so_dien');
             $table->integer('so_nuoc');
-            
+            $table->string('chi_phi_phat_sinh'); // lưu text chi phí phát sinh
+            $table->integer('tien_phat_sinh');// Tổng tiền điện (lưu = số int)
             $table->timestamps();
         });
     }

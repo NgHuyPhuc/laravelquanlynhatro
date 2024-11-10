@@ -1,11 +1,14 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\ChiPhiDichVu\ChiPhiDichVuController;
 use App\Http\Controllers\HoaDonPhongTro\HoaDonPhongTroController;
 use App\Http\Controllers\NhaTro\NhaTroController;
 use App\Http\Controllers\PhongTro\PhongTroController;
+use App\Http\Controllers\SoDienNuocTheoPhong\SoDienNuocTheoPhongController;
 use App\Http\Controllers\Tang\TangController;
 use App\Http\Controllers\ThongTinNguoiThue\ThongTinNguoiThueController;
+use App\Models\SoDienNuocTheoPhong;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,6 +43,14 @@ Route::middleware('fetch.nhatro')->prefix('nhatro/{id}')->group(function () {
         Route::post('/suatang/{id_tang}', [TangController::class, 'update'])->name('nhatro.suatang.post');
         Route::get('/xoatang/{id_tang}', [TangController::class, 'destroy'])->name('nhatro.xoatang');
     });
+    Route::prefix('chiphi')->group(function () {
+        Route::get('/', [ChiPhiDichVuController::class, 'index'])->name('nhatro.chiphi.show');
+        Route::get('/themmoi', [ChiPhiDichVuController::class, 'create'])->name('nhatro.themchiphi');
+        Route::post('/themmoi', [ChiPhiDichVuController::class, 'store'])->name('nhatro.storechiphi');
+        Route::get('/suachiphi/{id_chiphi}', [ChiPhiDichVuController::class, 'edit'])->name('nhatro.suachiphi.get');
+        Route::post('/suachiphi/{id_chiphi}', [ChiPhiDichVuController::class, 'update'])->name('nhatro.suachiphi.post');
+        Route::get('/xoachiphi/{id_chiphi}', [ChiPhiDichVuController::class, 'destroy'])->name('nhatro.xoachiphi');
+    });
 
     Route::prefix('phong')->group(function () {
         Route::get('/', [PhongTroController::class, 'index'])->name('nhatro.phong.show');
@@ -66,10 +77,12 @@ Route::middleware('fetch.nhatro')->prefix('nhatro/{id}')->group(function () {
             Route::get('/thongtin/{id_hoadon}', [HoaDonPhongTroController::class, 'info'])->name('nhatro.phong.hoadon.show.1.info');
             Route::get('/themhoadon', [HoaDonPhongTroController::class, 'create'])->name('phongtro.hoadon.themhoadon');
             Route::post('/themhoadon', [HoaDonPhongTroController::class, 'store'])->name('phongtro.hoadon.storehoadon');
+            Route::post('/sodiennuoc', [SoDienNuocTheoPhongController::class, 'store'])->name('sodien.nuoc.theophong');
             Route::get('/suahoadon/{id_hoadon}', [HoaDonPhongTroController::class, 'edit'])->name('hoadontro.suahoadon.get');
             Route::post('/suahoadon/{id_hoadon}', [HoaDonPhongTroController::class, 'update'])->name('hoadontro.suahoadon.post');
             Route::get('/xoahoadon/{id_hoadon}', [HoaDonPhongTroController::class, 'destroy'])->name('hoadontro.xoahoadon');
         });
+        
     });
     
     // Định nghĩa URL để hiển thị chi tiết phòng trọ

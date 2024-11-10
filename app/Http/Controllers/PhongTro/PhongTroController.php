@@ -34,7 +34,7 @@ class PhongTroController extends Controller
     }
     public function edit($id, $id_phong){
         $data['tang'] = $this->tangService->getall($id);
-        $data['phongtro'] = $this->phongTroService->getone($id_phong);
+        $data['phong'] = $this->phongTroService->getone($id_phong);
         $data['id'] = $id;
         return view('backend.phongtro.edit',$data);
     }

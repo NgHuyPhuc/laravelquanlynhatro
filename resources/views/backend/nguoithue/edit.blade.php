@@ -25,22 +25,6 @@
                 </div>
             </div>
             
-            <!-- <div class="col-12 grid-margin stretch-card">
-                <div class="card">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card-body">
-                                <h4 class="card-title">Thông tin phòng 301</h4>
-                                <div class="template-demo mt-3">
-                                    <h6>Số người thuê: 3</h6>
-                                    <h6>Tiền phòng: 2.000.000</h6>
-                                    <h6>Dùng internet: Có</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
             <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
@@ -48,7 +32,7 @@
                     <p class="card-description">
                       Thêm mới người thuê {{$phong->ten_phong}}
                     </p>
-                    <form class="forms-sample" method="POST" action="{{route('phongtro.nguoithue.storenguoi',['id' => $id, 'id_phong' => $id_phong])}}" enctype="multipart/form-data">
+                    <form class="forms-sample" method="POST" action="{{route('nguoitro.suanguoi.post',['id' => $id, 'id_phong' => $id_phong, 'id_nguoi_thue' => $nguoithue->id])}}" enctype="multipart/form-data">
                         @csrf
                       <div class="form-group">
                         <label for="name">Tên</label>

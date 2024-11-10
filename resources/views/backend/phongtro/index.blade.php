@@ -13,8 +13,9 @@
                                 <div class="template-demo">
                                     <a href="{{route('phongtro.nguoithue.themnguoi',['id' => $nhatro->id, 'id_phong' => $phongtro->id])}}" class="btn btn-info">Thêm mới người
                                         thuê phòng</a>
+                                        {{-- phongtro.hoadon.themhoadon --}}
                                     <a href="{{route('nhatro.phong.nguoithue.show.all.info',['id' => $id, 'id_phong' => $phongtro->id])}}" class="btn btn-info">Xem thông tin người thuê phòng</a>
-                                    <a href="./taohoadontiennha.html" class="btn btn-success">Tạo hóa đơn tiền phòng</a>
+                                    <a href="{{route('phongtro.hoadon.themhoadon',['id' => $nhatro->id, 'id_phong' => $phongtro->id])}}" class="btn btn-success">Tạo hóa đơn tiền phòng</a>
                                     <a href="./xemhoadontiennha.html" class="btn btn-success">Xem hóa đơn tiền phòng</a>
                                     <a href="{{route('phongtro.suaphong.get',['id' => $nhatro->id, 'id_phong' => $phongtro->id])}}" class="btn btn-danger">Chỉnh sửa thông tin phòng</a>
                                 </div>

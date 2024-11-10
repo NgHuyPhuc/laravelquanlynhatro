@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class TangCreateRequest extends FormRequest
 {
@@ -25,7 +26,11 @@ class TangCreateRequest extends FormRequest
     {
         return [
             'ten_tang' => 'required|string|max:255', // tên nhà trọ là bắt buộc, phải là chuỗi, không dài quá 255 ký tự, và duy nhất trong bảng nhatros
-            'ten_tang_so' => 'required|numeric|unique:tangs',
+            'ten_tang_so' => [
+                'required',
+                'numeric',
+                Rule::unique('tangs')->where('id_nha_tro', $this->id_nha_tro),
+            ],
         ];
     }
 }

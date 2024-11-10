@@ -14,6 +14,8 @@ class SoDienNuocTheoPhong extends Model
         'date',
         'so_dien',
         'so_nuoc',
+        'chi_phi_phat_sinh',
+        'tien_phat_sinh',
     ];
     public function phongtro()
     {

@@ -42,7 +42,9 @@ class ThongTinNguoiThueController extends Controller
         $data['id_nguoi_thue'] = $id_nguoi_thue;
         return view('backend.nguoithue.edit', $data);
     }
-    public function update($id, $id_phong){
-        return view('backend.nguoithue.index');
+    public function update(Request $request, $id , $id_phong, $id_nguoi_thue){
+        $this->nguoiThueService->update($request, $id, $id_nguoi_thue);
+        return redirect()->route('nhatro.phong.show.info',['id' => $id, 'id_phong' => $id_phong]);
+
     }
 }

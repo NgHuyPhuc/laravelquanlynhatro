@@ -51,6 +51,11 @@ class AppServiceProvider extends ServiceProvider
                 $app->make(\App\Repositories\Repository\HoaDonRepository::class)
             );
         });
+        $this->app->bind(\App\Services\SoDienNuocTheoPhongService\SoDienNuocTheoPhongService::class, function ($app) {
+            return new \App\Services\SoDienNuocTheoPhongService\SoDienNuocTheoPhongService(
+                $app->make(\App\Repositories\Repository\SoDienNuocTheoPhongRepository::class)
+            );
+        });
     }
 
     /**
