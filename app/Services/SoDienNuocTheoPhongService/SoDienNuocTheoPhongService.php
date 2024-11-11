@@ -32,5 +32,21 @@ class SoDienNuocTheoPhongService
     {
         return $this->soDienNuoc->find($id);
     }
+    public function firstcreate(Request $request, $id_phong)
+    {
+        $data = [
+            'id_phong_tro' => $id_phong,
+            'date' => $request->date,
+            'so_dien' => $request->so_dien,
+            'so_nuoc' => $request->so_nuoc,
+            'chi_phi_phat_sinh' => $request->tong_chi_phi_dich_vu ?? 'Không có',
+            'tien_phat_sinh' => $request->tong_chi_phi_dich_vu ?? 0,
+        ];
+        return $this->soDienNuoc->create($data);
+    }
+    public function count($id_phong)
+    {
+        return $this->soDienNuoc->countdata($id_phong);
+    }
 }
 ?>

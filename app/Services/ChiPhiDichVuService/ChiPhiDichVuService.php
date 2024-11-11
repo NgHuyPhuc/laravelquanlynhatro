@@ -18,7 +18,6 @@ class ChiPhiDichVuService
     }
     public function create(Request $request)
     {
-        // dd($request);
         if($request->hasFile('anh_qr_code'))
         {
             $anhqr = time() . '.' . $request->anh_qr_code->extension();
@@ -39,7 +38,6 @@ class ChiPhiDichVuService
     }
     public function update(Request $request , $id_chiphi)
     {
-        // dd($request);
         if($request->hasFile('anh_qr_code'))
         {
             $anhqr = time() . '.' . $request->anh_qr_code->extension();

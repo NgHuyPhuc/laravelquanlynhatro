@@ -12,5 +12,9 @@ class SoDienNuocTheoPhongRepository extends BaseRepository implements SoDienNuoc
     {
         parent::__construct($soDienNuocTheoPhong);
     }
+    public function countdata($id_phong)
+    {
+        return SoDienNuocTheoPhong::where('id_phong_tro', $id_phong)->count();
+    }
 }
 ?>

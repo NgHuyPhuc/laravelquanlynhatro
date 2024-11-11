@@ -77,6 +77,8 @@ Route::middleware('fetch.nhatro')->prefix('nhatro/{id}')->group(function () {
             Route::get('/thongtin/{id_hoadon}', [HoaDonPhongTroController::class, 'info'])->name('nhatro.phong.hoadon.show.1.info');
             Route::get('/themhoadon', [HoaDonPhongTroController::class, 'create'])->name('phongtro.hoadon.themhoadon');
             Route::post('/themhoadon', [HoaDonPhongTroController::class, 'store'])->name('phongtro.hoadon.storehoadon');
+            Route::get('/taomoisodiennuoc', [SoDienNuocTheoPhongController::class, 'firstCreate'])->name('phongtro.hoadon.sodiennuoc1');
+            Route::post('/taomoisodiennuoc', [SoDienNuocTheoPhongController::class, 'postFirstCreate'])->name('phongtro.hoadon.postsodiennuoc1');
             Route::post('/sodiennuoc', [SoDienNuocTheoPhongController::class, 'store'])->name('sodien.nuoc.theophong');
             Route::get('/suahoadon/{id_hoadon}', [HoaDonPhongTroController::class, 'edit'])->name('hoadontro.suahoadon.get');
             Route::post('/suahoadon/{id_hoadon}', [HoaDonPhongTroController::class, 'update'])->name('hoadontro.suahoadon.post');

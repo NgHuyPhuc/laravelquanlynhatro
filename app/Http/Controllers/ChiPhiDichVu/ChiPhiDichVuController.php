@@ -17,7 +17,6 @@ class ChiPhiDichVuController extends Controller
     }
     public function index($id){
         $data['chiphi'] = $this->nhatro->getone($id)->chiphidichvu;
-        // dd($this->nhatro->getone($id)->chiphidichvu);
         if($data['chiphi'] == null){
             $data['check'] = 1;
         }

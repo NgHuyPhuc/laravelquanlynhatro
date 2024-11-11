@@ -16,7 +16,6 @@ class AdminController extends Controller
     //
     public function index(){
         $data['nhatro'] = $this->nhatroController->getall();
-        // dd($data);
         return view('backend.index', $data);
     }
 }

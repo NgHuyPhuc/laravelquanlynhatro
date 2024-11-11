@@ -46,7 +46,6 @@ class ThongTinNguoiThueService
         return $this->thongTinNguoiThue->find($id);
     }
     public function update(Request $request, $id, $id_nguoi_thue){
-        // dd($request);
         if($request->hasFile('cmnd'))
         {
             $cmndtrc = time() . '.' . $request->cmnd ->extension();
