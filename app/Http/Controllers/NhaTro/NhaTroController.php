@@ -4,6 +4,7 @@ namespace App\Http\Controllers\NhaTro;
 
 use App\Http\Controllers\Controller;
 use App\Models\NhaTro;
+use App\Services\ChiPhiDichVuService\ChiPhiDichVuService;
 use App\Services\NhaTroService\NhaTroService;
 use App\Services\PhongTroService\PhongTroService;
 use App\Services\TangService\TangService;
@@ -14,11 +15,13 @@ class NhaTroController extends Controller
     protected $nhatroService;
     protected $tangService;
     protected $phongTroService;
-    public function __construct(NhaTroService $nhatroService, TangService $tangService, PhongTroService $phongTroService)
+    protected $chiPhiDichVuService;
+    public function __construct(NhaTroService $nhatroService, TangService $tangService, PhongTroService $phongTroService, ChiPhiDichVuService $chiPhiDichVuService)
     {
         $this->nhatroService = $nhatroService;
         $this->tangService = $tangService;
         $this->phongTroService = $phongTroService;
+        $this->chiPhiDichVuService = $chiPhiDichVuService;
     }
     //
     public function getall()
@@ -38,6 +41,7 @@ class NhaTroController extends Controller
         // $data['tang'] = $this->tangService->getall($id);
         // $data['phong_tro'] = $this->phongTroService->getall($id);
         $data['thongtin'] = $this->nhatroService->getTangandPhongTro($id);
+        $data['checkCpdv'] = $this->chiPhiDichVuService->getByNhaTroID($id)->count();
         return view('backend.nhatro.index', $data);
     }
 

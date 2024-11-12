@@ -60,6 +60,15 @@ Route::middleware('fetch.nhatro')->prefix('nhatro/{id}')->group(function () {
         Route::get('/suaphong/{id_phong}', [PhongTroController::class, 'edit'])->name('phongtro.suaphong.get');
         Route::post('/suaphong/{id_phong}', [PhongTroController::class, 'update'])->name('phongtro.suaphong.post');
         Route::get('/xoaphong/{id_phong}', [PhongTroController::class, 'destroy'])->name('phongtro.xoaphong');
+        Route::prefix('/{id_phong}/sodiennuoc')->group(function () {
+            Route::get('/danhsachsodiennuoc', [SoDienNuocTheoPhongController::class, 'index'])->name('danh.sach.so.dien.nuoc');
+            Route::get('/taomoisodiennuoc', [SoDienNuocTheoPhongController::class, 'firstCreate'])->name('phongtro.hoadon.sodiennuoc1');
+            Route::post('/taomoisodiennuoc', [SoDienNuocTheoPhongController::class, 'postFirstCreate'])->name('phongtro.hoadon.postsodiennuoc1');
+            Route::get('/create', [SoDienNuocTheoPhongController::class, 'create'])->name('sodien.nuoc.theophong.get');
+            Route::post('/store', [SoDienNuocTheoPhongController::class, 'store'])->name('sodien.nuoc.theophong');
+            Route::get('/edit/{id_sdn}', [SoDienNuocTheoPhongController::class, 'edit'])->name('sodien.nuoc.theophong.edit');
+            Route::post('/update/{id_sdn}', [SoDienNuocTheoPhongController::class, 'update'])->name('sodien.nuoc.theophong.update');
+        });
 
         Route::prefix('/{id_phong}/nguoithue')->group(function () {
             Route::get('/', [ThongTinNguoiThueController::class, 'index'])->name('nhatro.phong.nguoithue.show.all.info');
@@ -77,9 +86,6 @@ Route::middleware('fetch.nhatro')->prefix('nhatro/{id}')->group(function () {
             Route::get('/thongtin/{id_hoadon}', [HoaDonPhongTroController::class, 'info'])->name('nhatro.phong.hoadon.show.1.info');
             Route::get('/themhoadon', [HoaDonPhongTroController::class, 'create'])->name('phongtro.hoadon.themhoadon');
             Route::post('/themhoadon', [HoaDonPhongTroController::class, 'store'])->name('phongtro.hoadon.storehoadon');
-            Route::get('/taomoisodiennuoc', [SoDienNuocTheoPhongController::class, 'firstCreate'])->name('phongtro.hoadon.sodiennuoc1');
-            Route::post('/taomoisodiennuoc', [SoDienNuocTheoPhongController::class, 'postFirstCreate'])->name('phongtro.hoadon.postsodiennuoc1');
-            Route::post('/sodiennuoc', [SoDienNuocTheoPhongController::class, 'store'])->name('sodien.nuoc.theophong');
             Route::get('/suahoadon/{id_hoadon}', [HoaDonPhongTroController::class, 'edit'])->name('hoadontro.suahoadon.get');
             Route::post('/suahoadon/{id_hoadon}', [HoaDonPhongTroController::class, 'update'])->name('hoadontro.suahoadon.post');
             Route::get('/xoahoadon/{id_hoadon}', [HoaDonPhongTroController::class, 'destroy'])->name('hoadontro.xoahoadon');

@@ -17,8 +17,13 @@
                             </a>
                             <div type="button" class="ml-3 btn btn-info mb-4"> Tìm kiếm
                             </div>
-                            <a href="{{route('nhatro.themchiphi',['id' => $nhatro->id])}}" type="button" class="ml-3 btn btn-success mb-4">Chi phí dịch vụ
-                            </a>
+                            @if ($checkCpdv == 1)
+                                <a href="{{route('nhatro.chiphi.show',['id' => $nhatro->id])}}" type="button" class="ml-3 btn btn-success mb-4">Quản lý chi phí dịch vụ
+                                </a>
+                            @else
+                                <a href="{{route('nhatro.themchiphi',['id' => $nhatro->id])}}" type="button" class="ml-3 btn btn-success mb-4">Thêm mới chi phí dịch vụ
+                                </a>
+                            @endif
                         </div>
                     </div>
                 </div>

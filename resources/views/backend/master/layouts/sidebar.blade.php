@@ -25,7 +25,6 @@
                             </a>
                         </li>
                     @endforeach
-                    <li class="nav-item"><a class="nav-link" href="./nhatro.html">Nhà trọ 27/9/34</a></li>
                     {{-- <li class="nav-item"><a class="nav-link" href="./nhatro.html">Nhà trọ 27/9/34</a></li> --}}
                     <li class="nav-item"><a class="nav-link" href="{{ route('nhatro.create') }}">
                             <i class="menu-arrow mr-2"></i> Thêm mới nhà trọ</a>

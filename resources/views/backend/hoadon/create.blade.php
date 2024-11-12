@@ -1,159 +1,255 @@
 @extends('backend/master/master')
 @section('title', 'Tạo mới hóa đơn')
 @section('main')
-<div class="main-panel">
-    <div class="content-wrapper">
-        <div class="row">
-            <div class="col-12 grid-margin stretch-card">
-                <div class="card">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card-body">
-                                <h4 class="card-title">Chức năng phòng {{$phong->ten_phong}}</h4>
-                                <div class="template-demo">
-                                    <a href="./themmoinguoithue.html" class="btn btn-info">Thêm mới người
-                                        thuê phòng</a>
-                                    <a href="./xemthongtinnguoithue.html" class="btn btn-info">Xem thông tin
-                                        người thuê phòng</a>
-                                    <a href="./taohoadontiennha.html" class="btn btn-success">Tạo hóa đơn
-                                        tiền phòng</a>
-                                    <a href="./xemhoadontiennha.html" class="btn btn-success">Xem hóa đơn
-                                        tiền phòng</a>
-                                    <a href="./chinhsuathongtinphong.html" class="btn btn-danger">Chỉnh sửa
-                                        thông tin phòng</a>
+    <div class="main-panel">
+        <div class="content-wrapper">
+            <div class="row">
+                <div class="col-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card-body">
+                                    <h4 class="card-title">Quản lý hóa đơn phòng {{ $phong->ten_phong }}</h4>
+                                    <div class="template-demo">
+                                        <a href="{{ route('danh.sach.so.dien.nuoc', ['id' => $nhatro->id, 'id_phong' => $phong->id]) }}"
+                                            class="btn btn-info"> Danh sách số điện nước</a>
+                                        <a href="./themmoinguoithue.html" class="btn btn-info">Nhập số điện nước</a>
+                                        <a href="./xemthongtinnguoithue.html" class="btn btn-info">Danh sách hóa đơn
+                                            {{ $phong->ten_phong }}</a>
+                                        <a href="{{ route('phongtro.hoadon.themhoadon', ['id' => $nhatro->id, 'id_phong' => $phong->id]) }}"
+                                            class="btn btn-success">Tạo hóa đơn
+                                            tiền phòng</a>
+                                        <a href="./xemhoadontiennha.html" class="btn btn-success">Xem hóa đơn
+                                            tiền phòng</a>
+                                        <a href="./chinhsuathongtinphong.html" class="btn btn-danger">Chỉnh sửa
+                                            thông tin phòng</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-12 grid-margin stretch-card">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Tạo hóa đơn phòng {{$phong->ten_phong}}</h4>
-                        <div class="row">
-                            <div class="col-lg-8">
-                                <form method="POST" class="forms-sample" action="{{route('sodien.nuoc.theophong',['id' => $nhatro->id,'id_phong' => $phong->id])}}" >
-                            <div class="form-group row">
-                              <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Nhập số điện Tháng {{$month}}:</label>
-                              <div class="col-sm-9">
-                                <input name="so_dien" type="number" class="form-control" id="exampleInputUsername2" placeholder="Nhập số điện Tháng 10">
-                              </div>
-                            </div>
-                            <div class="form-group row">
-                              <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Nhập số nước Tháng {{$month}}:</label>
-                              <div class="col-sm-9">
-                                <input name="so_nuoc" type="number" class="form-control" id="exampleInputEmail2" placeholder="Nhập số nước Tháng 10">
-                              </div>
-                            </div>
-                            <div class="form-group row">
-                              <label for="exampleInputMobile" class="col-sm-3 col-form-label">Thông tin chi phí thêm (nếu có) :</label>
-                              <div class="col-sm-9">
-                                <input name="chi_phi_phat_sinh" type="text" class="form-control" id="exampleInputMobile" placeholder="Thông tin chi phí thêm (nếu có)">
-                              </div>
-                            </div>
-                            <div class="form-group row">
-                              <label for="exampleInputMobile" class="col-sm-3 col-form-label">Chi phí thêm (nếu có) :</label>
-                              <div class="col-sm-9">
-                                <input name="tien_phat_sinh" type="number" class="form-control" id="exampleInputMobile" placeholder="Chi phí thêm (nếu có)">
-                              </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                            <button class="btn btn-light">Cancel</button>
-                            @csrf
-                          </form>
-                            </div>
-                        </div>
-                        
-                        <div class="container">
-                            <div class="invoice"
-                                style="padding: 20px;border: 1px solid #ddd;border-radius: 5px;margin:20px;">
-                                <h2 class="text-center">Hóa Đơn Tiền Phòng 301</h2>
-                                <h3 class="text-center">Tháng 10 năm 2024</h3>
-                                <div style="display: flex; align-items: center;">
-                                    <h4 >Kính gửi anh/chị phòng: </h4> <h1 class="text-danger" style="margin-left: 18%;">301</h1>
-                                </div>
-                                <br>
-                                <p style="font-size: 20px;"> Xin thông báo tới anh (chị):  Phí dịch vụ trong tháng 9/2024 và tiền thuê phòng tháng 10/2024. Cụ thể như sau:</p>
-                                <hr>
-                                <!-- <div class="card"> -->
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-hover table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>STT</th>
-                                                    <th>Khoản</th>
-                                                    <th>Chi tiết</th>
-                                                    <th>Thành tiền</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Phòng</td>
-                                                    <td> Tháng 10 năm 2024</td>
-                                                    <td><label> 1.500.000
-                                                        </label></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Điện</td>
-                                                    <td> ( 10477 - 10400 ) = 77kWh x 3.500 VNĐ/kWh</td>
-                                                    <td><label> 269.500
-                                                        </label></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td>Nước</td>
-                                                    <td> ( 1109 - 1102 ) = 7m³ x 27.000 VNĐ/m³</td>
-                                                    <td><label> 189.000 VNĐ
-                                                        </label></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4</td>
-                                                    <td>Internet</td>
-                                                    <td>1</td>
-                                                    <td><label> 50.000 VNĐ</label></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>5</td>
-                                                    <td></td>
-                                                    <td> Tổng Cộng </td>
-                                                    <td><label> 2.008.500 VNĐ </label></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <!-- </div> -->
-                                    </div>
-                                </div>
+                <div class="col-lg-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Tạo hóa đơn phòng {{ $phong->ten_phong }}</h4>
+                            <div class="card-body">
+                                <h4 class="card-title">Danh sách người thuê phòng 301</h4>
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    Tháng
+                                                </th>
+                                                <th>
+                                                    Số điện
+                                                </th>
+                                                <th>
+                                                    Số nước
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    {{\Carbon\Carbon::parse($sdnSecond->date)->month}}
+                                                </td>
+                                                <td>
+                                                    {{$sdnSecond->so_dien}}
+                                                </td>
+                                                <td>
+                                                    {{$sdnSecond->so_nuoc}}
 
-                                <div class="row">
-                                    <div class="col-lg-7">
-                                        <h3 class="text-danger">Phương Thức Thanh Toán</h3>
-                                        <ul style="list-style: none;">
-                                            <li><h5 class="text-danger">1. Tiền mặt</h5></li>
-                                            <li><h5 class="text-danger">2. Chuyển khoản ngân hàng</h5></li>
-                                            <li><h5 class="text-danger">Chủ tài khoản: Nguyễn Minh Hằng</h5></li>
-                                            <li><h5 class="text-danger">STK: 01753829801-NH TMCP Tiên Phong (CN Hà Nội)</h5></li>
-                                            <li><h5 class="text-danger">Nội dung: Phòng… TT theo TB…/20…</h5></li>
-                                        </ul>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    {{\Carbon\Carbon::parse($sdnLast->date)->month}}
+
+                                                </td>
+                                                <td>
+                                                    {{$sdnLast->so_dien}}
+                                                </td>
+                                                <td>
+                                                    {{$sdnLast->so_nuoc}}
+
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                    <hr/>
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    STT
+                                                </th>
+                                                <th>
+                                                    Tiền điện / 1 số
+                                                </th>
+                                                <th>
+                                                    Tiền nước / 1m3
+                                                </th>
+                                                <th>
+                                                    Tiền mạng / 1 tháng
+                                                </th>
+                                                <th>
+                                                    tien_binh_nuoc
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    1
+                                                </td>
+                                                <td>
+                                                    {{$cpdv->tien_dien_int}}
+                                                </td>
+                                                <td>
+                                                    {{$cpdv->tien_nuoc_int}}
+                                                </td>
+                                                <td>
+                                                    {{$cpdv->tien_mang_int}}
+                                                </td>
+                                                <td>
+                                                    {{$cpdv->tien_binh_nuoc}}
+                                                </td>
+                                                <td>
+                                                    <img src="/uploads/img/{{$cpdv->anh_qr_code}}" alt="">
+                                                </td>
+
+                                                <td>
+                                                    <a href="http://localhost:8000/nhatro/1/phong/2/nguoithue/suanguoithue/3"
+                                                        class="btn btn-warning" style="color: white;">Chỉnh sửa</a>
+                                                    <a href="" class="btn btn-danger ml-3">Xóa</a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="container">
+                                <div class="invoice"
+                                    style="padding: 20px;border: 1px solid #ddd;border-radius: 5px;margin:20px;">
+                                    <h2 class="text-center">Hóa Đơn Tiền Phòng 301</h2>
+                                    <h3 class="text-center">Tháng 10 năm 2024</h3>
+                                    <div style="display: flex; align-items: center;">
+                                        <h4>Kính gửi anh/chị phòng: </h4>
+                                        <h1 class="text-danger" style="margin-left: 18%;">301</h1>
                                     </div>
-                                    <div class="col-lg-5">
-                                        <div class="qr-code" style=" text-align: center; margin-top: 20px;">
-                                            <img src="https://scontent.fhan2-3.fna.fbcdn.net/v/t1.15752-9/462544095_583779333997068_3164505815730183767_n.png?_nc_cat=111&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeFhUadD46T9U6zTA26FrgUqWdQqnjYozUBZ1CqeNijNQAdAUCXSQOtD458gzg-sBw47gE6Cvye1x89DkuLSsd4e&_nc_ohc=EE_GLkqrAS4Q7kNvgFDoXtU&_nc_zt=23&_nc_ht=scontent.fhan2-3.fna&_nc_gid=AmJjLe-bEvgKkohkXMIpYBK&oh=03_Q7cD1QEBkcHQj3wsIUussFdMIijWVhl10hMWvXK6M6UYDEHhCg&oe=67489B09"
-                                                alt="QR Code Thanh Toán" />
-                                            <p style="text-align: center;"><strong>Mã QR Code Thanh Toán</strong></p>
+                                    <br>
+                                    <p style="font-size: 20px;"> Xin thông báo tới anh (chị): Phí dịch vụ trong tháng
+                                        9/2024 và tiền thuê phòng tháng 10/2024. Cụ thể như sau:</p>
+                                    <hr>
+                                    <!-- <div class="card"> -->
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>STT</th>
+                                                        <th>Khoản</th>
+                                                        <th>Chi tiết</th>
+                                                        <th>Thành tiền</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>Phòng</td>
+                                                        <td> Tháng 10 năm 2024</td>
+                                                        <td><label> {{ number_format($phong->gia_phong) }} VND
+                                                            </label></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2</td>
+                                                        <td>Điện</td>
+                                                        <td> ( {{ $sdnLast->so_dien }} - {{ $sdnSecond->so_dien }} ) =
+                                                            {{ number_format($sdnLast->so_dien - $sdnSecond->so_dien) }} kWh
+                                                            x {{ number_format($cpdv->tien_dien_int) }} VNĐ/kWh</td>
+                                                        <td><label> {{ number_format($tien_dien) }} VNĐ
+                                                            </label></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>3</td>
+                                                        <td>Nước</td>
+                                                        <td> ( {{ $sdnLast->so_nuoc }} - {{ $sdnSecond->so_nuoc }} ) =
+                                                            {{ number_format($sdnLast->so_nuoc - $sdnSecond->so_nuoc) }}m³
+                                                            x {{ number_format($cpdv->tien_nuoc_int) }} VNĐ/m³</td>
+                                                        <td><label> {{ number_format($tien_nuoc) }} VNĐ
+                                                            </label></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>4</td>
+                                                        <td>Internet</td>
+                                                        <td>{{ $phong->dung_mang }}</td>
+                                                        <td><label> {{ number_format($tien_mang) }} VNĐ</label></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>5</td>
+                                                        <td></td>
+                                                        <td> Tổng Cộng </td>
+                                                        <td><label> {{ number_format($tong_cong) }} VNĐ </label></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <!-- </div> -->
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-7">
+                                            <h3 class="text-danger">Phương Thức Thanh Toán</h3>
+                                            <ul style="list-style: none;">
+                                                <li>
+                                                    <h5 class="text-danger">1. Tiền mặt</h5>
+                                                </li>
+                                                <li>
+                                                    <h5 class="text-danger">2. Chuyển khoản ngân hàng</h5>
+                                                </li>
+                                                <li>
+                                                    <h5 class="text-danger">Chủ tài khoản: Nguyễn Minh Hằng</h5>
+                                                </li>
+                                                <li>
+                                                    <h5 class="text-danger">STK: 01753829801-NH TMCP Tiên Phong (CN Hà Nội)
+                                                    </h5>
+                                                </li>
+                                                <li>
+                                                    <h5 class="text-danger">Nội dung: Phòng… TT theo TB…/20…</h5>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-lg-5">
+                                            <div class="qr-code" style=" text-align: center; margin-top: 20px;">
+                                                <img src="/uploads/img/{{$cpdv->anh_qr_code}}"
+                                                    alt="QR Code Thanh Toán" />
+                                                <p style="text-align: center;"><strong>Mã QR Code Thanh Toán</strong></p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <a href="./chinhsuathongtinphong.html" class="btn btn-success float-sm-right">Lưu hóa đơn</a>
                         </div>
-                        <a href="./chinhsuathongtinphong.html" class="btn btn-success float-sm-right">Lưu hóa đơn</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+    <script>
+        // Khi nhấn vào nút "Xác nhận"
+        document.getElementById('openModalButton').addEventListener('click', function() {
+            // Mở modal xác nhận
+            new bootstrap.Modal(document.getElementById('confirmationModal')).show();
+        });
+
+        // Khi người dùng nhấn vào nút "Đúng, thực hiện"
+        document.getElementById('confirmButton').addEventListener('click', function() {
+            // Gửi form
+            document.getElementById('your-form').submit();
+        });
+    </script>
 @endsection

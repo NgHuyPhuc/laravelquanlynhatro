@@ -67,5 +67,9 @@ class ChiPhiDichVuService
     {
         return $this->chiPhiDichVu->find($id);
     }
+    public function getByNhaTroID($id_nha_tro)
+    {
+        return $this->chiPhiDichVu->getByNhaTroID($id_nha_tro);
+    }
 }
 ?>

@@ -25,7 +25,7 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Danh sách người thuê phòng 301</h4>
+                    <h4 class="card-title">Chi phí dịch vụ nhà trọ {{$chiphi->nhatro->ten}}</h4>
                     <div class="table-responsive">
                         @if ($check == 0)
                         <table class="table table-striped">

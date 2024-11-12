@@ -10,6 +10,33 @@
                 <div class="col-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
+                            <h4 class="card-title">Chức năng chung</h4>
+                            <a href="{{route('nhatro.tang.show',['id' => $nhatro->id]) }}" type="button" class="btn btn-success mb-4">Quản Lý Tầng
+                            </a>
+                            <a href="{{route('phongtro.themphong',['id' => $nhatro->id])}}" type="button" class="ml-3 btn btn-success mb-4">Thêm mới Phòng
+                            </a>
+                            <div type="button" class="ml-3 btn btn-info mb-4"> Tìm kiếm
+                            </div>
+                            <a href="{{route('nhatro.themchiphi',['id' => $nhatro->id])}}" type="button" class="ml-3 btn btn-success mb-4">Chi phí dịch vụ
+                            </a>
+                            <div class="row">
+                              <div class="col">
+                                <div class="card">
+                                  <div class="card-body ">
+                                    <h4 class="card-title">Chức năng</h4>
+                                    <a href="{{route('phongtro.themphong',['id' => $nhatro->id])}}" type="button" class="btn btn-success mb-4">Thêm mới Tầng
+                                    </a>
+                                    <a href="{{route('phongtro.themphong',['id' => $nhatro->id])}}" type="button" class="btn btn-success mb-4">Thêm mới Phòng
+                                    </a>
+                                  </div>
+                            </div>
+                              </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    {{-- <div class="card">
+                        <div class="card-body">
                             <h4 class="card-title">Chức năng</h4>
                             <a href="{{route('phongtro.themphong',['id' => $nhatro->id])}}" type="button" class="btn btn-success mb-4">Thêm mới Tầng
                             </a>
@@ -18,7 +45,7 @@
                             <div type="button" class="btn btn-info mb-4"> Tìm kiếm
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="col-12 grid-margin stretch-card">
                     <div class="card">
