@@ -41,15 +41,14 @@
                         <div class="card-body">
                             <h4 class="card-title">Tạo hóa đơn phòng {{ $phong->ten_phong }}</h4>
                             <div class="card-body">
-                                <h4 class="card-title">Danh sách người thuê phòng 301</h4>
+                                <h4 class="card-title">Danh sách người thuê phòng {{ $phong->ten_phong }}</h4>
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-lg-8">
                                             <form method="GET" class="forms-sample"
                                                 action="{{ route('phongtro.hoadon.themhoadontheothang', ['id' => $nhatro->id, 'id_phong' => $phong->id]) }}">
                                                 <div class="form-group">
-                                                <label for="exampleFormControlSelect3">Chọn tầng . /</label>
-                                                <a href="{{route('nhatro.themtang',['id'=> $nhatro->id])}}">Thêm mới tầng</a>
+                                                <label for="exampleFormControlSelect3">Chọn Tháng</label>
                                                 <select style="color: black" name="id_second" class="form-control form-control-sm"
                                                     id="exampleFormControlSelect3">
                                                     @foreach ($sdn as $item)
@@ -58,8 +57,7 @@
                                                 </select>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="exampleFormControlSelect3">Chọn tầng . /</label>
-                                                    <a href="{{route('nhatro.themtang',['id'=> $nhatro->id])}}">Thêm mới tầng</a>
+                                                    <label for="exampleFormControlSelect3">Chọn Tháng</label>
                                                     <select style="color: black" name="id_last" class="form-control form-control-sm"
                                                         id="exampleFormControlSelect3">
                                                         @foreach ($sdn as $item)
@@ -174,14 +172,14 @@
                                 <div class="invoice"
                                     style="padding: 20px;border: 1px solid #ddd;border-radius: 5px;margin:20px;">
                                     <h2 class="text-center">Hóa Đơn Tiền Phòng 301</h2>
-                                    <h3 class="text-center">Tháng {{\Carbon\Carbon::parse($sdnLast->date)->format('m')}} năm {{\Carbon\Carbon::parse($sdnLast->date)->format('Y')}}</h3>
+                                    <h3 class="text-center">Tháng 10 năm 2024</h3>
                                     <div style="display: flex; align-items: center;">
                                         <h4>Kính gửi anh/chị phòng: </h4>
-                                        <h1 class="text-danger" style="margin-left: 10%;">{{$phong->ten_phong}}</h1>
+                                        <h1 class="text-danger" style="margin-left: 18%;">{{$phong->ten_phong}}</h1>
                                     </div>
                                     <br>
                                     <p style="font-size: 20px;"> Xin thông báo tới anh (chị): Phí dịch vụ trong tháng
-                                        {{\Carbon\Carbon::parse($sdnSecond->date)->format('m/Y')}} và tiền thuê phòng tháng {{\Carbon\Carbon::parse($sdnLast->date)->format('m/Y')}}. Cụ thể như sau:</p>
+                                        {{\Carbon\Carbon::parse($sdnSecond->date)->format('d/Y')}} và tiền thuê phòng tháng {{\Carbon\Carbon::parse($sdnLast->date)->format('d/Y')}}. Cụ thể như sau:</p>
                                     <hr>
                                     <!-- <div class="card"> -->
                                     <div class="card-body">

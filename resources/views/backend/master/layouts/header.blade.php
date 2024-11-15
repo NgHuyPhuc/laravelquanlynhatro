@@ -39,7 +39,8 @@
           <ul class="navbar-nav navbar-nav-right">
             <li class="nav-item nav-date dropdown">
               <a class="nav-link d-flex justify-content-center align-items-center" href="javascript:;">
-                <h6 class="date mb-0">Today : Mar 23</h6>
+                {{-- <h6 class="date mb-0">Today : Mar 23</h6> --}}
+                <h6 class="date mb-0">{{\Carbon\Carbon::now()->format('d-m-Y')}}</h6>
                 <i class="typcn typcn-calendar"></i>
               </a>
             </li>

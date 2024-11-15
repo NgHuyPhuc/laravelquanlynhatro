@@ -174,14 +174,14 @@
                                 <div class="invoice"
                                     style="padding: 20px;border: 1px solid #ddd;border-radius: 5px;margin:20px;">
                                     <h2 class="text-center">Hóa Đơn Tiền Phòng 301</h2>
-                                    <h3 class="text-center">Tháng {{\Carbon\Carbon::parse($sdnLast->date)->format('m')}} năm {{\Carbon\Carbon::parse($sdnLast->date)->format('Y')}}</h3>
+                                    <h3 class="text-center">Tháng 10 năm 2024</h3>
                                     <div style="display: flex; align-items: center;">
                                         <h4>Kính gửi anh/chị phòng: </h4>
-                                        <h1 class="text-danger" style="margin-left: 10%;">{{$phong->ten_phong}}</h1>
+                                        <h1 class="text-danger" style="margin-left: 18%;">301</h1>
                                     </div>
                                     <br>
                                     <p style="font-size: 20px;"> Xin thông báo tới anh (chị): Phí dịch vụ trong tháng
-                                        {{\Carbon\Carbon::parse($sdnSecond->date)->format('m/Y')}} và tiền thuê phòng tháng {{\Carbon\Carbon::parse($sdnLast->date)->format('m/Y')}}. Cụ thể như sau:</p>
+                                        9/2024 và tiền thuê phòng tháng 10/2024. Cụ thể như sau:</p>
                                     <hr>
                                     <!-- <div class="card"> -->
                                     <div class="card-body">

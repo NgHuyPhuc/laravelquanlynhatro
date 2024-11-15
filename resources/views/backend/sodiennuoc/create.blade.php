@@ -1,5 +1,5 @@
 @extends('backend/master/master')
-@section('title', 'Tạo mới hóa đơn')
+@section('title', 'Nhập số điện nước')
 @section('main')
     <div class="main-panel">
         <div class="content-wrapper">
@@ -52,26 +52,26 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Tháng này :</label>
+                                            <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Tháng :</label>
                                             <div class="col-sm-9">
                                                 <input name="date" type="date" class="form-control"
                                                     id="exampleInputEmail2" value="{{\Carbon\Carbon::now()->format('Y-m-d')}}" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="exampleInputMobile" class="col-sm-3 col-form-label">Thông tin chi
+                                            <label for="chi_phi_phat_sinh" class="col-sm-3 col-form-label">Thông tin chi
                                                 phí thêm (nếu có) :</label>
                                             <div class="col-sm-9">
                                                 <input name="chi_phi_phat_sinh" type="text" class="form-control"
-                                                    id="exampleInputMobile" placeholder="Thông tin chi phí thêm (nếu có)">
+                                                    id="chi_phi_phat_sinh" placeholder="Thông tin chi phí thêm (nếu có)">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="exampleInputMobile" class="col-sm-3 col-form-label">Chi phí thêm
+                                            <label for="tien_phat_sinh" class="col-sm-3 col-form-label">Chi phí thêm
                                                 (nếu có) :</label>
                                             <div class="col-sm-9">
                                                 <input name="tien_phat_sinh" type="number" class="form-control"
-                                                    id="exampleInputMobile" placeholder="Chi phí thêm (nếu có)">
+                                                    id="tien_phat_sinh" placeholder="Chi phí thêm (nếu có)">
                                             </div>
                                         </div>
                                         @if ($checksdn)
