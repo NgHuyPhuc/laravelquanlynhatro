@@ -16,6 +16,9 @@ class ChiPhiDichVu extends Model
         'tien_mang_int',
         'tien_binh_nuoc',
         'anh_qr_code',
+        'ten_chu_tk',
+        'chi_nhanh',
+        'noi_dung_ck',
     ];
     public function nhatro()
     {

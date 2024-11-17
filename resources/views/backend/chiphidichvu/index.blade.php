@@ -38,6 +38,15 @@
                                   Tên nhà trọ
                                 </th>
                                 <th>
+                                  Tên chủ tk
+                                </th>
+                                <th>
+                                  STK
+                                </th>
+                                <th>
+                                  Nội dung
+                                </th>
+                                <th>
                                   Tiền điện / 1kwh
                                 </th>
                                 <th>
@@ -63,16 +72,25 @@
                                       {{$chiphi->nhatro->ten}}
                                     </td>
                                     <td>
-                                      {{$chiphi->tien_dien_int}}
+                                      {{$chiphi->ten_chu_tk}}
                                     </td>
                                     <td>
-                                      {{$chiphi->tien_nuoc_int}}
+                                      {{$chiphi->chi_nhanh}}
                                     </td>
                                     <td>
-                                      {{$chiphi->tien_mang_int}}
+                                      {{$chiphi->noi_dung_ck}}
                                     </td>
                                     <td>
-                                      {{$chiphi->tien_binh_nuoc}}
+                                      {{number_format($chiphi->tien_dien_int)}} VNĐ
+                                    </td>
+                                    <td>
+                                      {{number_format($chiphi->tien_nuoc_int)}} VNĐ
+                                    </td>
+                                    <td>
+                                      {{number_format($chiphi->tien_mang_int)}} VNĐ
+                                    </td>
+                                    <td>
+                                      {{number_format($chiphi->tien_binh_nuoc)}} VNĐ
                                     </td>
                                     <td>
                                       <a href="{{route('nhatro.suachiphi.get',['id' => $nhatro->id, 'id_chiphi' => $chiphi->id])}}" class="btn btn-warning" style="color: white;">Chỉnh sửa</a>

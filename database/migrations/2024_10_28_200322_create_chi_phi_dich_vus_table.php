@@ -23,6 +23,9 @@ class CreateChiPhiDichVusTable extends Migration
             $table->integer('tien_mang_int'); // tien mang / 1 thang
             $table->integer('tien_binh_nuoc'); // gia 1 binh nuoc
             $table->string('anh_qr_code'); // anh qr chuyen tien
+            $table->string('ten_chu_tk'); // anh qr chuyen tien
+            $table->string('chi_nhanh'); // anh qr chuyen tien
+            $table->string('noi_dung_ck'); // anh qr chuyen tien
             $table->unique('id_nha_tro');
             $table->timestamps();
         });

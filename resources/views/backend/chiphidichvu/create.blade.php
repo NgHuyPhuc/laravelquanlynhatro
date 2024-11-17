@@ -72,6 +72,27 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
+                                            <label for="ten_chu_tk" class="col-sm-3 col-form-label">Tên chủ tài khoản: </label>
+                                            <div class="col-sm-9">
+                                                <input name="ten_chu_tk" type="text" class="form-control"
+                                                    id="ten_chu_tk" placeholder="Nhập Tiền bình nước">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="chi_nhanh" class="col-sm-3 col-form-label">STK + Chi nhánh: </label>
+                                            <div class="col-sm-9">
+                                                <input name="chi_nhanh" type="text" class="form-control"
+                                                    id="chi_nhanh" placeholder="Nhập Tiền bình nước">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="noi_dung_ck" class="col-sm-3 col-form-label">Nội dung chuyển khoản:</label>
+                                            <div class="col-sm-9">
+                                                <input name="noi_dung_ck" type="text" class="form-control"
+                                                    id="noi_dung_ck" placeholder="Nhập Tiền bình nước">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
                                             <label for="exampleInputMobile" class="col-sm-3 col-form-label">Qr code chuyển
                                                 khoản :</label>
                                             <div class="col-sm-9">
