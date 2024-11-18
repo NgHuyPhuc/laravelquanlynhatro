@@ -41,7 +41,6 @@ class HoaDonPhongTroController extends Controller
         $data['tien_nuoc'] = ($data['sdnLast']->so_nuoc - $data['sdnSecond']->so_nuoc) * $data['cpdv']->tien_nuoc_int;
         $data['tien_mang'] = $data['phong']->dung_mang * $data['cpdv']->tien_mang_int;
         $data['tong_cong'] = $data['tien_dien'] + $data['tien_nuoc'] + $data['tien_mang'] + $data['phong']->gia_phong;
-        // dd($data);
         return view('backend.hoadon.create',$data);
     }
 
@@ -59,7 +58,6 @@ class HoaDonPhongTroController extends Controller
         $data['tien_nuoc'] = ($data['sdnLast']->so_nuoc - $data['sdnSecond']->so_nuoc) * $data['cpdv']->tien_nuoc_int;
         $data['tien_mang'] = $data['phong']->dung_mang * $data['cpdv']->tien_mang_int;
         $data['tong_cong'] = $data['tien_dien'] + $data['tien_nuoc'] + $data['tien_mang'] + $data['phong']->gia_phong;
-        // dd($data);
         return view('backend.hoadon.createmonth',$data);
     }
     public function getcreateMonth(Request $request, $id, $id_phong){
@@ -76,14 +74,21 @@ class HoaDonPhongTroController extends Controller
         $data['tien_nuoc'] = ($data['sdnLast']->so_nuoc - $data['sdnSecond']->so_nuoc) * $data['cpdv']->tien_nuoc_int;
         $data['tien_mang'] = $data['phong']->dung_mang * $data['cpdv']->tien_mang_int;
         $data['tong_cong'] = $data['tien_dien'] + $data['tien_nuoc'] + $data['tien_mang'] + $data['phong']->gia_phong;
-        // dd($data);
         return view('backend.hoadon.getcreatemonth',$data);
     }
     public function store(Request $request, $id, $id_phong){
         $soDienNuocPrev = $this->soDienNuoc->getSecondLast($id_phong);
         $soDienNuocNow = $this->soDienNuoc->getLastest($id_phong);        
-        $this->hoaDon->create($request,$id_phong, $soDienNuocPrev, $soDienNuocNow);
-        return redirect()->route('nhatro.show',['id' => $id]);
+        $create = $this->hoaDon->create($request,$id_phong, $soDienNuocPrev, $soDienNuocNow);
+        $id_hoadon = $create->id;
+        return redirect()->route('phongtro.hoadon.detailhoadon',['id' => $id, 'id_phong' => $id_phong, 'id_hoadon' => $id_hoadon]);
+    }
+    public function showHoaDonPhong($id, $id_phong,$id_hoadon){
+        $data['hoadon'] = $this->hoaDon->getone($id_hoadon);
+        $data['phong'] = $this->phongTro->getone($id_phong);
+        $data['cpdv'] = $this->chiPhiDichVu->getone($id);
+
+        return view('backend.hoadon.detail',$data);
     }
     public function edit($id, $id_phong){
         

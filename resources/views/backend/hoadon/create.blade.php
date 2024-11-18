@@ -41,29 +41,37 @@
                         <div class="card-body">
                             <h4 class="card-title">Tạo hóa đơn phòng {{ $phong->ten_phong }}</h4>
                             <div class="card-body">
-                                <h4 class="card-title">Danh sách người thuê phòng 301</h4>
+                                <h4 class="card-title">Danh sách người thuê phòng {{ $phong->ten_phong }}</h4>
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-lg-8">
                                             <form method="GET" class="forms-sample"
                                                 action="{{ route('phongtro.hoadon.themhoadontheothang', ['id' => $nhatro->id, 'id_phong' => $phong->id]) }}">
                                                 <div class="form-group">
-                                                <label for="exampleFormControlSelect3">Chọn tầng . /</label>
-                                                <a href="{{route('nhatro.themtang',['id'=> $nhatro->id])}}">Thêm mới tầng</a>
-                                                <select style="color: black" name="id_second" class="form-control form-control-sm"
-                                                    id="exampleFormControlSelect3">
-                                                    @foreach ($sdn as $item)
-                                                        <option style="color: black" {{$item->id == $sdnSecond->id ? 'selected' : ''}} value="{{$item->id}}"> Tháng : {{\Carbon\Carbon::parse($item->date)->format('m/Y')}} , Số nước : {{$item->so_nuoc}}, Số điện : {{$item->so_dien}}</option>
-                                                    @endforeach
-                                                </select>
+                                                    <label for="exampleFormControlSelect3">Chọn số điện nước Tháng :</label>
+                                                    <select style="color: black" name="id_second"
+                                                        class="form-control form-control-sm" id="exampleFormControlSelect3">
+                                                        @foreach ($sdn as $item)
+                                                            <option style="color: black"
+                                                                {{ $item->id == $sdnSecond->id ? 'selected' : '' }}
+                                                                value="{{ $item->id }}"> Tháng :
+                                                                {{ \Carbon\Carbon::parse($item->date)->format('m/Y') }} , Số
+                                                                nước : {{ $item->so_nuoc }}, Số điện :
+                                                                {{ $item->so_dien }}</option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="exampleFormControlSelect3">Chọn tầng . /</label>
-                                                    <a href="{{route('nhatro.themtang',['id'=> $nhatro->id])}}">Thêm mới tầng</a>
-                                                    <select style="color: black" name="id_last" class="form-control form-control-sm"
-                                                        id="exampleFormControlSelect3">
+                                                    <label for="exampleFormControlSelect3">Chọn số điện nước Tháng :</label>
+                                                    <select style="color: black" name="id_last"
+                                                        class="form-control form-control-sm" id="exampleFormControlSelect3">
                                                         @foreach ($sdn as $item)
-                                                            <option style="color: black" {{$item->id == $sdnLast->id ? 'selected' : ''}} value="{{$item->id}}"> Tháng : {{\Carbon\Carbon::parse($item->date)->format('m/Y')}} , Số nước : {{$item->so_nuoc}}, Số điện : {{$item->so_dien}}</option>
+                                                            <option style="color: black"
+                                                                {{ $item->id == $sdnLast->id ? 'selected' : '' }}
+                                                                value="{{ $item->id }}"> Tháng :
+                                                                {{ \Carbon\Carbon::parse($item->date)->format('m/Y') }} ,
+                                                                Số nước : {{ $item->so_nuoc }}, Số điện :
+                                                                {{ $item->so_dien }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -92,33 +100,33 @@
                                         <tbody>
                                             <tr>
                                                 <td>
-                                                    {{\Carbon\Carbon::parse($sdnSecond->date)->month}}
+                                                    {{ \Carbon\Carbon::parse($sdnSecond->date)->month }}
                                                 </td>
                                                 <td>
-                                                    {{$sdnSecond->so_dien}}
+                                                    {{ $sdnSecond->so_dien }}
                                                 </td>
                                                 <td>
-                                                    {{$sdnSecond->so_nuoc}}
+                                                    {{ $sdnSecond->so_nuoc }}
 
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    {{\Carbon\Carbon::parse($sdnLast->date)->month}}
+                                                    {{ \Carbon\Carbon::parse($sdnLast->date)->month }}
 
                                                 </td>
                                                 <td>
-                                                    {{$sdnLast->so_dien}}
+                                                    {{ $sdnLast->so_dien }}
                                                 </td>
                                                 <td>
-                                                    {{$sdnLast->so_nuoc}}
+                                                    {{ $sdnLast->so_nuoc }}
 
                                                 </td>
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <br/>
-                                    <hr/>
+                                    <br />
+                                    <hr />
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
@@ -135,7 +143,7 @@
                                                     Tiền mạng / 1 tháng
                                                 </th>
                                                 <th>
-                                                    tien_binh_nuoc
+                                                    Tiền bình nước
                                                 </th>
                                             </tr>
                                         </thead>
@@ -145,19 +153,19 @@
                                                     1
                                                 </td>
                                                 <td>
-                                                    {{$cpdv->tien_dien_int}}
+                                                    {{ number_format($cpdv->tien_dien_int) }} VNĐ
                                                 </td>
                                                 <td>
-                                                    {{$cpdv->tien_nuoc_int}}
+                                                    {{ number_format($cpdv->tien_nuoc_int ) }} VNĐ
                                                 </td>
                                                 <td>
-                                                    {{$cpdv->tien_mang_int}}
+                                                    {{ number_format($cpdv->tien_mang_int ) }} VNĐ
                                                 </td>
                                                 <td>
-                                                    {{$cpdv->tien_binh_nuoc}}
+                                                    {{ number_format($cpdv->tien_binh_nuoc ) }} VNĐ
                                                 </td>
                                                 <td>
-                                                    <img src="/uploads/img/{{$cpdv->anh_qr_code}}" alt="">
+                                                    <img src="/uploads/img/{{ $cpdv->anh_qr_code }}" alt="">
                                                 </td>
 
                                                 <td>
@@ -170,108 +178,229 @@
                                     </table>
                                 </div>
                             </div>
-                            <div class="container">
-                                <div class="invoice"
-                                    style="padding: 20px;border: 1px solid #ddd;border-radius: 5px;margin:20px;">
-                                    <h2 class="text-center">Hóa Đơn Tiền Phòng 301</h2>
-                                    <h3 class="text-center">Tháng {{\Carbon\Carbon::parse($sdnLast->date)->format('m')}} năm {{\Carbon\Carbon::parse($sdnLast->date)->format('Y')}}</h3>
-                                    <div style="display: flex; align-items: center;">
-                                        <h4>Kính gửi anh/chị phòng: </h4>
-                                        <h1 class="text-danger" style="margin-left: 10%;">{{$phong->ten_phong}}</h1>
-                                    </div>
-                                    <br>
-                                    <p style="font-size: 20px;"> Xin thông báo tới anh (chị): Phí dịch vụ trong tháng
-                                        {{\Carbon\Carbon::parse($sdnSecond->date)->format('m/Y')}} và tiền thuê phòng tháng {{\Carbon\Carbon::parse($sdnLast->date)->format('m/Y')}}. Cụ thể như sau:</p>
-                                    <hr>
-                                    <!-- <div class="card"> -->
-                                    <div class="card-body">
-                                        <div class="table-responsive">
-                                            <table class="table table-hover table-striped">
-                                                <thead>
-                                                    <tr>
-                                                        <th>STT</th>
-                                                        <th>Khoản</th>
-                                                        <th>Chi tiết</th>
-                                                        <th>Thành tiền</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>Phòng</td>
-                                                        <td> Tháng 10 năm 2024</td>
-                                                        <td><label> {{ number_format($phong->gia_phong) }} VND
-                                                            </label></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>2</td>
-                                                        <td>Điện</td>
-                                                        <td> ( {{ $sdnLast->so_dien }} - {{ $sdnSecond->so_dien }} ) =
-                                                            {{ number_format($sdnLast->so_dien - $sdnSecond->so_dien) }} kWh
-                                                            x {{ number_format($cpdv->tien_dien_int) }} VNĐ/kWh</td>
-                                                        <td><label> {{ number_format($tien_dien) }} VNĐ
-                                                            </label></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>3</td>
-                                                        <td>Nước</td>
-                                                        <td> ( {{ $sdnLast->so_nuoc }} - {{ $sdnSecond->so_nuoc }} ) =
-                                                            {{ number_format($sdnLast->so_nuoc - $sdnSecond->so_nuoc) }}m³
-                                                            x {{ number_format($cpdv->tien_nuoc_int) }} VNĐ/m³</td>
-                                                        <td><label> {{ number_format($tien_nuoc) }} VNĐ
-                                                            </label></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>4</td>
-                                                        <td>Internet</td>
-                                                        <td>{{ $phong->dung_mang }}</td>
-                                                        <td><label> {{ number_format($tien_mang) }} VNĐ</label></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>5</td>
-                                                        <td></td>
-                                                        <td> Tổng Cộng </td>
-                                                        <td><label> {{ number_format($tong_cong) }} VNĐ </label></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                            <!-- </div> -->
+                            <form
+                                action="{{ route('phongtro.hoadon.storehoadon', ['id' => $nhatro->id, 'id_phong' => $phong->id]) }}"
+                                method="POST"> 
+                                <div class="container">
+                                    <div class="invoice"
+                                        style="padding: 20px;border: 1px solid #ddd;border-radius: 5px;margin:20px;">
+                                        <h2 class="text-center">Hóa Đơn Tiền Phòng {{ $phong->ten_phong }}</h2>
+                                        <h3 class="text-center">Tháng
+                                            {{ \Carbon\Carbon::parse($sdnLast->date)->format('m') }} năm
+                                            {{ \Carbon\Carbon::parse($sdnLast->date)->format('Y') }}</h3>
+                                        <div style="display: flex; align-items: center;">
+                                            <h4>Kính gửi anh/chị phòng: </h4>
+                                            <h1 class="text-danger" style="margin-left: 10%;">{{ $phong->ten_phong }}</h1>
                                         </div>
-                                    </div>
+                                        <br>
+                                        <p style="font-size: 20px;"> Xin thông báo tới anh (chị): Phí dịch vụ trong tháng
+                                            {{ \Carbon\Carbon::parse($sdnSecond->date)->format('m/Y') }} và tiền thuê phòng
+                                            tháng {{ \Carbon\Carbon::parse($sdnLast->date)->format('m/Y') }}. Cụ thể như
+                                            sau:</p>
+                                        <hr>
+                                        <!-- <div class="card"> -->
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table class="table table-hover table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>STT</th>
+                                                            <th>Khoản</th>
+                                                            <th>Chi tiết</th>
+                                                            <th>Thành tiền</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>1</td>
+                                                            <td>Tiền Phòng</td>
+                                                            <td>{{$phong->ten_phong }} Tháng {{\Carbon\Carbon::parse($sdnLast->date)->format('m')}} năm {{\Carbon\Carbon::parse($sdnLast->date)->format('Y')}}</td>
+                                                            <td><label> {{ number_format($phong->gia_phong) }} VND
+                                                                </label></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2</td>
+                                                            <td>Điện</td>
+                                                            <td> ( {{ $sdnLast->so_dien }} - {{ $sdnSecond->so_dien }} ) =
+                                                                {{ number_format($sdnLast->so_dien - $sdnSecond->so_dien) }}
+                                                                kWh
+                                                                x {{ number_format($cpdv->tien_dien_int) }} VNĐ/kWh</td>
+                                                            <td><label> {{ number_format($tien_dien) }} VNĐ
+                                                                </label></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>3</td>
+                                                            <td>Nước</td>
+                                                            <td> ( {{ $sdnLast->so_nuoc }} - {{ $sdnSecond->so_nuoc }} ) =
+                                                                {{ number_format($sdnLast->so_nuoc - $sdnSecond->so_nuoc) }}m³
+                                                                x {{ number_format($cpdv->tien_nuoc_int) }} VNĐ/m³</td>
+                                                            <td><label> {{ number_format($tien_nuoc) }} VNĐ
+                                                                </label></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>4</td>
+                                                            <td>Internet</td>
+                                                            <td>{{ $phong->dung_mang }}</td>
+                                                            <td><label> {{ number_format($tien_mang) }} VNĐ</label></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>5</td>
+                                                            <td></td>
+                                                            <td> Tổng Cộng </td>
+                                                            <td><label> {{ number_format($tong_cong) }} VNĐ </label></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <!-- </div> -->
+                                            </div>
+                                        </div>
 
-                                    <div class="row">
-                                        <div class="col-lg-7">
-                                            <h3 class="text-danger">Phương Thức Thanh Toán</h3>
-                                            <ul style="list-style: none;">
-                                                <li>
-                                                    <h5 class="text-danger">1. Tiền mặt</h5>
-                                                </li>
-                                                <li>
-                                                    <h5 class="text-danger">2. Chuyển khoản ngân hàng</h5>
-                                                </li>
-                                                <li>
-                                                    <h5 class="text-danger">Chủ tài khoản: Nguyễn Minh Hằng</h5>
-                                                </li>
-                                                <li>
-                                                    <h5 class="text-danger">STK: 01753829801-NH TMCP Tiên Phong (CN Hà Nội)
-                                                    </h5>
-                                                </li>
-                                                <li>
-                                                    <h5 class="text-danger">Nội dung: Phòng… TT theo TB…/20…</h5>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-lg-5">
-                                            <div class="qr-code" style=" text-align: center; margin-top: 20px;">
-                                                <img src="/uploads/img/{{$cpdv->anh_qr_code}}"
-                                                    alt="QR Code Thanh Toán" />
-                                                <p style="text-align: center;"><strong>Mã QR Code Thanh Toán</strong></p>
+                                        <div class="row">
+                                            <div class="col-lg-7">
+                                                <h3 class="text-danger">Phương Thức Thanh Toán</h3>
+                                                <ul style="list-style: none;">
+                                                    <li>
+                                                        <h5 class="text-danger">1. Tiền mặt</h5>
+                                                    </li>
+                                                    <li>
+                                                        <h5 class="text-danger">2. Chuyển khoản ngân hàng</h5>
+                                                    </li>
+                                                    <li>
+                                                        <h5 class="text-danger">Chủ tài khoản: {{$cpdv->ten_chu_tk}}</h5>
+                                                    </li>
+                                                    <li>
+                                                        <h5 class="text-danger">{{$cpdv->chi_nhanh}}
+                                                        </h5>
+                                                    </li>
+                                                    <li>
+                                                        <h5 class="text-danger">{{$cpdv->noi_dung_ck}}</h5>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-lg-5">
+                                                <div class="qr-code" style=" text-align: center; margin-top: 20px;">
+                                                    <img src="/uploads/img/{{ $cpdv->anh_qr_code }}"
+                                                        alt="QR Code Thanh Toán" />
+                                                    <p style="text-align: center;"><strong>Mã QR Code Thanh Toán</strong>
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <a href="./chinhsuathongtinphong.html" class="btn btn-success float-sm-right">Lưu hóa đơn</a>
+                                <div class="form-group row">
+                                    <label for="id_phong_tro" class="col-sm-3 col-form-label">id_phong_tro </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" name="id_phong_tro" type="number"
+                                        value="{{ $phong->id }}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="dung_mang" class="col-sm-3 col-form-label">dung_mang </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" name="dung_mang" type="number"
+                                    value="{{ $phong->dung_mang }}">
+                                    </div>
+                                </div> <div class="form-group row">
+                                    <label for="tien_dien_string" class="col-sm-3 col-form-label">tien_dien_string </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" name="tien_dien_string" type="text"
+                                    value="( {{ $sdnLast->so_dien }} - {{ $sdnSecond->so_dien }} ) = {{ number_format($sdnLast->so_dien - $sdnSecond->so_dien) }} kWhx {{ number_format($cpdv->tien_dien_int) }} VNĐ/kWh">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="tien_nuoc_string" class="col-sm-3 col-form-label">tien_nuoc_string </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" name="tien_nuoc_string" type="text" value="( {{ $sdnLast->so_nuoc }} - {{ $sdnSecond->so_nuoc }} ) ={{ number_format($sdnLast->so_nuoc - $sdnSecond->so_nuoc) }}m³ x {{ number_format($cpdv->tien_nuoc_int) }} VNĐ/m³">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="chi_phi_phat_sinh" class="col-sm-3 col-form-label">chi_phi_phat_sinh </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" name="chi_phi_phat_sinh" type="text" value="{{$sdnLast->chi_phi_phat_sinh}}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="tien_phong_string" class="col-sm-3 col-form-label">tien_phong_string </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" name="tien_phong_string" type="text" value="{{$phong->ten_phong }} Tháng {{\Carbon\Carbon::parse($sdnLast->date)->format('m')}} năm {{\Carbon\Carbon::parse($sdnLast->date)->format('Y')}}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="thang" class="col-sm-3 col-form-label">thang </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" name="thang" type="text" value="Tháng {{ \Carbon\Carbon::parse($sdnLast->date)->format('m') }} năm {{ \Carbon\Carbon::parse($sdnLast->date)->format('Y') }}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="thong_bao" class="col-sm-3 col-form-label">thong_bao </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" name="thong_bao" type="text" value="Xin thông báo tới anh (chị): Phí dịch vụ trong tháng {{ \Carbon\Carbon::parse($sdnSecond->date)->format('m/Y') }} và tiền thuê phòng tháng {{ \Carbon\Carbon::parse($sdnLast->date)->format('m/Y') }}. Cụ thể như sau:">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="tien_phong_int" class="col-sm-3 col-form-label">tien_phong_int </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" name="tien_phong_int" type="text" value="{{$phong->gia_phong }}">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="tien_dien_int" class="col-sm-3 col-form-label">tien_dien_int </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" name="tien_dien_int" type="number" value="{{$tien_dien}}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="tien_mang" class="col-sm-3 col-form-label">tien_mang </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" name="tien_mang" type="number" value="{{ $phong->dung_mang == 1 ? $cpdv->tien_mang_int : 0 }}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="tien_nuoc_int" class="col-sm-3 col-form-label">tien_nuoc_int </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" name="tien_nuoc_int" type="number" value="{{$tien_nuoc}}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="tien_phat_sinh" class="col-sm-3 col-form-label">tien_phat_sinh </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" name="tien_phat_sinh" type="number" value="{{$sdnLast->tien_phat_sinh}}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="so_tien_phai_tra" class="col-sm-3 col-form-label">so_tien_phai_tra </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" name="so_tien_phai_tra" type="number" value="{{$tong_cong}}">
+
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="so_tien_da_thanh_toan" class="col-sm-3 col-form-label">so_tien_da_thanh_toan </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" name="so_tien_da_thanh_toan" type="number" value="0">
+
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="so_du" class="col-sm-3 col-form-label">so_du </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" name="so_du" type="number" value="0">
+
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="trang_thai" class="col-sm-3 col-form-label">trang_thai </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" name="trang_thai" type="number" value="0">
+
+                                    </div>
+                                </div>
+                                @csrf
+                                <button type="submit" class="btn btn-success float-sm-right">Lưu hóa đơn</button>
+                            </form>
+
                         </div>
                     </div>
                 </div>

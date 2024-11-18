@@ -17,13 +17,15 @@ class HoaDonService
     }
     public function create(Request $request, $id_phong, $soDienNuocPrev, $soDienNuocNow)
     {
-        
+        // dd($request);
         $data = [
             'id_phong_tro' => $request->id_phong_tro,
             'dung_mang' => $request->dung_mang,
             'tien_dien_string' => $request->tien_dien_string,
             'tien_nuoc_string' => $request->tien_nuoc_string,
             'chi_phi_phat_sinh' => $request->chi_phi_phat_sinh,
+            'tien_phong_string' => $request->tien_phong_string,
+            'tien_phong_int' => $request->tien_phong_int,
             'tien_dien_int' => $request->tien_dien_int,
             'tien_nuoc_int' => $request->tien_nuoc_int,
             'tien_phat_sinh' => $request->tien_phat_sinh,

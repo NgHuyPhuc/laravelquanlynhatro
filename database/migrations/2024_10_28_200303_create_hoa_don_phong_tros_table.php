@@ -13,17 +13,6 @@ class CreateHoaDonPhongTrosTable extends Migration
      */
     public function up()
     {
-        // Hoa don phong tro( ID, 
-        // Phong troID, 
-        // Tháng-năm
-        // Dùng mạng
-        // Tiền điện * giá (lưu = chữ)
-        // Tiền nước * giá (lưu = chữ)
-        // Tổng tiền điện (lưu = số int)
-        // Tổng tiền nước ( lưu = số int)
-        // Tổng tiền phải trả (lưu bằng số int) 
-        // Trạng thái<true[Đã thanh toán]/ false[Chưa thanh toán]>
-        // )
         Schema::create('hoa_don_phong_tros', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('id_phong_tro')->unsigned();
@@ -32,13 +21,17 @@ class CreateHoaDonPhongTrosTable extends Migration
             $table->string('tien_dien_string'); // Tiền điện * giá (lưu = chữ)
             $table->string('tien_nuoc_string'); // Tiền nước * giá (lưu = chữ)
             $table->string('chi_phi_phat_sinh'); // lưu text chi phí phát sinh
+            $table->string('tien_phong_string'); // lưu text thong tin tien phong
+            $table->string('thang'); // lưu text thang tao hoa don
+            $table->string('thong_bao'); // lưu text thong bao hoa don tu thang -> thang
+            $table->string('chi_phi_phat_sinh'); // lưu text chi phí phát sinh
+            $table->integer('tien_phong_int');// tiền phong (lưu = số int)
             $table->integer('tien_dien_int');// Tổng tiền điện (lưu = số int)
             $table->integer('tien_nuoc_int');// Tổng tiền nước ( lưu = số int)
             $table->integer('tien_phat_sinh');// Tổng tiền điện (lưu = số int)
             $table->integer('so_tien_phai_tra'); // Tổng tiền phải trả (lưu bằng số int) 
             $table->integer('so_tien_da_thanh_toan');// Số tiền đã thanh toán của hóa đơn này
             $table->integer('so_du'); // Số dư của hóa đơn này
-            
             $table->tinyInteger('trang_thai')->default(0); // mac dinh la 0 chua thanh toan
             $table->timestamps();
         });
