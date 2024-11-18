@@ -48,9 +48,9 @@
                                             <form method="GET" class="forms-sample"
                                                 action="{{ route('phongtro.hoadon.themhoadontheothang', ['id' => $nhatro->id, 'id_phong' => $phong->id]) }}">
                                                 <div class="form-group">
-                                                    <label for="exampleFormControlSelect3">Chọn số điện nước Tháng :</label>
+                                                    <label for="id_second">Chọn số điện nước Tháng :</label>
                                                     <select style="color: black" name="id_second"
-                                                        class="form-control form-control-sm" id="exampleFormControlSelect3">
+                                                        class="form-control form-control-sm" id="id_second">
                                                         @foreach ($sdn as $item)
                                                             <option style="color: black"
                                                                 {{ $item->id == $sdnSecond->id ? 'selected' : '' }}
@@ -62,9 +62,9 @@
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="exampleFormControlSelect3">Chọn số điện nước Tháng :</label>
+                                                    <label for="id_last">Chọn số điện nước Tháng :</label>
                                                     <select style="color: black" name="id_last"
-                                                        class="form-control form-control-sm" id="exampleFormControlSelect3">
+                                                        class="form-control form-control-sm" id="id_last">
                                                         @foreach ($sdn as $item)
                                                             <option style="color: black"
                                                                 {{ $item->id == $sdnLast->id ? 'selected' : '' }}
@@ -251,10 +251,8 @@
                                                         </tr>
                                                     </tbody>
                                                 </table>
-                                                <!-- </div> -->
                                             </div>
                                         </div>
-
                                         <div class="row">
                                             <div class="col-lg-7">
                                                 <h3 class="text-danger">Phương Thức Thanh Toán</h3>
@@ -289,112 +287,107 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="id_phong_tro" class="col-sm-3 col-form-label">id_phong_tro </label>
+                                    <label class="col-sm-3 col-form-label">id_phong_tro </label>
                                     <div class="col-sm-9">
                                         <input class="form-control" name="id_phong_tro" type="number"
                                         value="{{ $phong->id }}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="dung_mang" class="col-sm-3 col-form-label">dung_mang </label>
+                                    <label class="col-sm-3 col-form-label">dung_mang </label>
                                     <div class="col-sm-9">
                                         <input class="form-control" name="dung_mang" type="number"
                                     value="{{ $phong->dung_mang }}">
                                     </div>
                                 </div> <div class="form-group row">
-                                    <label for="tien_dien_string" class="col-sm-3 col-form-label">tien_dien_string </label>
+                                    <label class="col-sm-3 col-form-label">tien_dien_string </label>
                                     <div class="col-sm-9">
                                         <input class="form-control" name="tien_dien_string" type="text"
                                     value="( {{ $sdnLast->so_dien }} - {{ $sdnSecond->so_dien }} ) = {{ number_format($sdnLast->so_dien - $sdnSecond->so_dien) }} kWhx {{ number_format($cpdv->tien_dien_int) }} VNĐ/kWh">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="tien_nuoc_string" class="col-sm-3 col-form-label">tien_nuoc_string </label>
+                                    <label class="col-sm-3 col-form-label">tien_nuoc_string </label>
                                     <div class="col-sm-9">
                                         <input class="form-control" name="tien_nuoc_string" type="text" value="( {{ $sdnLast->so_nuoc }} - {{ $sdnSecond->so_nuoc }} ) ={{ number_format($sdnLast->so_nuoc - $sdnSecond->so_nuoc) }}m³ x {{ number_format($cpdv->tien_nuoc_int) }} VNĐ/m³">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="chi_phi_phat_sinh" class="col-sm-3 col-form-label">chi_phi_phat_sinh </label>
+                                    <label class="col-sm-3 col-form-label">chi_phi_phat_sinh </label>
                                     <div class="col-sm-9">
                                         <input class="form-control" name="chi_phi_phat_sinh" type="text" value="{{$sdnLast->chi_phi_phat_sinh}}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="tien_phong_string" class="col-sm-3 col-form-label">tien_phong_string </label>
+                                    <label class="col-sm-3 col-form-label">tien_phong_string </label>
                                     <div class="col-sm-9">
                                         <input class="form-control" name="tien_phong_string" type="text" value="{{$phong->ten_phong }} Tháng {{\Carbon\Carbon::parse($sdnLast->date)->format('m')}} năm {{\Carbon\Carbon::parse($sdnLast->date)->format('Y')}}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="thang" class="col-sm-3 col-form-label">thang </label>
+                                    <label class="col-sm-3 col-form-label">thang </label>
                                     <div class="col-sm-9">
                                         <input class="form-control" name="thang" type="text" value="Tháng {{ \Carbon\Carbon::parse($sdnLast->date)->format('m') }} năm {{ \Carbon\Carbon::parse($sdnLast->date)->format('Y') }}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="thong_bao" class="col-sm-3 col-form-label">thong_bao </label>
+                                    <label class="col-sm-3 col-form-label">thong_bao </label>
                                     <div class="col-sm-9">
                                         <input class="form-control" name="thong_bao" type="text" value="Xin thông báo tới anh (chị): Phí dịch vụ trong tháng {{ \Carbon\Carbon::parse($sdnSecond->date)->format('m/Y') }} và tiền thuê phòng tháng {{ \Carbon\Carbon::parse($sdnLast->date)->format('m/Y') }}. Cụ thể như sau:">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="tien_phong_int" class="col-sm-3 col-form-label">tien_phong_int </label>
+                                    <label class="col-sm-3 col-form-label">tien_phong_int </label>
                                     <div class="col-sm-9">
                                         <input class="form-control" name="tien_phong_int" type="text" value="{{$phong->gia_phong }}">
                                     </div>
                                 </div>
-
                                 <div class="form-group row">
-                                    <label for="tien_dien_int" class="col-sm-3 col-form-label">tien_dien_int </label>
+                                    <label class="col-sm-3 col-form-label">tien_dien_int </label>
                                     <div class="col-sm-9">
                                         <input class="form-control" name="tien_dien_int" type="number" value="{{$tien_dien}}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="tien_mang" class="col-sm-3 col-form-label">tien_mang </label>
+                                    <label class="col-sm-3 col-form-label">tien_mang </label>
                                     <div class="col-sm-9">
                                         <input class="form-control" name="tien_mang" type="number" value="{{ $phong->dung_mang == 1 ? $cpdv->tien_mang_int : 0 }}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="tien_nuoc_int" class="col-sm-3 col-form-label">tien_nuoc_int </label>
+                                    <label class="col-sm-3 col-form-label">tien_nuoc_int </label>
                                     <div class="col-sm-9">
                                         <input class="form-control" name="tien_nuoc_int" type="number" value="{{$tien_nuoc}}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="tien_phat_sinh" class="col-sm-3 col-form-label">tien_phat_sinh </label>
+                                    <label class="col-sm-3 col-form-label">tien_phat_sinh </label>
                                     <div class="col-sm-9">
                                         <input class="form-control" name="tien_phat_sinh" type="number" value="{{$sdnLast->tien_phat_sinh}}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="so_tien_phai_tra" class="col-sm-3 col-form-label">so_tien_phai_tra </label>
+                                    <label class="col-sm-3 col-form-label">so_tien_phai_tra </label>
                                     <div class="col-sm-9">
                                         <input class="form-control" name="so_tien_phai_tra" type="number" value="{{$tong_cong}}">
-
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="so_tien_da_thanh_toan" class="col-sm-3 col-form-label">so_tien_da_thanh_toan </label>
+                                    <label class="col-sm-3 col-form-label">so_tien_da_thanh_toan </label>
                                     <div class="col-sm-9">
                                         <input class="form-control" name="so_tien_da_thanh_toan" type="number" value="0">
-
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="so_du" class="col-sm-3 col-form-label">so_du </label>
+                                    <label class="col-sm-3 col-form-label">so_du </label>
                                     <div class="col-sm-9">
                                         <input class="form-control" name="so_du" type="number" value="0">
-
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="trang_thai" class="col-sm-3 col-form-label">trang_thai </label>
+                                    <label class="col-sm-3 col-form-label">trang_thai </label>
                                     <div class="col-sm-9">
                                         <input class="form-control" name="trang_thai" type="number" value="0">
-
                                     </div>
                                 </div>
                                 @csrf

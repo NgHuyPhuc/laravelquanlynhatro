@@ -13,12 +13,13 @@ class HoaDonPhongTro extends Model
         'id',
         'id_phong_tro',
         'dung_mang',
+        'tien_mang',
         'tien_dien_string',
         'tien_nuoc_string',
         'chi_phi_phat_sinh',
         'tien_phong_string',
         'thang',
-        'thongbao',
+        'thong_bao',
         'tien_phong_int',
         'tien_dien_int',
         'tien_nuoc_int',
@@ -26,7 +27,7 @@ class HoaDonPhongTro extends Model
         'so_tien_phai_tra',
         'so_tien_da_thanh_toan',
         'so_du',
-        'trang_thai_thanh_toan',
+        'trang_thai',
     ];
 
     public function phongtro()

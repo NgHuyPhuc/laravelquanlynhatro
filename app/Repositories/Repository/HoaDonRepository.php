@@ -13,5 +13,9 @@ class HoaDonRepository extends BaseRepository implements HoaDonRepositoryInterfa
     {
         parent::__construct($hoadon);
     }
+    public function getByIdPhong($id_phong)
+    {
+        return HoaDonPhongTro::where('id_phong_tro', $id_phong);
+    }
 }
 ?>

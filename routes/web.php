@@ -81,9 +81,8 @@ Route::middleware('fetch.nhatro')->prefix('nhatro/{id}')->group(function () {
             Route::get('/xoanguoi/{id_nguoi_thue}', [ThongTinNguoiThueController::class, 'destroy'])->name('nguoitro.xoanguoi');
         });
         Route::prefix('/{id_phong}/hoadon')->group(function () {
-            // Route::get('/', [HoaDonPhongTroController::class, 'index'])->name('nhatro.phong.nguoithue.show.all.info');
+            Route::get('/', [HoaDonPhongTroController::class, 'index'])->name('nhatro.phong.nguoithue.show.all.info');
             Route::get('/all', [HoaDonPhongTroController::class, 'infoall'])->name('phong.hoadon.danhsach.all');
-            Route::get('/thongtin/{id_hoadon}', [HoaDonPhongTroController::class, 'info'])->name('nhatro.phong.hoadon.show.1.info');
             Route::get('/chonsdntheothang', [HoaDonPhongTroController::class, 'createMonth'])->name('phongtro.hoadon.chonsdntheothang');
             Route::get('/themhoadontheothang', [HoaDonPhongTroController::class, 'getcreateMonth'])->name('phongtro.hoadon.themhoadontheothang');
             // Route::post('/themhoadontheothang', [HoaDonPhongTroController::class, 'createMonth'])->name('phongtro.hoadon.themhoadontheothang');

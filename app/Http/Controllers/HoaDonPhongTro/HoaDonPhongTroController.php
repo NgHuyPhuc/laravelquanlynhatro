@@ -25,7 +25,9 @@ class HoaDonPhongTroController extends Controller
         $this->chiPhiDichVu = $chiPhiDichVu;
     }
     public function index($id, $id_phong){
-        
+        $data['hoadon'] = $this->hoaDon->getByIdPhong($id_phong)->paginate(5);
+        $data['id_phong'] = $id_phong;
+        return view('backend.hoadon.index',$data);
     }
     public function create($id, $id_phong){
         $data['id'] = $id;
@@ -90,11 +92,17 @@ class HoaDonPhongTroController extends Controller
 
         return view('backend.hoadon.detail',$data);
     }
-    public function edit($id, $id_phong){
-        
+    public function edit($id, $id_phong, $id_hoadon){
+        $data['hoadon'] = $this->hoaDon->getone($id_hoadon);
+        $data['phong'] = $this->phongTro->getone($id_phong);
+        $data['cpdv'] = $this->chiPhiDichVu->getone($id);
+        return view('backend.hoadon.edit',$data);
     }
-    public function update(Request $request, $id, $id_phong){
-        
+    public function update(Request $request, $id, $id_phong, $id_hoadon){
+        // dd($request);
+        $this->hoaDon->update($request, $id_hoadon, $id_phong);
+        return redirect()->route('phongtro.hoadon.detailhoadon',['id' => $id, 'id_phong' => $id_phong, 'id_hoadon' => $id_hoadon]);
+
     }
     public function destroy($id, $id_phong){
         
