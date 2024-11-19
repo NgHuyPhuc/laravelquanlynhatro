@@ -51,60 +51,29 @@ class HoaDonService
             if($request->so_tien_da_thanh_toan == $request->so_tien_phai_tra || $request->so_tien_da_thanh_toan > $request->so_tien_phai_tra)
             {
                 $trang_thai = 2;
-                $data = [
-                    'id_phong_tro' => $id_phong,
-                    'dung_mang' => $request->dung_mang,
-                    'tien_dien_string' => $request->tien_dien_string,
-                    'tien_nuoc_string' => $request->tien_nuoc_string,
-                    'chi_phi_phat_sinh' => $request->chi_phi_phat_sinh,
-                    'tien_phong_string' => $request->tien_phong_string,
-                    'tien_phong_int' => $request->tien_phong_int,
-                    'tien_dien_int' => $request->tien_dien_int,
-                    'tien_nuoc_int' => $request->tien_nuoc_int,
-                    'tien_phat_sinh' => $request->tien_phat_sinh,
-                    'so_tien_phai_tra' => $request->so_tien_phai_tra,
-                    'so_tien_da_thanh_toan' => $request->so_tien_da_thanh_toan,
-                    'so_du' => $request->so_tien_da_thanh_toan - $request->so_tien_phai_tra,
-                    'trang_thai' => $trang_thai,
-                ];
             }
             elseif($request->so_tien_da_thanh_toan < $request->so_tien_phai_tra){
                 $trang_thai = 1;
-                $data = [
-                    'id_phong_tro' => $id_phong,
-                    'dung_mang' => $request->dung_mang,
-                    'tien_dien_string' => $request->tien_dien_string,
-                    'tien_nuoc_string' => $request->tien_nuoc_string,
-                    'chi_phi_phat_sinh' => $request->chi_phi_phat_sinh,
-                    'tien_phong_string' => $request->tien_phong_string,
-                    'tien_phong_int' => $request->tien_phong_int,
-                    'tien_dien_int' => $request->tien_dien_int,
-                    'tien_nuoc_int' => $request->tien_nuoc_int,
-                    'tien_phat_sinh' => $request->tien_phat_sinh,
-                    'so_tien_phai_tra' => $request->so_tien_phai_tra,
-                    'so_tien_da_thanh_toan' => $request->so_tien_da_thanh_toan,
-                    'so_du' => $request->so_tien_da_thanh_toan - $request->so_tien_phai_tra,
-                    'trang_thai' => $trang_thai,
-                ];
             }
             else{
-                $data = [
-                    'id_phong_tro' => $id_phong,
-                    'dung_mang' => $request->dung_mang,
-                    'tien_dien_string' => $request->tien_dien_string,
-                    'tien_nuoc_string' => $request->tien_nuoc_string,
-                    'chi_phi_phat_sinh' => $request->chi_phi_phat_sinh,
-                    'tien_phong_string' => $request->tien_phong_string,
-                    'tien_phong_int' => $request->tien_phong_int,
-                    'tien_dien_int' => $request->tien_dien_int,
-                    'tien_nuoc_int' => $request->tien_nuoc_int,
-                    'tien_phat_sinh' => $request->tien_phat_sinh,
-                    'so_tien_phai_tra' => $request->so_tien_phai_tra,
-                    'so_tien_da_thanh_toan' => $request->so_tien_da_thanh_toan,
-                    'so_du' => $request->so_tien_phai_tra - $request->so_tien_da_thanh_toan,
-                    'trang_thai' => $request->trang_thai,
-                ];
+                $trang_thai = $request->trang_thai;
             }
+            $data = [
+                'id_phong_tro' => $id_phong,
+                'dung_mang' => $request->dung_mang,
+                'tien_dien_string' => $request->tien_dien_string,
+                'tien_nuoc_string' => $request->tien_nuoc_string,
+                'chi_phi_phat_sinh' => $request->chi_phi_phat_sinh,
+                'tien_phong_string' => $request->tien_phong_string,
+                'tien_phong_int' => $request->tien_phong_int,
+                'tien_dien_int' => $request->tien_dien_int,
+                'tien_nuoc_int' => $request->tien_nuoc_int,
+                'tien_phat_sinh' => $request->tien_phat_sinh,
+                'so_tien_phai_tra' => $request->so_tien_phai_tra,
+                'so_tien_da_thanh_toan' => $request->so_tien_da_thanh_toan,
+                'so_du' => $request->so_tien_da_thanh_toan - $request->so_tien_phai_tra,
+                'trang_thai' => $trang_thai,
+            ];
         }
         return $this->hoaDon->update($id, $data);
     }
