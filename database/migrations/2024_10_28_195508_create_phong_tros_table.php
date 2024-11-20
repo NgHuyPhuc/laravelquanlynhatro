@@ -20,6 +20,7 @@ class CreatePhongTrosTable extends Migration
 
             $table->string('ten_phong');
             $table->integer('gia_phong');
+            $table->integer('tien_coc'); // Tiền đặt cọc khi thuê phòng
             $table->integer('mua_nuoc')->default(0); // số lượng bình nước mua / sẽ lấy giá trong chi phi dich vu
             $table->tinyInteger('dung_mang')->default(0); // cai nay se dung de dua thong tin sang ben hoa don
             $table->string('anh_hop_dong')->default('default.png'); 

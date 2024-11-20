@@ -24,7 +24,6 @@ class CreateHoaDonPhongTrosTable extends Migration
             $table->string('tien_phong_string'); // lưu text thong tin tien phong
             $table->string('thang'); // lưu text thang tao hoa don
             $table->string('thong_bao'); // lưu text thong bao hoa don tu thang -> thang
-            $table->string('chi_phi_phat_sinh'); // lưu text chi phí phát sinh
             $table->integer('tien_phong_int');// tiền phong (lưu = số int)
             $table->integer('tien_dien_int');// Tổng tiền điện (lưu = số int)
             $table->integer('tien_nuoc_int');// Tổng tiền nước ( lưu = số int)

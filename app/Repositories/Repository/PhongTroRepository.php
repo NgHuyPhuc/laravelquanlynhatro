@@ -18,5 +18,9 @@ class PhongTroRepository extends BaseRepository implements PhongTroRepositoryInt
     {
         return PhongTro::withCount(['nguoidangthue'])->find($id);
     }
+    public function traPhong($id)
+    {
+        return PhongTro::find($id)->traPhong();
+    }
 }
 ?>

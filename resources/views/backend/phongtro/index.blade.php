@@ -9,7 +9,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card-body">
-                                <h4 class="card-title">Chức năng phòng 301</h4>
+                                <h4 class="card-title">Chức năng phòng : {{$phongtro->ten_phong}}</h4>
                                 <div class="template-demo">
                                     <a href="{{route('phongtro.nguoithue.themnguoi',['id' => $nhatro->id, 'id_phong' => $phongtro->id])}}" class="btn btn-info">Thêm mới người
                                         thuê phòng</a>
@@ -35,7 +35,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card-body">
-                                <h4 class="card-title">Thông tin phòng 301</h4>
+                                <h4 class="card-title">Thông tin phòng : {{$phongtro->ten_phong}}</h4>
                                 @if ($phongtro->trang_thai == 0)
                                     Phòng chưa được cho thuê
                                 @else
@@ -54,7 +54,15 @@
                                                 <h6>Tiền phòng: </h6>
                                             </td>
                                             <td>
-                                                <h6>{{$phongtro->gia_phong}} đ</h6>
+                                                <h6>{{number_format($phongtro->gia_phong)}} đ</h6>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-1">
+                                                <h6>Tiền cọc: </h6>
+                                            </td>
+                                            <td>
+                                                <h6>{{number_format($phongtro->tien_coc)}} đ</h6>
                                             </td>
                                         </tr>
                                         <tr>
@@ -69,7 +77,8 @@
                                 </table>
                                 <div class="template-demo mt-3">
                                     <h6>Số người thuê: {{$phongtro->nguoidangthue->count()}}</h6>
-                                    <h6>Tiền phòng: {{$phongtro->gia_phong}} đ</h6>
+                                    <h6>Tiền phòng: {{number_format($phongtro->gia_phong)}} đ</h6>
+                                    <h6>Tiền cọc: {{number_format($phongtro->tien_coc)}} đ</h6>
                                     <h6>Dùng internet: {{$phongtro->dung_mang ? 'Có' : 'Không'}}</h6>
                                 </div>
                                 @endif
