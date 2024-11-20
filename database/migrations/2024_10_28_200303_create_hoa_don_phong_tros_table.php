@@ -18,6 +18,7 @@ class CreateHoaDonPhongTrosTable extends Migration
             $table->bigInteger('id_phong_tro')->unsigned();
             $table->foreign('id_phong_tro')->references('id')->on('phong_tros');
             $table->boolean('dung_mang'); // check xem phong co dung mang hay khong thong qua bang phong_tros
+            $table->integer('tien_mang'); // tien mang int
             $table->string('tien_dien_string'); // Tiền điện * giá (lưu = chữ)
             $table->string('tien_nuoc_string'); // Tiền nước * giá (lưu = chữ)
             $table->string('chi_phi_phat_sinh'); // lưu text chi phí phát sinh

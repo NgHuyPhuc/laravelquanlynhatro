@@ -9,7 +9,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card-body">
-                                    <h4 class="card-title">Quản lý hóa đơn phòng {{ $phong->ten_phong }}</h4>
+                                    <h4 class="card-title">Quản lý hóa đơn phòng : {{ $phong->ten_phong }}</h4>
                                     <div class="template-demo">
                                         <a href="{{ route('danh.sach.so.dien.nuoc', ['id' => $nhatro->id, 'id_phong' => $phong->id]) }}"
                                             class="btn btn-info"> Danh sách số điện nước</a>
@@ -31,7 +31,41 @@
                 <div class="col-lg-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Tạo hóa đơn phòng {{ $phong->ten_phong }}</h4>
+                            <h4 class="card-title">Tạo hóa đơn phòng : {{ $phong->ten_phong }}</h4>
+                            <h4 class="card-title">Số điện và số nước tháng trước:</h4>
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                Tháng
+                                            </th>
+                                            <th>
+                                                Số điện
+                                            </th>
+                                            <th>
+                                                Số nước
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                {{ \Carbon\Carbon::parse($sdnSecond->date)->month }}
+                                            </td>
+                                            <td>
+                                                {{ $sdnSecond->so_dien }}
+                                            </td>
+                                            <td>
+                                                {{ $sdnSecond->so_nuoc }}
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <hr>
+                            <br>
                             <h3 class="card-title">Nhập số điện nước {{ $phong->ten_phong }}</h3>
                             <div class="row">
                                 <div class="col-lg-8">
@@ -41,14 +75,14 @@
                                             <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Nhập số điện :</label>
                                             <div class="col-sm-9">
                                                 <input name="so_dien" type="number" class="form-control"
-                                                    id="exampleInputUsername2" placeholder="Nhập số điện Tháng 10" required>
+                                                    id="exampleInputUsername2" min="{{$sdnSecond->so_dien}}" placeholder="Nhập số điện Tháng {{$month}}" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Nhập số nước :</label>
                                             <div class="col-sm-9">
                                                 <input name="so_nuoc" type="number" class="form-control"
-                                                    id="exampleInputEmail2" placeholder="Nhập số nước Tháng 10" required>
+                                                    id="exampleInputEmail2"  min="{{$sdnSecond->so_nuoc}}" placeholder="Nhập số nước Tháng {{$month}}" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -60,18 +94,18 @@
                                         </div>
                                         <div class="form-group row">
                                             <label for="chi_phi_phat_sinh" class="col-sm-3 col-form-label">Thông tin chi
-                                                phí thêm (nếu có) :</label>
+                                                phí thêm (nếu có - Nhập chữ) :</label>
                                             <div class="col-sm-9">
                                                 <input name="chi_phi_phat_sinh" type="text" class="form-control"
-                                                    id="chi_phi_phat_sinh" placeholder="Thông tin chi phí thêm (nếu có)">
+                                                    id="chi_phi_phat_sinh" placeholder="Thông tin chi phí thêm (nếu có - Nhập chữ)">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="tien_phat_sinh" class="col-sm-3 col-form-label">Chi phí thêm
-                                                (nếu có) :</label>
+                                                (nếu có - Nhập số) :</label>
                                             <div class="col-sm-9">
                                                 <input name="tien_phat_sinh" type="number" class="form-control"
-                                                    id="tien_phat_sinh" placeholder="Chi phí thêm (nếu có)">
+                                                    id="tien_phat_sinh" placeholder="Chi phí thêm (nếu có - Nhập số)">
                                             </div>
                                         </div>
                                         @if ($checksdn)

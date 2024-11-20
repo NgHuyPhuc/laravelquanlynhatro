@@ -17,10 +17,8 @@ class SoDienNuocTheoPhongController extends Controller
         $this->phongTro = $phongTro;
     }
     public function index($id, $id_phong){
-        // $data['danhsach'] = $this->soDienNuoc->getbyphong($id_phong);
         $data['diennuoc'] = $this->soDienNuoc->getbyphong($id_phong)->paginate(2);
         $data['phong'] = $this->phongTro->getone($id_phong);
-        // dd($data);
         return view('backend.sodiennuoc.all', $data);
     }
     public function create(Request $request, $id, $id_phong){
@@ -31,7 +29,7 @@ class SoDienNuocTheoPhongController extends Controller
         $monthSdnLast = Carbon::parse($this->soDienNuoc->getLastest($id_phong)->date)->month;
         $data['month'] = $monthNow - 1;
         $data['checksdn'] = 0;
-        // dd(Carbon::parse($this->soDienNuoc->getLastest($id_phong)->date)->month);
+        $data['sdnSecond'] = $this->soDienNuoc->getLastest($id_phong);
         if($monthNow == $monthSdnLast)
         {
             $data['checksdn'] = 1;
@@ -46,7 +44,6 @@ class SoDienNuocTheoPhongController extends Controller
         $data['check'] = 0;
         $data['id'] = $id;
         $data['id_phong'] = $id_phong;
-        // $data['month'] = Carbon::now()->month - 1;
         $data['phong'] = $this->phongTro->getone($id_phong);
         return view('backend.hoadon.sodiennuochientai',$data);
     }

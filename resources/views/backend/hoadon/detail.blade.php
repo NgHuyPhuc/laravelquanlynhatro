@@ -46,7 +46,7 @@
                                             <h1 class="text-danger" style="margin-left: 10%;">{{ $phong->ten_phong }}</h1>
                                         </div>
                                         <br>
-                                        <p style="font-size: 20px;"> {{$hoadon->thongbao}}:</p>
+                                        <p style="font-size: 20px;"> {{$hoadon->thong_bao}}</p>
                                         <hr>
                                         <!-- <div class="card"> -->
                                         <div class="card-body">
@@ -124,7 +124,7 @@
                                             </div>
                                             <div class="col-lg-5">
                                                 <div class="qr-code" style=" text-align: center; margin-top: 20px;">
-                                                    <img src="/uploads/img/{{ $cpdv->anh_qr_code }}"
+                                                    <img style="width: 350px; height: 350px;" src="/uploads/img/{{ $cpdv->anh_qr_code }}"
                                                         alt="QR Code Thanh Toán" />
                                                     <p style="text-align: center;"><strong>Mã QR Code Thanh Toán</strong>
                                                     </p>
