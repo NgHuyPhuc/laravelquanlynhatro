@@ -60,6 +60,7 @@ Route::middleware('fetch.nhatro')->prefix('nhatro/{id}')->group(function () {
         Route::get('/suaphong/{id_phong}', [PhongTroController::class, 'edit'])->name('phongtro.suaphong.get');
         Route::post('/suaphong/{id_phong}', [PhongTroController::class, 'update'])->name('phongtro.suaphong.post');
         Route::get('/xoaphong/{id_phong}', [PhongTroController::class, 'destroy'])->name('phongtro.xoaphong');
+
         Route::prefix('/{id_phong}/sodiennuoc')->group(function () {
             Route::get('/danhsachsodiennuoc', [SoDienNuocTheoPhongController::class, 'index'])->name('danh.sach.so.dien.nuoc');
             Route::get('/taomoisodiennuoc', [SoDienNuocTheoPhongController::class, 'firstCreate'])->name('phongtro.hoadon.sodiennuoc1');
@@ -71,17 +72,18 @@ Route::middleware('fetch.nhatro')->prefix('nhatro/{id}')->group(function () {
         });
 
         Route::prefix('/{id_phong}/nguoithue')->group(function () {
-            Route::get('/', [ThongTinNguoiThueController::class, 'index'])->name('nhatro.phong.nguoithue.show.all.info');
+            Route::get('/', [ThongTinNguoiThueController::class, 'index'])->name('phong.nguoithue.dangthue');
             Route::get('/all', [ThongTinNguoiThueController::class, 'infoall'])->name('phong.nguoithue.danhsach.all');
-            Route::get('/thongtin/{id_nguoithue}', [ThongTinNguoiThueController::class, 'info'])->name('nhatro.phong.nguoithue.show.1.info');
+            Route::get('/thongtin/{id_nguoi_thue}', [ThongTinNguoiThueController::class, 'detail'])->name('nhatro.phong.nguoithue.show.1.info');
             Route::get('/themnguoi', [ThongTinNguoiThueController::class, 'create'])->name('phongtro.nguoithue.themnguoi');
             Route::post('/themnguoi', [ThongTinNguoiThueController::class, 'store'])->name('phongtro.nguoithue.storenguoi');
             Route::get('/suanguoithue/{id_nguoi_thue}', [ThongTinNguoiThueController::class, 'edit'])->name('nguoitro.suanguoi.get');
             Route::post('/suanguoithue/{id_nguoi_thue}', [ThongTinNguoiThueController::class, 'update'])->name('nguoitro.suanguoi.post');
             Route::get('/xoanguoi/{id_nguoi_thue}', [ThongTinNguoiThueController::class, 'destroy'])->name('nguoitro.xoanguoi');
         });
+        
         Route::prefix('/{id_phong}/hoadon')->group(function () {
-            Route::get('/', [HoaDonPhongTroController::class, 'index'])->name('nhatro.phong.nguoithue.show.all.info');
+            Route::get('/', [HoaDonPhongTroController::class, 'index'])->name('nhatro.phong.hoadon.show.all.info');
             Route::get('/all', [HoaDonPhongTroController::class, 'infoall'])->name('phong.hoadon.danhsach.all');
             Route::get('/chonsdntheothang', [HoaDonPhongTroController::class, 'createMonth'])->name('phongtro.hoadon.chonsdntheothang');
             Route::get('/themhoadontheothang', [HoaDonPhongTroController::class, 'getcreateMonth'])->name('phongtro.hoadon.themhoadontheothang');
@@ -93,7 +95,6 @@ Route::middleware('fetch.nhatro')->prefix('nhatro/{id}')->group(function () {
             Route::post('/suahoadon/{id_hoadon}', [HoaDonPhongTroController::class, 'update'])->name('hoadontro.suahoadon.post');
             Route::get('/xoahoadon/{id_hoadon}', [HoaDonPhongTroController::class, 'destroy'])->name('hoadontro.xoahoadon');
         });
-        
     });
     
     // Định nghĩa URL để hiển thị chi tiết phòng trọ

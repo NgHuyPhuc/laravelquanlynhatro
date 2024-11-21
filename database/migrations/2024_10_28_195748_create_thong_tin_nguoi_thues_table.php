@@ -22,7 +22,8 @@ class CreateThongTinNguoiThuesTable extends Migration
 
             $table->string('ten');
             $table->string('sdt');
-            $table->string('cmnd');// anh
+            $table->string('cmnd_mat_trc');// anh cmnd_mat_trc
+            $table->string('cmnd_mat_sau');// anh cmnd_mat_sau
             $table->string('que_quan');
             $table->boolean('xe'); // nguoi nay co xe hay khong
             $table->integer('gioi_tinh');//1 la nam / 2 la nu

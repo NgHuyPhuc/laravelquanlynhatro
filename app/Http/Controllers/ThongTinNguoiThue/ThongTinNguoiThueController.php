@@ -12,29 +12,41 @@ class ThongTinNguoiThueController extends Controller
     //
     protected $phongService;
     protected $nguoiThueService;
-    public function __construct(PhongTroService $phongService, ThongTinNguoiThueService $nguoiThueService){
+    public function __construct(PhongTroService $phongService, ThongTinNguoiThueService $nguoiThueService)
+    {
         $this->phongService = $phongService;
         $this->nguoiThueService = $nguoiThueService;
     }
-    public function index($id, $id_phong){
+    public function index($id, $id_phong)
+    {
         $data['phong'] = $this->phongService->getone($id_phong);
-        // $data['nguoithue'] = $this->phongService
-        return view('backend.nguoithue.index',$data);
+        $data['nguoidangthue'] = $data['phong']->nguoidangthue()->paginate(3);
+        return view('backend.nguoithue.index', $data);
     }
-    public function infoall($id, $id_phong){
+    public function detail($id, $id_phong, $id_nguoi_thue)
+    {
+        $data['nguoi'] = $this->nguoiThueService->getone($id_nguoi_thue);
         $data['phong'] = $this->phongService->getone($id_phong);
-        $data['nguoi'] = $this->phongService->getone($id_phong)->nguoithue()->paginate(3);
-        return view('backend.nguoithue.all',$data);
+        return view('backend.nguoithue.detail', $data);
     }
-        public function create($id, $id_phong){
+    public function infoall($id, $id_phong)
+    {
         $data['phong'] = $this->phongService->getone($id_phong);
-        return view('backend.nguoithue.create',$data ,['id' => $id, 'id_phong' => $id_phong]);
+        $data['nguoi'] = $this->phongService->getone($id_phong)->nguoithue()->orderby('id','desc')->paginate(3);
+        return view('backend.nguoithue.all', $data);
     }
-    public function store(Request $request,$id, $id_phong){
+    public function create($id, $id_phong)
+    {
+        $data['phong'] = $this->phongService->getone($id_phong);
+        return view('backend.nguoithue.create', $data, ['id' => $id, 'id_phong' => $id_phong]);
+    }
+    public function store(Request $request, $id, $id_phong)
+    {
         $this->nguoiThueService->create($request, $id_phong);
-        return redirect()->route('nhatro.phong.show.info',['id' => $id, 'id_phong' => $id_phong]);
+        return redirect()->route('phong.nguoithue.dangthue', ['id' => $id, 'id_phong' => $id_phong]);
     }
-    public function edit($id, $id_phong , $id_nguoi_thue){
+    public function edit($id, $id_phong, $id_nguoi_thue)
+    {
         $data['nguoithue'] = $this->nguoiThueService->getone($id_nguoi_thue);
         $data['phong'] = $this->phongService->getone($id_phong);
         $data['id'] = $id;
@@ -42,9 +54,9 @@ class ThongTinNguoiThueController extends Controller
         $data['id_nguoi_thue'] = $id_nguoi_thue;
         return view('backend.nguoithue.edit', $data);
     }
-    public function update(Request $request, $id , $id_phong, $id_nguoi_thue){
-        $this->nguoiThueService->update($request, $id, $id_nguoi_thue);
-        return redirect()->route('nhatro.phong.show.info',['id' => $id, 'id_phong' => $id_phong]);
-
+    public function update(Request $request, $id, $id_phong, $id_nguoi_thue)
+    {
+        $this->nguoiThueService->update($request, $id_nguoi_thue);
+        return redirect()->route('phong.nguoithue.danhsach.all', ['id' => $id, 'id_phong' => $id_phong]);
     }
 }

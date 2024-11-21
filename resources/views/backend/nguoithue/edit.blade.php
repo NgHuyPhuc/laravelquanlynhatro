@@ -56,33 +56,34 @@
                       <div class="form-group">
                         <label for="exampleSelectGender">Giới tính</label>
                           <select name="gioi_tinh" style="color: black;" class="form-control" id="exampleSelectGender">
-                            <option value="0" {{$nguoithue->gioitinh == 0 ? 'selected' : ''}}>Nam</option>
-                            <option value="1" {{$nguoithue->gioitinh == 1 ? 'selected' : ''}}>Nữ</option>
+                            <option value="0" {{$nguoithue->gioi_tinh == 0 ? 'selected' : ''}}>Nam</option>
+                            <option value="1" {{$nguoithue->gioi_tinh == 1 ? 'selected' : ''}}>Nữ</option>
                           </select>
                         </div>
                         <div class="form-group">
                             <label>Ảnh CMND mặt trước</label>
-                            <input type="file" name="cmnd" class="file-upload-default" id="cmndImage" onchange="updateFileName()" value="{{$nguoithue->cmnd}}">
+                            <input type="file" name="cmnd_mat_trc" class="file-upload-default" id="cmnd_mat_trc" onchange="updateFileNametrc()" value="{{$nguoithue->cmnd_mat_trc}}">
                             
                             <div class="input-group col-xs-12">
-                                <input type="text" class="form-control file-upload-info" id="fileNameDisplay" disabled placeholder="{{$nguoithue->cmnd}}">
+                                <input type="text" class="form-control file-upload-info" id="fileNameDisplaytrc" disabled placeholder="{{$nguoithue->cmnd_mat_trc}}">
                                 
                                 <span class="input-group-append">
-                                    <label class="file-upload-browse btn btn-primary" for="cmndImage">Chọn ảnh</label>
+                                    <label class="file-upload-browse btn btn-primary" for="cmnd_mat_trc">Chọn ảnh</label>
                                 </span>
                             </div>
                         </div>
-                        
-                      {{-- <div class="form-group">
-                        <label>Ảnh cmnd mặt sau</label>
-                        <input type="file" name="cmndsau" class="file-upload-default">
-                        <div class="input-group col-xs-12">
-                          <input type="text" class="form-control file-upload-info" disabled="" placeholder="Upload Image">
-                          <span class="input-group-append">
-                            <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
-                          </span>
-                        </div>
-                      </div> --}}
+                        <div class="form-group">
+                          <label>Ảnh CMND mặt sau</label>
+                          <input type="file" name="cmnd_mat_sau" class="file-upload-default" id="cmnd_mat_sau" onchange="updateFileNamesau()" value="{{$nguoithue->cmnd_mat_sau}}">
+                          
+                          <div class="input-group col-xs-12">
+                              <input type="text" class="form-control file-upload-info" id="fileNameDisplaysau" disabled placeholder="{{$nguoithue->cmnd_mat_sau}}">
+                              
+                              <span class="input-group-append">
+                                  <label class="file-upload-browse btn btn-primary" for="cmnd_mat_sau">Chọn ảnh</label>
+                              </span>
+                          </div>
+                      </div>
                       {{-- @dd($nguoithue->trang_thai == 1 ? 'checked' : '') --}}
                       <div class="form-group">
                         <label for="exampleInputName1">Trạng thái:</label>
@@ -101,15 +102,26 @@
     </div>
 </div>
 <script>
-    function updateFileName() {
-        const fileInput = document.getElementById('cmndImage');
-        const fileNameDisplay = document.getElementById('fileNameDisplay');
+    function updateFileNametrc() {
+        const fileInput = document.getElementById('cmnd_mat_trc');
+        const fileNameDisplaytrc = document.getElementById('fileNameDisplaytrc');
         
         // Hiển thị tên ảnh đã chọn
         if (fileInput.files.length > 0) {
-            fileNameDisplay.value = fileInput.files[0].name;
+            fileNameDisplaytrc.value = fileInput.files[0].name;
         } else {
-            fileNameDisplay.value = '';  // Xóa nếu không có file
+            fileNameDisplaytrc.value = '';  // Xóa nếu không có file
+        }
+    }
+    function updateFileNamesau() {
+        const fileInput = document.getElementById('cmnd_mat_sau');
+        const fileNameDisplaysau = document.getElementById('fileNameDisplaysau');
+        
+        // Hiển thị tên ảnh đã chọn
+        if (fileInput.files.length > 0) {
+            fileNameDisplaysau.value = fileInput.files[0].name;
+        } else {
+            fileNameDisplaysau.value = '';  // Xóa nếu không có file
         }
     }
 </script>

@@ -32,7 +32,10 @@
                         <thead>
                           <tr>
                             <th>
-                              User
+                              Ảnh CMND mặt trước
+                            </th>
+                            <th>
+                              Ảnh CMND mặt sau
                             </th>
                             <th>
                               Tên
@@ -51,8 +54,11 @@
                         <tbody>
                             @foreach ($nguoi as $item)
                             <tr>
-                                <td class="py-1">
-                                  <img src="/uploads/img/{{$item->cmnd}}" alt="image"/>
+                                <td>
+                                  <img style="border-radius: 0%; width: 250px; height: 150px" src="/uploads/img/{{$item->cmnd_mat_trc}}" alt="image"/>
+                                </td>
+                                <td>
+                                  <img style="border-radius: 0%; width: 250px; height: 150px" src="/uploads/img/{{$item->cmnd_mat_sau}}" alt="image"/>
                                 </td>
                                 <td>
                                   {{$item->ten}}
@@ -66,11 +72,15 @@
                                     @else
                                     <p style="color: white" class="btn btn-warning">Đã chuyển đi</p>
                                     @endif
-
                                 </td>
                                 <td>
-                                  <a href="{{route('nguoitro.suanguoi.get',['id' => $nhatro->id , 'id_phong' => $phong->id , 'id_nguoi_thue' => $item->id])}}" class="btn btn-warning" style="color: white;">Chỉnh sửa</a>
+                                  <a href="{{route('nhatro.phong.nguoithue.show.1.info',['id' => $nhatro->id , 'id_phong' => $phong->id , 'id_nguoi_thue' => $item->id])}}" class="btn btn-info ml-3" style="color: white;">Xem thông tin chi tiết</a>
+                                  <a href="{{route('nguoitro.suanguoi.get',['id' => $nhatro->id , 'id_phong' => $phong->id , 'id_nguoi_thue' => $item->id])}}" class="btn btn-warning ml-3" style="color: white;">Chỉnh sửa</a>
                                   <a href="" class="btn btn-danger ml-3">Xóa</a>
+                                  <br>
+                                  @if ($item->xe == 1)
+                                  <a href="{{route('nguoitro.suanguoi.get',['id' => $nhatro->id , 'id_phong' => $phong->id , 'id_nguoi_thue' => $item->id])}}" class="btn btn-success ml-3 mt-3" style="color: white;">Thông tin xe</a>
+                                  @endif
                                 </td>
                               </tr>
                             @endforeach
