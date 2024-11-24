@@ -72,24 +72,24 @@
                                     <form id="your-form" method="POST" class="forms-sample"
                                         action="{{ route('sodien.nuoc.theophong', ['id' => $nhatro->id, 'id_phong' => $phong->id]) }}">
                                         <div class="form-group row">
-                                            <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Nhập số điện :</label>
+                                            <label for="so_dien" class="col-sm-3 col-form-label">Nhập số điện :</label>
                                             <div class="col-sm-9">
                                                 <input name="so_dien" type="number" class="form-control"
-                                                    id="exampleInputUsername2" min="{{$sdnSecond->so_dien}}" placeholder="Nhập số điện Tháng {{$month}}" required>
+                                                    id="so_dien" min="{{$sdnSecond->so_dien}}" placeholder="Nhập số điện Tháng {{$month}}" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Nhập số nước :</label>
+                                            <label for="so_nuoc" class="col-sm-3 col-form-label">Nhập số nước :</label>
                                             <div class="col-sm-9">
                                                 <input name="so_nuoc" type="number" class="form-control"
-                                                    id="exampleInputEmail2"  min="{{$sdnSecond->so_nuoc}}" placeholder="Nhập số nước Tháng {{$month}}" required>
+                                                    id="so_nuoc"  min="{{$sdnSecond->so_nuoc}}" placeholder="Nhập số nước Tháng {{$month}}" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Tháng :</label>
+                                            <label for="date" class="col-sm-3 col-form-label">Tháng :</label>
                                             <div class="col-sm-9">
                                                 <input name="date" type="date" class="form-control"
-                                                    id="exampleInputEmail2" value="{{\Carbon\Carbon::now()->format('Y-m-d')}}" required>
+                                                    id="date" value="{{\Carbon\Carbon::now()->format('Y-m-d')}}" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">

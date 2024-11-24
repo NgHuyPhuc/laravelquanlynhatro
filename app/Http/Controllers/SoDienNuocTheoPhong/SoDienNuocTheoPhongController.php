@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\SoDienNuocTheoPhong;
 
 use App\Http\Controllers\Controller;
+use App\Services\ChiPhiDichVuService\ChiPhiDichVuService;
+use App\Services\NhaTroService\NhaTroService;
 use App\Services\PhongTroService\PhongTroService;
 use App\Services\SoDienNuocTheoPhongService\SoDienNuocTheoPhongService;
 use Carbon\Carbon;
@@ -12,14 +14,32 @@ class SoDienNuocTheoPhongController extends Controller
 {
     protected $soDienNuoc;
     protected $phongTro;
-    public function __construct(SoDienNuocTheoPhongService $soDienNuoc, PhongTroService $phongTro){
+    protected $nhatroService;
+    protected $chiPhiDichVuService;
+    public function __construct(SoDienNuocTheoPhongService $soDienNuoc, PhongTroService $phongTro, NhaTroService $nhatroService, ChiPhiDichVuService $chiPhiDichVuService){
         $this->soDienNuoc = $soDienNuoc;
         $this->phongTro = $phongTro;
+        $this->nhatroService = $nhatroService;
+        $this->chiPhiDichVuService = $chiPhiDichVuService;
     }
     public function index($id, $id_phong){
         $data['diennuoc'] = $this->soDienNuoc->getbyphong($id_phong)->paginate(2);
         $data['phong'] = $this->phongTro->getone($id_phong);
         return view('backend.sodiennuoc.all', $data);
+    }
+    public function nhaptatcasdn($id) {
+        $monthNow = Carbon::now()->month;
+        $data['month'] = $monthNow - 1;
+        $data['thongtin'] = $this->nhatroService->getTangandPhongTro($id);
+        $data['checkCpdv'] = $this->chiPhiDichVuService->getByNhaTroID($id)->count();
+        return view('backend.sodiennuoc.nhaptatcasdn', $data);
+    }
+    public function nhaptatcasdnPost(Request $request, $id) {
+        // dd($request);
+        $data['thongtin'] = $this->nhatroService->getTangandPhongTro($id);
+        $data['checkCpdv'] = $this->chiPhiDichVuService->getByNhaTroID($id)->count();
+        return $this->soDienNuoc->createMultiple($request,$id);
+        return view('backend.sodiennuoc.nhaptatcasdn', $data);
     }
     public function create(Request $request, $id, $id_phong){
         $data['id'] = $id;

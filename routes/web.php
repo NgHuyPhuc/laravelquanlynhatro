@@ -34,6 +34,8 @@ Route::post('/postthemmoinhatro', [NhaTroController::class, 'store'])->name('nha
 // Route::get('/phongtro', [PhongTroController::class, 'index']);
 Route::middleware('fetch.nhatro')->prefix('nhatro/{id}')->group(function () {
     Route::get('/', [NhaTroController::class, 'show'])->name('nhatro.show');
+    Route::get('/nhaptatcasdn', [SoDienNuocTheoPhongController::class, 'nhaptatcasdn'])->name('get.nhaptatcasdn');
+    Route::post('/nhaptatcasdn', [SoDienNuocTheoPhongController::class, 'nhaptatcasdnPost'])->name('post.nhaptatcasdn');
 
     Route::prefix('tang')->group(function () {
         Route::get('/', [TangController::class, 'index'])->name('nhatro.tang.show');

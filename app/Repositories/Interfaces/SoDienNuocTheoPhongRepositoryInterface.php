@@ -9,6 +9,6 @@ interface SoDienNuocTheoPhongRepositoryInterface extends BaseRepositoryInterface
     public function getLastest($id_phong);
     public function getSecondLastest($id_phong);
     public function getByPhong($id_phong);
-
+    public function createMany(array $data);
 }
 ?>

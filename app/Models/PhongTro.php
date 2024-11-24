@@ -45,4 +45,7 @@ class PhongTro extends Model
     public function sodiennuoc(){
         return $this->hasMany(SoDienNuocTheoPhong::class ,"id_phong_tro","id");
     }
+    public function getLastestSdn(){
+        return $this->sodiennuoc()->orderBy('created_at', 'desc')->take(1)->first();
+    }
 }
