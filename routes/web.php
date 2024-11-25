@@ -36,6 +36,7 @@ Route::middleware('fetch.nhatro')->prefix('nhatro/{id}')->group(function () {
     Route::get('/', [NhaTroController::class, 'show'])->name('nhatro.show');
     Route::get('/nhaptatcasdn', [SoDienNuocTheoPhongController::class, 'nhaptatcasdn'])->name('get.nhaptatcasdn');
     Route::post('/nhaptatcasdn', [SoDienNuocTheoPhongController::class, 'nhaptatcasdnPost'])->name('post.nhaptatcasdn');
+    Route::get('/danhsachsdn', [SoDienNuocTheoPhongController::class, 'danhsachsdn'])->name('get.danhsachsdn');
 
     Route::prefix('tang')->group(function () {
         Route::get('/', [TangController::class, 'index'])->name('nhatro.tang.show');
@@ -56,9 +57,10 @@ Route::middleware('fetch.nhatro')->prefix('nhatro/{id}')->group(function () {
 
     Route::prefix('phong')->group(function () {
         Route::get('/', [PhongTroController::class, 'index'])->name('nhatro.phong.show');
-        Route::get('/thongtinphong/{id_phong}', [PhongTroController::class, 'info'])->name('nhatro.phong.show.info');
+        Route::get('/{id_phong}/thongtinphong', [PhongTroController::class, 'info'])->name('nhatro.phong.show.info');
         Route::get('/themphong', [PhongTroController::class, 'create'])->name('phongtro.themphong');
         Route::post('/themphong', [PhongTroController::class, 'store'])->name('phongtro.storephong');
+        
         Route::get('/suaphong/{id_phong}', [PhongTroController::class, 'edit'])->name('phongtro.suaphong.get');
         Route::post('/suaphong/{id_phong}', [PhongTroController::class, 'update'])->name('phongtro.suaphong.post');
         Route::get('/xoaphong/{id_phong}', [PhongTroController::class, 'destroy'])->name('phongtro.xoaphong');

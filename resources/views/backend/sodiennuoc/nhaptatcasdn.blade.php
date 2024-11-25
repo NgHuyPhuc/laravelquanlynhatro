@@ -47,7 +47,23 @@
                             </div>
                         </div>
                     @endif
+                    @foreach ($errors->all() as $error)
+                        <div class="alert alert-danger">{{ $error }}</div>
+                    @endforeach
                     <form class="col-12" action="{{ route('post.nhaptatcasdn', ['id' => $nhatro->id]) }}" method="post">
+                        <div class="col-12 grid-margin stretch-card">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="form-group row">
+                                        <label for="date" class="col-sm-3 col-form-label">Tháng :</label>
+                                        <div class="col-sm-9">
+                                            <input name="date" type="date" class="form-control"
+                                                id="date" value="{{\Carbon\Carbon::now()->format('Y-m-d')}}" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         @foreach ($thongtin->tangdesc as $item)
                             <div class="col-12 grid-margin stretch-card">
                                 <div class="card">
@@ -61,37 +77,42 @@
                                                             <div class="mb-2">
                                                                 <h4 class="mb-0 ">{{ $phong->ten_phong }}</h4>
                                                             </div>
-                                                            <h5 class="mb-3">Giá phòng: {{ $phong->gia_phong }} đ</h5>
+                                                            <h5 class="mb-3">Giá phòng: {{ number_format($phong->gia_phong) }} đ</h5>
                                                             @if ($phong->trang_thai === 0)
                                                                 <div type="button"
                                                                     class="btn btn-danger btn-rounded btn-fw mb-4">Chưa cho
                                                                     thuê
                                                                 </div>
                                                             @else
-                                                                <input type="text" name="id_phong[]" value="{{$phong->id}}">
+                                                                <input type="text" name="id_phong[]"
+                                                                    value="{{ $phong->id }}" hidden>
                                                                 <div class="form-group row">
-                                                                    <label for="so_dien_{{$phong->id}}"
-                                                                        class="col-sm-3 col-form-label">Nhập
+                                                                    <label for="so_dien_{{ $phong->id }}"
+                                                                        class="col-sm-7 col-form-label">Nhập
                                                                         số điện
                                                                         :</label>
-                                                                    <div class="col-sm-9">
+                                                                    <div class="col-sm-5">
                                                                         <input name="so_dien[]" type="number"
-                                                                            class="form-control" id="so_dien_{{$phong->id}}"
+                                                                            class="form-control"
+                                                                            id="so_dien_{{ $phong->id }}"
                                                                             min="{{ $phong->getLastestSdn()->so_dien }}"
                                                                             placeholder="Số điện T {{ $month }}"
+                                                                            value="{{ old('so_dien.' . $loop->index) }}"
                                                                             required>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row">
-                                                                    <label for="so_nuoc_{{$phong->id}}"
-                                                                        class="col-sm-3 col-form-label">Nhập
+                                                                    <label for="so_nuoc_{{ $phong->id }}"
+                                                                        class="col-sm-7 col-form-label">Nhập
                                                                         số nước
                                                                         :</label>
-                                                                    <div class="col-sm-9">
+                                                                    <div class="col-sm-5">
                                                                         <input name="so_nuoc[]" type="number"
-                                                                            class="form-control" id="so_nuoc_{{$phong->id}}"
+                                                                            class="form-control"
+                                                                            id="so_nuoc_{{ $phong->id }}"
                                                                             min="{{ $phong->getLastestSdn()->so_nuoc }}"
                                                                             placeholder="Số nước T {{ $month }}"
+                                                                            value="{{ old('so_nuoc.' . $loop->index) }}"
                                                                             required>
                                                                     </div>
                                                                 </div>
@@ -111,12 +132,11 @@
                                 </div>
                             </div>
                         @endforeach
-                        <button type="submit" class="btn btn-primary mr-2">Submit</button>
-
+                        <button type="submit" class="btn btn-primary mr-2 float-right">Submit</button>
                         @csrf
                     </form>
                 </div>
-                <footer class="footer">
+                {{-- <footer class="footer">
                     <div class="card">
                         <div class="card-body">
                             <div class="d-sm-flex justify-content-center justify-content-sm-between">
@@ -130,7 +150,7 @@
                             </div>
                         </div>
                     </div>
-                </footer>
+                </footer> --}}
                 <!-- partial -->
             </div>
             <!-- main-panel ends -->

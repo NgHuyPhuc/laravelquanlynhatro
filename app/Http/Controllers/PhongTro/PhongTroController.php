@@ -4,9 +4,11 @@ namespace App\Http\Controllers\PhongTro;
 
 use App\Http\Controllers\Controller;
 use App\Models\SoDienNuocTheoPhong;
+use App\Services\HoaDonService\HoaDonService;
 use App\Services\PhongTroService\PhongTroService;
 use App\Services\SoDienNuocTheoPhongService\SoDienNuocTheoPhongService;
 use App\Services\TangService\TangService;
+use App\Services\ThongTinNguoiThueService\ThongTinNguoiThueService;
 use Illuminate\Http\Request;
 
 class PhongTroController extends Controller
@@ -15,10 +17,16 @@ class PhongTroController extends Controller
     protected $tangService;
     protected $phongTroService;
     protected $soDienNuoc;
-    public function __construct(TangService $tangService, PhongTroService $phongTroService, SoDienNuocTheoPhongService $soDienNuoc){
+    protected $nguoiThue;
+    protected $sdn;
+    protected $hoaDon;
+    public function __construct(TangService $tangService, PhongTroService $phongTroService, SoDienNuocTheoPhongService $soDienNuoc, ThongTinNguoiThueService $nguoiThue, SoDienNuocTheoPhongService $sdn, HoaDonService $hoaDon){
         $this->tangService = $tangService;
         $this->phongTroService = $phongTroService;
         $this->soDienNuoc = $soDienNuoc;
+        $this->nguoiThue = $nguoiThue;
+        $this->sdn = $sdn;
+        $this->hoaDon = $hoaDon;
     }
     public function index(){
         return view('backend.phongtro.index');
@@ -27,8 +35,6 @@ class PhongTroController extends Controller
         $data['phongtro'] = $this->phongTroService->getone($id_phong);
         $data['id'] = $id;
         $data['check'] = $this->soDienNuoc->count($id_phong);
-        // dd(SoDienNuocTheoPhong::where('id_phong_tro', $id_phong)->count());
-        // dd($data);
         return view('backend.phongtro.index',$data);
     }
     public function create($id){
@@ -49,7 +55,11 @@ class PhongTroController extends Controller
         $this->phongTroService->update($request, $id_phong);
         return redirect()->route('nhatro.phong.show.info',['id' => $id,'id_phong' => $id_phong]);
     }
-    public function destroy($id_phong){
-
+    public function destroy($id, $id_phong){
+        // dd($id_phong);
+        $this->phongTroService->getone($id_phong)->nguoithue()->delete();
+        $this->sdn->getbyphong($id_phong)->delete();
+        $this->hoaDon->getByIdPhong($id_phong)->delete();
+        $this->phongTroService->delete($id_phong);
     }
 }

@@ -136,7 +136,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Hủy</button>
+                                                data-bs-dismiss="modal" id="CancelButton">Hủy</button>
                                             <button type="button" class="btn btn-danger" id="confirmButton">Đúng, thực
                                                 hiện</button>
                                         </div>
@@ -155,7 +155,9 @@
             // Mở modal xác nhận
             new bootstrap.Modal(document.getElementById('confirmationModal')).show();
         });
-
+        document.getElementById('CancelButton').addEventListener('click', function() {
+            new bootstrap.Modal(document.getElementById('confirmationModal')).hide();
+        });
         // Khi người dùng nhấn vào nút "Đúng, thực hiện"
         document.getElementById('confirmButton').addEventListener('click', function() {
             // Gửi form

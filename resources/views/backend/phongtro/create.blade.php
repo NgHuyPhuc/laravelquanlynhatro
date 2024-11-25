@@ -7,7 +7,7 @@
                 <div class="row">
                     <h4 class="card-title">Quản lý nhà cho thuê {{ $nhatro->ten }}</h4>
                     <a href="./suatennhatro.html" class=" ml-3"> Sửa tên</a>
-                    <div class="col-12 grid-margin stretch-card">
+                    {{-- <div class="col-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Chức năng chung</h4>
@@ -39,7 +39,10 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
+                    {{-- @dd($phongtro) --}}
+                    {!! generateMenuPhong($nhatro) !!}
+
                     <div class="col-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">

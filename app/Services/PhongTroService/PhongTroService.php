@@ -90,5 +90,8 @@ class PhongTroService
     {
         return $this->phongtro->find($id);
     }
+    public function delete($id){
+        return $this->phongtro->delete($id);
+    }
 }
 ?>

@@ -23,9 +23,16 @@ class SoDienNuocTheoPhongController extends Controller
         $this->chiPhiDichVuService = $chiPhiDichVuService;
     }
     public function index($id, $id_phong){
-        $data['diennuoc'] = $this->soDienNuoc->getbyphong($id_phong)->paginate(2);
+        $data['diennuoc'] = $this->soDienNuoc->getbyphong($id_phong)->orderby('date','desc')->paginate(2);
         $data['phong'] = $this->phongTro->getone($id_phong);
         return view('backend.sodiennuoc.all', $data);
+    }
+    public function danhsachsdn($id){
+        $monthNow = Carbon::now()->month;
+        $data['month'] = $monthNow - 1;
+        $data['thongtin'] = $this->nhatroService->getTangandPhongTro($id);
+        $data['checkCpdv'] = $this->chiPhiDichVuService->getByNhaTroID($id)->count();
+        return view('backend.sodiennuoc.danhsach', $data);
     }
     public function nhaptatcasdn($id) {
         $monthNow = Carbon::now()->month;

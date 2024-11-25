@@ -6,7 +6,7 @@
         <div class="row">
             <div class="row">
                 <h4 class="card-title">Quản lý tầng nhà cho thuê</h4>
-                <div class="col-12 grid-margin stretch-card">
+                {{-- <div class="col-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Chức năng chung</h4>
@@ -32,7 +32,8 @@
                             
                         </div>
                     </div>
-                </div>
+                </div> --}}
+                {!! generateMenuTang($nhatro) !!}
                 <div class="col-lg-12 grid-margin stretch-card">
                     <div class="card">
                       <div class="card-body">

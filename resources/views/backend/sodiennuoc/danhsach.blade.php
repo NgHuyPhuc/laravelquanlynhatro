@@ -47,7 +47,25 @@
                             </div>
                         </div>
                     @endif
-                    {{-- foreach o day --}}
+                    @foreach ($errors->all() as $error)
+                        <div class="alert alert-danger">{{ $error }}</div>
+                    @endforeach
+                    @if (isset($success))
+                        <div class="alert alert-danger">{{ $success }}</div>
+                    @endif
+                    <div class="col-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-group row">
+                                    <label for="date" class="col-sm-3 col-form-label">Tháng :</label>
+                                    <div class="col-sm-9">
+                                        <input name="date" type="date" class="form-control" id="date"
+                                            value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     @foreach ($thongtin->tangdesc as $item)
                         <div class="col-12 grid-margin stretch-card">
                             <div class="card">
@@ -64,26 +82,43 @@
                                                         <h5 class="mb-3">Giá phòng: {{ number_format($phong->gia_phong) }} đ</h5>
                                                         @if ($phong->trang_thai === 0)
                                                             <div type="button"
-                                                                class="btn btn-danger btn-rounded btn-fw mb-4">Chưa cho thuê
-                                                            </div>
-                                                        @else
-                                                            <div type="button"
-                                                                class="btn btn-success btn-rounded btn-fw mb-4">Đang cho
+                                                                class="btn btn-danger btn-rounded btn-fw mb-4">Chưa cho
                                                                 thuê
                                                             </div>
-                                                            <div type="button" class="btn btn-success mb-4">Tiền nhà tháng
-                                                                9: Đã thanh toán
+                                                        @else
+                                                            <input type="text" name="id_phong[]"
+                                                                value="{{ $phong->id }}" hidden>
+                                                            <div class="form-group row">
+                                                                <label for="so_dien_{{ $phong->id }}"
+                                                                    class="col-sm-7 col-form-label">
+                                                                    Số điện tháng {{ $month }}
+                                                                    :</label>
+                                                                <div class="col-sm-5">
+                                                                    <input name="so_dien[]" type="number"
+                                                                        class="form-control"
+                                                                        id="so_dien_{{ $phong->id }}"
+                                                                        placeholder="Số điện T {{ $month }}"
+                                                                        value="{{$phong->getLastestSdn()->so_dien}}"
+                                                                        required>
+                                                                </div>
                                                             </div>
-                                                            <div type="button" class="btn btn-info mb-4">
-                                                                {{ $phong->so_du >= 0 ? 'Số dư' : 'Còn thiếu' }}
-                                                                {{ $phong->so_du }} VNĐ
+                                                            <div class="form-group row">
+                                                                <label for="so_nuoc_{{ $phong->id }}"
+                                                                    class="col-sm-7 col-form-label">
+                                                                    Số nước tháng {{ $month }}
+                                                                    :</label>
+                                                                <div class="col-sm-5">
+                                                                    <input name="so_nuoc[]" type="number"
+                                                                        class="form-control"
+                                                                        id="so_nuoc_{{ $phong->id }}"
+                                                                        placeholder="Số nước T {{ $month }}"
+                                                                        value="{{$phong->getLastestSdn()->so_nuoc}}"
+                                                                        required>
+                                                                </div>
                                                             </div>
                                                         @endif
                                                     </div>
                                                     <div class=" d-flex justify-content-center">
-                                                        {{-- <a href="{{route('nhatro.phong.show', ['id' => $thongtin->id, 'id_phong' => $phong->id])}}" type="button"
-                                                class="btn btn-outline-info btn-fw justify-content-center mb-4">Xem
-                                                thêm</a> --}}
                                                         <a href="{{ route('nhatro.phong.show.info', ['id' => $thongtin->id, 'id_phong' => $phong->id]) }}"
                                                             type="button"
                                                             class="btn btn-outline-info btn-fw justify-content-center mb-4">Xem
@@ -97,10 +132,7 @@
                             </div>
                         </div>
                     @endforeach
-                    {{-- end foreach o day --}}
                 </div>
-                <!-- content-wrapper ends -->
-                <!-- partial:partials/_footer.html -->
                 <footer class="footer">
                     <div class="card">
                         <div class="card-body">

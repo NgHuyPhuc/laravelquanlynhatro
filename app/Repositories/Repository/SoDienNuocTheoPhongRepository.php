@@ -28,6 +28,10 @@ class SoDienNuocTheoPhongRepository extends BaseRepository implements SoDienNuoc
     {
         return SoDienNuocTheoPhong::where('id_phong_tro', $id_phong);
     }
+    public function getOneWithIdPhong($id_phong)
+    {
+        return SoDienNuocTheoPhong::where('id_phong_tro', $id_phong)->latest()->first();
+    }
     public function createMany(array $data)
     {
         return SoDienNuocTheoPhong::insert($data);

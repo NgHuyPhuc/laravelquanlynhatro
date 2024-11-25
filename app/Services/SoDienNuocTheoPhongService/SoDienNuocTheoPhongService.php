@@ -5,6 +5,7 @@ namespace App\Services\SoDienNuocTheoPhongService;
 use App\Repositories\Repository\SoDienNuocTheoPhongRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SoDienNuocTheoPhongService
 {
@@ -63,38 +64,41 @@ class SoDienNuocTheoPhongService
     }
     public function createMultiple(Request $request)
     {
-        // // Xác thực dữ liệu
-        // $validated = $request->validate([
-        //     'id_phong' => 'required|array',
-        //     'id_phong.*' => 'exists:phong_tro,id',
-        //     'so_dien' => 'required|array',
-        //     'so_dien.*' => 'integer|min:0',
-        //     'so_nuoc' => 'required|array',
-        //     'so_nuoc.*' => 'integer|min:0',
-        // ]);
+        $id_phongs = $request['id_phong'];
+        $so_dien_inputs = $request['so_dien'];
+        $so_nuoc_inputs = $request['so_nuoc'];
 
-        // // Lặp qua dữ liệu và chuẩn bị mảng để thêm mới
-        // $dataToInsert = [];
-        // foreach ($validated['id_phong'] as $key => $id_phong) {
-        //     $dataToInsert[] = [
-        //         'id_phong_tro' => $id_phong,
-        //         'date' => now()->toDateString(), // Hoặc lấy từ $request->date nếu cần
-        //         'so_dien' => $validated['so_dien'][$key],
-        //         'so_nuoc' => $validated['so_nuoc'][$key],
-        //         'chi_phi_phat_sinh' => $request->tong_chi_phi_dich_vu[$key] ?? 'Không có',
-        //         'tien_phat_sinh' => $request->tong_chi_phi_dich_vu[$key] ?? 0,
-        //         'created_at' => now(),
-        //         'updated_at' => now(),
-        //     ];
-        // }
-        // Xác thực dữ liệu
+        $errors = [];
+        foreach ($id_phongs as $index => $id_phong) {
+            // Lấy bản ghi cuối cùng của số điện nước của phòng
+            $lastRecord = $this->soDienNuoc->getLastest($id_phong);
+            $ten_phong = $this->soDienNuoc->getOneWithIdPhong($id_phong)->phongtro->ten_phong;
+            // dd($ten_phong);
 
-        // Lặp qua dữ liệu và chuẩn bị mảng để thêm mới
+            if ($lastRecord) {
+                $lastSoDien = $lastRecord->so_dien ?? 0;
+                $lastSoNuoc = $lastRecord->so_nuoc ?? 0;
+                // dd($lastRecord);
+
+                // Kiểm tra số điện
+                if ($so_dien_inputs[$index] < $lastSoDien) {
+                    $errors["so_dien.$index"] = "Số điện của phòng $ten_phong phải lớn hơn hoặc bằng $lastSoDien.";
+                }
+
+                // Kiểm tra số nước
+                if ($so_nuoc_inputs[$index] < $lastSoNuoc) {
+                    $errors["so_nuoc.$index"] = "Số nước của phòng $ten_phong phải lớn hơn hoặc bằng $lastSoNuoc.";
+                }
+            }
+        }
+        if (!empty($errors)) {
+            return redirect()->back()->withErrors($errors)->withInput();
+        }
         $dataToInsert = [];
         foreach ($request['id_phong'] as $key => $id_phong) {
             $dataToInsert[] = [
                 'id_phong_tro' => $id_phong,
-                'date' => now()->toDateString(), // Hoặc lấy từ $request->date nếu cần
+                'date' => $request->date, // Hoặc lấy từ $request->date nếu cần
                 'so_dien' => $request['so_dien'][$key],
                 'so_nuoc' => $request['so_nuoc'][$key],
                 'chi_phi_phat_sinh' => $request->tong_chi_phi_dich_vu[$key] ?? 'Không có',
@@ -103,9 +107,16 @@ class SoDienNuocTheoPhongService
                 'updated_at' => now(),
             ];
         }
-        // dd($dataToInsert);
         // Thêm mới hàng loạt
-        $this->soDienNuoc->createMany($dataToInsert);
-        // return redirect()->back()->with('success', 'Thêm dữ liệu thành công!');
+        DB::beginTransaction();
+        try {
+            $this->soDienNuoc->createMany($dataToInsert);
+            DB::commit();
+            return redirect()->route('danh.sach.so.dien.nuoc')->with('success', 'Thêm dữ liệu thành công!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            // return redirect()->back()->withErrors('Có lỗi xảy ra: ' . $e->getMessage());
+            return 'Có lỗi xảy ra: ' . $e->getMessage();
+        }
     }
 }
