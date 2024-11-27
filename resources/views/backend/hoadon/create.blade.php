@@ -32,13 +32,6 @@
                 <div class="col-lg-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            aa
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-12 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
                             <h4 class="card-title">Tạo hóa đơn phòng {{ $phong->ten_phong }}</h4>
                             <div class="card-body">
                                 <h4 class="card-title">Danh sách người thuê phòng {{ $phong->ten_phong }}</h4>
@@ -182,7 +175,7 @@
                                 action="{{ route('phongtro.hoadon.storehoadon', ['id' => $nhatro->id, 'id_phong' => $phong->id]) }}"
                                 method="POST"> 
                                 <div class="container">
-                                    <div class="invoice"
+                                    <div id='capture' class="invoice"
                                         style="padding: 20px;border: 1px solid #ddd;border-radius: 5px;margin:20px;">
                                         <h2 class="text-center">Hóa Đơn Tiền Phòng {{ $phong->ten_phong }}</h2>
                                         <h3 class="text-center">Tháng
@@ -243,12 +236,27 @@
                                                             <td>{{ $phong->dung_mang }}</td>
                                                             <td><label> {{ number_format($tien_mang) }} VNĐ</label></td>
                                                         </tr>
-                                                        <tr>
-                                                            <td>5</td>
-                                                            <td></td>
-                                                            <td> Tổng Cộng </td>
-                                                            <td><label> {{ number_format($tong_cong) }} VNĐ </label></td>
-                                                        </tr>
+                                                        @if ($phong->mua_nuoc != 0)
+                                                            <tr>
+                                                                <td>5</td>
+                                                                <td>Mua Nước</td>
+                                                                <td>{{ $phong->mua_nuoc }} * {{ number_format($cpdv->tien_binh_nuoc) }}</td>
+                                                                <td><label> {{ number_format($tong_tien_binh_nuoc) }} VNĐ</label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>6</td>
+                                                                <td></td>
+                                                                <td> Tổng Cộng </td>
+                                                                <td><label> {{ number_format($tong_cong) }} VNĐ </label></td>
+                                                            </tr>
+                                                        @else
+                                                            <tr>
+                                                                <td>5</td>
+                                                                <td></td>
+                                                                <td> Tổng Cộng </td>
+                                                                <td><label> {{ number_format($tong_cong) }} VNĐ </label></td>
+                                                            </tr>
+                                                        @endif
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -338,6 +346,18 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">tien_binh_nuoc_string </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" name="tien_binh_nuoc_string" type="text" value="{{ $phong->mua_nuoc }}* {{ number_format($cpdv->tien_binh_nuoc) }}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">tien_binh_nuoc_int </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" name="tien_binh_nuoc_int" type="text" value="{{$tong_tien_binh_nuoc}}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">tien_phong_int </label>
                                     <div class="col-sm-9">
                                         <input class="form-control" name="tien_phong_int" type="text" value="{{$phong->gia_phong }}">
@@ -394,6 +414,7 @@
                                 @csrf
                                 <button type="submit" class="btn btn-success float-sm-right">Lưu hóa đơn</button>
                             </form>
+                            <button id="capture-btn" data-phong="{{ $phong->ten_phong }} - Tháng {{ \Carbon\Carbon::parse($sdnSecond->date)->format('m-Y')}}">Chụp màn hình</button>
 
                         </div>
                     </div>
@@ -401,17 +422,36 @@
             </div>
         </div>
     </div>
+    <script src="js/html2canvas.js"></script> 
     <script>
         // Khi nhấn vào nút "Xác nhận"
-        document.getElementById('openModalButton').addEventListener('click', function() {
-            // Mở modal xác nhận
-            new bootstrap.Modal(document.getElementById('confirmationModal')).show();
-        });
+        // document.getElementById('openModalButton').addEventListener('click', function() {
+        //     // Mở modal xác nhận
+        //     new bootstrap.Modal(document.getElementById('confirmationModal')).show();
+        // });
 
-        // Khi người dùng nhấn vào nút "Đúng, thực hiện"
-        document.getElementById('confirmButton').addEventListener('click', function() {
-            // Gửi form
-            document.getElementById('your-form').submit();
-        });
+        // // Khi người dùng nhấn vào nút "Đúng, thực hiện"
+        // document.getElementById('confirmButton').addEventListener('click', function() {
+        //     // Gửi form
+        //     document.getElementById('your-form').submit();
+        // });
+
+        // chup man hinh
+        var phongName = document.getElementById("capture-btn").getAttribute("data-phong");
+        console.log(phongName); 
+        document.getElementById("capture-btn").onclick = function() {
+            html2canvas(document.getElementById("capture")).then(function(canvas) {
+                // Chuyển đổi canvas thành hình ảnh
+                var img = canvas.toDataURL("image/png");
+                
+                // Tạo một liên kết tải về ảnh
+                var link = document.createElement("a");
+                link.href = img;
+                link.download = phongName + ".png";
+                link.click();
+            }).catch(function(error) {
+                console.error("Lỗi khi chụp màn hình:", error);
+            });
+        };
     </script>
 @endsection

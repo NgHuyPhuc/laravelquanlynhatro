@@ -20,6 +20,8 @@ class HoaDonPhongTro extends Model
         'tien_phong_string',
         'thang',
         'thong_bao',
+        'tien_binh_nuoc_string',
+        'tien_binh_nuoc_int',
         'tien_phong_int',
         'tien_dien_int',
         'tien_nuoc_int',

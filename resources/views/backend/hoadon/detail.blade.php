@@ -88,12 +88,33 @@
                                                             <td>{{ $hoadon->dung_mang }}</td>
                                                             <td><label> {{ number_format($hoadon->tien_mang) }} VNĐ</label></td>
                                                         </tr>
-                                                        <tr>
+                                                        @if ($hoadon->tien_binh_nuoc_int > 0)
+                                                            <tr>
+                                                                <td>5</td>
+                                                                <td>Mua Nước</td>
+                                                                <td>{{ $hoadon->tien_binh_nuoc_string }}</td>
+                                                                <td><label> {{ number_format($hoadon->tien_binh_nuoc_int) }} VNĐ</label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>6</td>
+                                                                <td></td>
+                                                                <td> Tổng Cộng </td>
+                                                                <td><label> {{ number_format($hoadon->so_tien_phai_tra) }} VNĐ </label></td>
+                                                            </tr>
+                                                        @else
+                                                            <tr>
+                                                                <td>5</td>
+                                                                <td></td>
+                                                                <td> Tổng Cộng </td>
+                                                                <td><label> {{ number_format($hoadon->so_tien_phai_tra) }} VNĐ </label></td>
+                                                            </tr>
+                                                        @endif
+                                                        {{-- <tr>
                                                             <td>5</td>
                                                             <td></td>
                                                             <td> Tổng Cộng </td>
                                                             <td><label> {{ number_format($hoadon->so_tien_phai_tra) }} VNĐ </label></td>
-                                                        </tr>
+                                                        </tr> --}}
                                                     </tbody>
                                                 </table>
                                                 <!-- </div> -->

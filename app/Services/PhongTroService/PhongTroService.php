@@ -82,6 +82,31 @@ class PhongTroService
         }
         return $this->phongtro->update($id_phong,$data);
     }
+    public function resetMuaNuoc($id_phong)
+    {
+        $result = $this->phongtro->resetBinhNuoc($id_phong);
+        return $result;
+    }
+    public function muaNuoc($id_phong)
+    {
+        $phong = $this->phongtro->find($id_phong);
+        $binhNuoc = $phong->mua_nuoc + 1;
+        $result = $this->phongtro->muaNuoc($id_phong, $binhNuoc);
+        return $result;
+    }
+    public function truNuoc($id_phong)
+    {
+        $phong = $this->phongtro->find($id_phong);
+        if($phong->mua_nuoc == 0)
+        {
+
+        }
+        else{
+            $binhNuoc = $phong->mua_nuoc - 1;
+            $result = $this->phongtro->muaNuoc($id_phong, $binhNuoc);
+            return $result;
+        }
+    }
     public function countnguoidangthue($id_phong)
     {
         return $this->phongtro->countnguoi($id_phong);

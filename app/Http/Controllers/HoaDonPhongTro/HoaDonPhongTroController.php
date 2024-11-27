@@ -52,7 +52,8 @@ class HoaDonPhongTroController extends Controller
         $data['tien_dien'] = ($data['sdnLast']->so_dien - $data['sdnSecond']->so_dien) * $data['cpdv']->tien_dien_int;
         $data['tien_nuoc'] = ($data['sdnLast']->so_nuoc - $data['sdnSecond']->so_nuoc) * $data['cpdv']->tien_nuoc_int;
         $data['tien_mang'] = $data['phong']->dung_mang * $data['cpdv']->tien_mang_int;
-        $data['tong_cong'] = $data['tien_dien'] + $data['tien_nuoc'] + $data['tien_mang'] + $data['phong']->gia_phong;
+        $data['tong_tien_binh_nuoc'] = $data['phong']->mua_nuoc * $data['cpdv']->tien_binh_nuoc;
+        $data['tong_cong'] = $data['tien_dien'] + $data['tien_nuoc'] + $data['tien_mang'] + $data['phong']->gia_phong + $data['tong_tien_binh_nuoc'];
         return view('backend.hoadon.create', $data);
     }
 
@@ -96,6 +97,7 @@ class HoaDonPhongTroController extends Controller
         $soDienNuocNow = $this->soDienNuoc->getLastest($id_phong);
         $create = $this->hoaDon->create($request, $id_phong, $soDienNuocPrev, $soDienNuocNow);
         $id_hoadon = $create->id;
+        $this->phongTro->resetMuaNuoc($id_phong);
         return redirect()->route('phongtro.hoadon.detailhoadon', ['id' => $id, 'id_phong' => $id_phong, 'id_hoadon' => $id_hoadon]);
     }
     public function showHoaDonPhong($id, $id_phong, $id_hoadon)

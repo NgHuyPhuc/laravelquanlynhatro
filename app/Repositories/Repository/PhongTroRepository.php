@@ -22,5 +22,13 @@ class PhongTroRepository extends BaseRepository implements PhongTroRepositoryInt
     {
         return PhongTro::find($id)->traPhong();
     }
+    public function resetBinhNuoc($id)
+    {
+        return PhongTro::where('id', $id)->update(['mua_nuoc' => 0]);
+    }
+    public function muaNuoc($id, $binhNuoc)
+    {
+        return PhongTro::where('id', $id)->update(['mua_nuoc' => $binhNuoc]);
+    }
 }
 ?>

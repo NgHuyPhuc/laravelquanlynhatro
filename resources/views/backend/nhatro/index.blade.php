@@ -61,7 +61,8 @@
                                                         <div class="mb-2">
                                                             <h4 class="mb-0 ">{{ $phong->ten_phong }}</h4>
                                                         </div>
-                                                        <h5 class="mb-3">Giá phòng: {{ number_format($phong->gia_phong) }} đ</h5>
+                                                        <h6 class="mb-3">Giá phòng: {{ number_format($phong->gia_phong) }}
+                                                            đ</h6>
                                                         @if ($phong->trang_thai === 0)
                                                             <div type="button"
                                                                 class="btn btn-danger btn-rounded btn-fw mb-4">Chưa cho thuê
@@ -80,10 +81,13 @@
                                                             </div>
                                                         @endif
                                                     </div>
+                                                    <button class="buy-water" data-nhatro-id="{{ $nhatro->id }}"
+                                                        data-id="{{ $phong->id }}">+ Nuoc</button>
+                                                    <a href="javascript:void(0)">{{ $phong->mua_nuoc }}</a>
+                                                    <button class="tru-water" data-nhatro-id="{{ $nhatro->id }}"
+                                                        data-id="{{ $phong->id }}">- Nuoc</button>
+
                                                     <div class=" d-flex justify-content-center">
-                                                        {{-- <a href="{{route('nhatro.phong.show', ['id' => $thongtin->id, 'id_phong' => $phong->id])}}" type="button"
-                                                class="btn btn-outline-info btn-fw justify-content-center mb-4">Xem
-                                                thêm</a> --}}
                                                         <a href="{{ route('nhatro.phong.show.info', ['id' => $thongtin->id, 'id_phong' => $phong->id]) }}"
                                                             type="button"
                                                             class="btn btn-outline-info btn-fw justify-content-center mb-4">Xem
@@ -122,4 +126,117 @@
         </div>
         <!-- page-body-wrapper ends -->
     </div>
+    {{-- /nhatro/id/phong/id_phong/muanuoc
+            /nhatro/id/phong/id_phong/trunuoc --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Lấy tất cả các nút với class 'buy-water'
+            const buttons = document.querySelectorAll('.buy-water');
+
+            // Duyệt qua từng nút và gắn sự kiện click
+            buttons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const idPhong = this.getAttribute('data-id'); // Lấy id của phòng
+                    const nhatroId = this.getAttribute('data-nhatro-id'); // Lấy id của nhà trọ
+
+                    console.log("idPhong:", idPhong); // Kiểm tra giá trị trong console
+                    console.log("nhatroId:", nhatroId); // Kiểm tra giá trị trong console
+
+                    // Lấy CSRF token từ meta tag trong HTML
+                    const csrfToken = document.querySelector('meta[name="csrf-token"]')
+                        .getAttribute('content');
+
+                    // Gửi yêu cầu POST đến backend để mua nước
+                    fetch(`/nhatro/${nhatroId}/phong/${idPhong}/muanuoc`, {
+                            method: 'GET',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                // 'X-CSRF-TOKEN': csrfToken // Thêm token CSRF vào header
+                            }
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.message === 'Mua bình nước thành công!') {
+                                alert('Mua bình nước thành công! Số lần mua: ' + data.mua_nuoc);
+                            } else {
+                                alert(data.message); // Hiển thị lỗi nếu không thành công
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Có lỗi xảy ra:', error);
+                            alert('Có lỗi xảy ra khi thực hiện hành động.');
+                        });
+                });
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Lấy tất cả các nút với class 'buy-water'
+            const buttons = document.querySelectorAll('.tru-water');
+
+            // Duyệt qua từng nút và gắn sự kiện click
+            buttons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const idPhong = this.getAttribute('data-id'); // Lấy id của phòng
+                    const nhatroId = this.getAttribute('data-nhatro-id'); // Lấy id của nhà trọ
+
+                    console.log("idPhong:", idPhong); // Kiểm tra giá trị trong console
+                    console.log("nhatroId:", nhatroId); // Kiểm tra giá trị trong console
+
+                    // Lấy CSRF token từ meta tag trong HTML
+                    const csrfToken = document.querySelector('meta[name="csrf-token"]')
+                        .getAttribute('content');
+
+                    // Gửi yêu cầu POST đến backend để mua nước
+                    fetch(`/nhatro/${nhatroId}/phong/${idPhong}/trunuoc`, {
+                            method: 'GET',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                // 'X-CSRF-TOKEN': csrfToken // Thêm token CSRF vào header
+                            }
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.message === 'Trừ bình nước thành công!') {
+                                alert('Trừ bình nước thành công! Số lần mua: ' + data.mua_nuoc);
+                            } else {
+                                alert(data.message); // Hiển thị lỗi nếu không thành công
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Có lỗi xảy ra:', error);
+                            alert('Có lỗi xảy ra khi thực hiện hành động.');
+                        });
+                });
+            });
+        });
+
+        // document.getElementById('tru-water').addEventListener('click', function() {
+        //     // Lấy id của phòng từ thuộc tính data-id
+        //     const idPhong = this.getAttribute('data-id');
+        //     const nhatroId = this.getAttribute('data-nhatro-id');
+        //     // Gửi yêu cầu POST đến backend để mua nước
+        //     // fetch(`/mua-nuoc/${idPhong}`, {
+        //     fetch(`/nhatro/${nhatroId}/phong/${idPhong}/trunuoc`, {
+        //             method: 'POST',
+        //             headers: {
+        //                 'Content-Type': 'application/json',
+        //                 // Nếu cần, bạn có thể thêm token CSRF ở đây
+        //                 'X-CSRF-TOKEN': csrf_token
+        //             }
+        //         })
+        //         .then(response => response.json())
+        //         .then(data => {
+        //             if (data.message === 'Mua nước thành công!') {
+        //                 alert('Mua nước thành công! Số lần mua: ' + data.mua_nuoc);
+        //             } else {
+        //                 alert(data.message); // Hiển thị lỗi nếu không thành công
+        //             }
+        //         })
+        //         .catch(error => {
+        //             console.error('Có lỗi xảy ra:', error);
+        //             alert('Có lỗi xảy ra khi thực hiện hành động.');
+        //         });
+        // });
+    </script>
 @endsection

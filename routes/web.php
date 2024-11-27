@@ -29,6 +29,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [AdminController::class, 'index'])->name('dashboard');
 Route::get('/themmoinhatro', [NhaTroController::class, 'create'])->name('nhatro.create');
 Route::post('/postthemmoinhatro', [NhaTroController::class, 'store'])->name('nhatro.create.post');
+Route::get('/test/{id_phongtro}', [AdminController::class, 'test']);
 
 // Route::get('/nhatro/{id}', [AdminController::class, 'index']);
 // Route::get('/phongtro', [PhongTroController::class, 'index']);
@@ -64,6 +65,11 @@ Route::middleware('fetch.nhatro')->prefix('nhatro/{id}')->group(function () {
         Route::get('/suaphong/{id_phong}', [PhongTroController::class, 'edit'])->name('phongtro.suaphong.get');
         Route::post('/suaphong/{id_phong}', [PhongTroController::class, 'update'])->name('phongtro.suaphong.post');
         Route::get('/xoaphong/{id_phong}', [PhongTroController::class, 'destroy'])->name('phongtro.xoaphong');
+        Route::prefix('/{id_phong}')->group(function () {
+            Route::get('/muanuoc', [PhongTroController::class, 'muaNuoc'])->name('muabinhnuoc');
+            Route::get('/trunuoc', [PhongTroController::class, 'truNuoc'])->name('trubinhnuoc');
+            
+        });
 
         Route::prefix('/{id_phong}/sodiennuoc')->group(function () {
             Route::get('/danhsachsodiennuoc', [SoDienNuocTheoPhongController::class, 'index'])->name('danh.sach.so.dien.nuoc');

@@ -32,13 +32,6 @@
                 <div class="col-lg-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            aa
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-12 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
                             <h4 class="card-title">Tạo hóa đơn phòng {{ $phong->ten_phong }}</h4>
                             <div class="card-body">
                                 <h4 class="card-title">Danh sách người thuê phòng {{ $phong->ten_phong }}</h4>

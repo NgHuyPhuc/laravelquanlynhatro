@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Services\HoaDonService;
 
 use App\Repositories\Repository\HoaDonRepository;
@@ -29,6 +30,8 @@ class HoaDonService
             'tien_phong_string' => $request->tien_phong_string,
             'thang' => $request->thang,
             'thong_bao' => $request->thong_bao,
+            'tien_binh_nuoc_string' => $request->tien_binh_nuoc_string,
+            'tien_binh_nuoc_int' => $request->tien_binh_nuoc_int,
             'tien_phong_int' => $request->tien_phong_int,
             'tien_dien_int' => $request->tien_dien_int,
             'tien_nuoc_int' => $request->tien_nuoc_int,
@@ -50,16 +53,12 @@ class HoaDonService
     }
     public function update(Request $request, $id, $id_phong)
     {
-        if(isset($request->so_tien_da_thanh_toan))
-        {
-            if($request->so_tien_da_thanh_toan == $request->so_tien_phai_tra || $request->so_tien_da_thanh_toan > $request->so_tien_phai_tra)
-            {
+        if (isset($request->so_tien_da_thanh_toan)) {
+            if ($request->so_tien_da_thanh_toan == $request->so_tien_phai_tra || $request->so_tien_da_thanh_toan > $request->so_tien_phai_tra) {
                 $trang_thai = 2;
-            }
-            elseif($request->so_tien_da_thanh_toan < $request->so_tien_phai_tra){
+            } elseif ($request->so_tien_da_thanh_toan < $request->so_tien_phai_tra) {
                 $trang_thai = 1;
-            }
-            else{
+            } else {
                 $trang_thai = $request->trang_thai;
             }
             $data = [
@@ -72,6 +71,8 @@ class HoaDonService
                 'tien_phong_string' => $request->tien_phong_string,
                 'thang' => $request->thang,
                 'thong_bao' => $request->thong_bao,
+                'tien_binh_nuoc_string' => $request->tien_binh_nuoc_string,
+                'tien_binh_nuoc_int' => $request->tien_binh_nuoc_int,
                 'tien_phong_int' => $request->tien_phong_int,
                 'tien_dien_int' => $request->tien_dien_int,
                 'tien_nuoc_int' => $request->tien_nuoc_int,
@@ -84,7 +85,7 @@ class HoaDonService
         }
         return $this->hoaDon->update($id, $data);
     }
-    public function createAllHoaDon($id, $nhaTro , $cpdv)
+    public function createAllHoaDon($id, $nhaTro, $cpdv)
     {
         foreach ($nhaTro->tangdesc as $item) {
             foreach ($item->phongtro as $phong) {
@@ -101,6 +102,8 @@ class HoaDonService
                         'tien_phong_string' => $this->tienPhongString($soDienNuocPrev, $soDienNuocNow, $phong, $cpdv),
                         'thang' => $this->thangString($soDienNuocNow),
                         'thong_bao' => $this->thongBaoString($soDienNuocPrev, $soDienNuocNow),
+                        'tien_binh_nuoc_string' => $this->tienBinhNuocString($phong,$cpdv),
+                        'tien_binh_nuoc_int' => $this->tienBinhNuocInt($phong,$cpdv),
                         'tien_phong_int' => (int) $phong->gia_phong,
                         'tien_dien_int' => $this->tinhTienDienInt($soDienNuocPrev, $soDienNuocNow, $cpdv),
                         'tien_nuoc_int' => $this->tinhTienNuocInt($soDienNuocPrev, $soDienNuocNow, $cpdv),
@@ -116,27 +119,38 @@ class HoaDonService
             }
         }
     }
+    public function tienBinhNuocString($phong, $cpdv)
+    {
+        $tien_binh_nuoc_string = ''. $phong->mua_nuoc . '*' . $cpdv->tien_binh_nuoc;
+        return $tien_binh_nuoc_string;
+    }
+    public function tienBinhNuocInt($phong, $cpdv)
+    {
+        $tien_binh_nuoc_string = $phong->mua_nuoc * $cpdv->tien_binh_nuoc;
+        return $tien_binh_nuoc_string;
+    }
     public function tienPhongString($soDienNuocNow, $phong)
     {
-        $tienPhong = ''. $phong->ten_phong .' Tháng '. Carbon::parse($soDienNuocNow->date)->format('m') .' năm '. Carbon::parse($soDienNuocNow->date)->format('Y');
+        $tienPhong = '' . $phong->ten_phong . ' Tháng ' . Carbon::parse($soDienNuocNow->date)->format('m') . ' năm ' . Carbon::parse($soDienNuocNow->date)->format('Y');
         return $tienPhong;
     }
-    public function thangString($soDienNuocNow) {
-       $thangString =  'Tháng '. Carbon::parse($soDienNuocNow->date)->format('m') . 'năm' . Carbon::parse($soDienNuocNow->date)->format('Y') ;
-       return $thangString;
+    public function thangString($soDienNuocNow)
+    {
+        $thangString =  'Tháng ' . Carbon::parse($soDienNuocNow->date)->format('m') . 'năm' . Carbon::parse($soDienNuocNow->date)->format('Y');
+        return $thangString;
     }
     public function thongBaoString($soDienNuocPrev, $soDienNuocNow)
     {
-        $thongBao = 'Xin thông báo tới anh (chị): Phí dịch vụ trong tháng' . Carbon::parse($soDienNuocPrev->date)->format('m/Y').' và tiền thuê phòng tháng ' . Carbon::parse($soDienNuocNow->date)->format('m/Y') .'. Cụ thể như sau:';
+        $thongBao = 'Xin thông báo tới anh (chị): Phí dịch vụ trong tháng' . Carbon::parse($soDienNuocPrev->date)->format('m/Y') . ' và tiền thuê phòng tháng ' . Carbon::parse($soDienNuocNow->date)->format('m/Y') . '. Cụ thể như sau:';
     }
     function tinhTienDienString($soDienNuocPrev, $soDienNuocNow, $cpdv)
     {
-        $soDienString = '( '. $soDienNuocNow->so_dien.' - '.$soDienNuocPrev->so_dien.' ) = '. number_format($soDienNuocNow->so_dien - $soDienNuocPrev->so_dien) .' kWh x '. number_format($cpdv->tien_dien_int).' VNĐ/kWh';
+        $soDienString = '( ' . $soDienNuocNow->so_dien . ' - ' . $soDienNuocPrev->so_dien . ' ) = ' . number_format($soDienNuocNow->so_dien - $soDienNuocPrev->so_dien) . ' kWh x ' . number_format($cpdv->tien_dien_int) . ' VNĐ/kWh';
         return $soDienString;
     }
     function tinhTienNuocString($soDienNuocPrev, $soDienNuocNow, $cpdv)
     {
-        $soNuocString = '( '. $soDienNuocNow->so_nuoc.' - '.$soDienNuocPrev->so_nuoc.' ) = '. number_format($soDienNuocNow->so_nuoc - $soDienNuocPrev->so_nuoc) .' kWh x '. number_format($cpdv->tien_nuoc_int).' VNĐ/kWh';
+        $soNuocString = '( ' . $soDienNuocNow->so_nuoc . ' - ' . $soDienNuocPrev->so_nuoc . ' ) = ' . number_format($soDienNuocNow->so_nuoc - $soDienNuocPrev->so_nuoc) . ' kWh x ' . number_format($cpdv->tien_nuoc_int) . ' VNĐ/kWh';
         return $soNuocString;
     }
     function tinhTienDienInt($soDienNuocPrev, $soDienNuocNow, $cpdv)
@@ -159,4 +173,3 @@ class HoaDonService
         return $tongTien;
     }
 }
-?>
