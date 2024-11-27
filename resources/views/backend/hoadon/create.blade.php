@@ -305,6 +305,7 @@
                                         <input class="form-control" name="tien_dien_string" type="text"
                                     value="( {{ $sdnLast->so_dien }} - {{ $sdnSecond->so_dien }} ) = {{ number_format($sdnLast->so_dien - $sdnSecond->so_dien) }} kWhx {{ number_format($cpdv->tien_dien_int) }} VNĐ/kWh">
                                     </div>
+                                
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">tien_nuoc_string </label>

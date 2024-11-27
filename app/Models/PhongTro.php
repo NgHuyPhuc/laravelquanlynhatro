@@ -48,4 +48,7 @@ class PhongTro extends Model
     public function getLastestSdn(){
         return $this->sodiennuoc()->orderBy('created_at', 'desc')->take(1)->first();
     }
+    public function getSecondSdn(){
+        return $this->sodiennuoc()->orderBy('created_at', 'desc')->skip(1)->take(1)->first();
+    }
 }
