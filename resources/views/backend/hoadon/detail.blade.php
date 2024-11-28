@@ -33,11 +33,8 @@
                     <div class="card">
                         <div class="card-body">
                             <h3 class="card-title">Hóa đơn phòng {{ $phong->ten_phong }}</h3>
-                            <form
-                                action="{{ route('phongtro.hoadon.storehoadon', ['id' => $nhatro->id, 'id_phong' => $phong->id]) }}"
-                                method="POST"> 
                                 <div class="container">
-                                    <div class="invoice"
+                                    <div id="capture" class="invoice"
                                         style="padding: 20px;border: 1px solid #ddd;border-radius: 5px;margin:20px;">
                                         <h2 class="text-center">Hóa Đơn Tiền Phòng {{ $phong->ten_phong }}</h2>
                                         <h3 class="text-center">{{$hoadon->thang}}</h3>
@@ -61,60 +58,58 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
+                                                        @php
+                                                            $stt = 1; // Khởi tạo số thứ tự
+                                                        @endphp
                                                         <tr>
-                                                            <td>1</td>
+                                                            <td>{{ $stt++ }}</td>
                                                             <td>Tiền Phòng</td>
                                                             <td>{{$hoadon->tien_phong_string}}</td>
                                                             <td><label> {{ number_format($hoadon->tien_phong_int) }} VND
                                                                 </label></td>
                                                         </tr>
                                                         <tr>
-                                                            <td>2</td>
+                                                            <td>{{ $stt++ }}</td>
                                                             <td>Điện</td>
                                                             <td> {{$hoadon->tien_dien_string}}</td>
                                                             <td><label> {{ number_format($hoadon->tien_dien_int) }} VNĐ
                                                                 </label></td>
                                                         </tr>
                                                         <tr>
-                                                            <td>3</td>
+                                                            <td>{{ $stt++ }}</td>
                                                             <td>Nước</td>
                                                             <td> {{$hoadon->tien_nuoc_string}}</td>
                                                             <td><label> {{ number_format($hoadon->tien_nuoc_int) }} VNĐ
                                                                 </label></td>
                                                         </tr>
                                                         <tr>
-                                                            <td>4</td>
+                                                            <td>{{ $stt++ }}</td>
                                                             <td>Internet</td>
                                                             <td>{{ $hoadon->dung_mang }}</td>
                                                             <td><label> {{ number_format($hoadon->tien_mang) }} VNĐ</label></td>
                                                         </tr>
+                                                        @if ($hoadon->tien_phat_sinh > 0)
+                                                            <tr>
+                                                                <td>{{ $stt++ }}</td>
+                                                                <td>Chi phi phát sinh</td>
+                                                                <td>{{ $hoadon->chi_phi_phat_sinh }}</td>
+                                                                <td><label> {{ number_format($hoadon->tien_phat_sinh) }} VNĐ</label></td>
+                                                            </tr>
+                                                        @endif
                                                         @if ($hoadon->tien_binh_nuoc_int > 0)
                                                             <tr>
-                                                                <td>5</td>
+                                                                <td>{{ $stt++ }}</td>
                                                                 <td>Mua Nước</td>
                                                                 <td>{{ $hoadon->tien_binh_nuoc_string }}</td>
                                                                 <td><label> {{ number_format($hoadon->tien_binh_nuoc_int) }} VNĐ</label></td>
                                                             </tr>
-                                                            <tr>
-                                                                <td>6</td>
-                                                                <td></td>
-                                                                <td> Tổng Cộng </td>
-                                                                <td><label> {{ number_format($hoadon->so_tien_phai_tra) }} VNĐ </label></td>
-                                                            </tr>
-                                                        @else
-                                                            <tr>
-                                                                <td>5</td>
-                                                                <td></td>
-                                                                <td> Tổng Cộng </td>
-                                                                <td><label> {{ number_format($hoadon->so_tien_phai_tra) }} VNĐ </label></td>
-                                                            </tr>
                                                         @endif
-                                                        {{-- <tr>
-                                                            <td>5</td>
+                                                        <tr>
+                                                            <td>{{ $stt++ }}</td>
                                                             <td></td>
                                                             <td> Tổng Cộng </td>
                                                             <td><label> {{ number_format($hoadon->so_tien_phai_tra) }} VNĐ </label></td>
-                                                        </tr> --}}
+                                                        </tr>
                                                     </tbody>
                                                 </table>
                                                 <!-- </div> -->
@@ -154,13 +149,33 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-success float-sm-right">Lưu hóa đơn</button>
-                            </form>
-
+                                <button class="btn btn-success" id="capture-btn"
+                                data-phong="{{ $phong->ten_phong }} - Tháng {{ \Carbon\Carbon::parse($hoadon->created_at)->format('m-Y') }}">Chụp
+                                màn hình</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script src="js/html2canvas.js"></script>
+    <script>
+        // chup man hinh
+        var phongName = document.getElementById("capture-btn").getAttribute("data-phong");
+        console.log(phongName);
+        document.getElementById("capture-btn").onclick = function() {
+            html2canvas(document.getElementById("capture")).then(function(canvas) {
+                // Chuyển đổi canvas thành hình ảnh
+                var img = canvas.toDataURL("image/png");
+
+                // Tạo một liên kết tải về ảnh
+                var link = document.createElement("a");
+                link.href = img;
+                link.download = phongName + ".png";
+                link.click();
+            }).catch(function(error) {
+                console.error("Lỗi khi chụp màn hình:", error);
+            });
+        };
+    </script>
 @endsection

@@ -7,6 +7,12 @@
                 <div class="row">
                     <h4 class="card-title">Quản lý nhà cho thuê: {{ $nhatro->ten }}</h4>
                     <a href="./suatennhatro.html" class=" ml-3"> Sửa tên</a>
+                    @if ($errors->any())
+                        @foreach ($errors->all() as $error)
+                            <hr/>
+                            <p class="btn-danger">{{ $error }}</p>
+                        @endforeach
+                    @endif
                     @if ($checkCpdv == 0)
                         <div class="col-12 grid-margin stretch-card">
                             <div class="card">
@@ -29,7 +35,7 @@
                                     <a href="{{ route('phongtro.themphong', ['id' => $nhatro->id]) }}" type="button"
                                         class="ml-3 btn btn-success mb-4">Thêm mới Phòng
                                     </a>
-                                    <a href="{{ route('phongtro.themphong', ['id' => $nhatro->id]) }}" type="button"
+                                    <a href="{{ route('get.nhaptatcasdn', ['id' => $nhatro->id]) }}" type="button"
                                         class="ml-3 btn btn-success mb-4">Nhập số điện nước
                                     </a>
                                     <div type="button" class="ml-3 btn btn-info mb-4"> Tìm kiếm
@@ -61,7 +67,8 @@
                                                         <div class="mb-2">
                                                             <h4 class="mb-0 ">{{ $phong->ten_phong }}</h4>
                                                         </div>
-                                                        <h6 class="mb-3">Giá phòng: {{ number_format($phong->gia_phong) }}
+                                                        <h6 class="mb-3">Giá phòng:
+                                                            {{ number_format($phong->gia_phong) }}
                                                             đ</h6>
                                                         @if ($phong->trang_thai === 0)
                                                             <div type="button"
@@ -82,30 +89,30 @@
                                                         @endif
                                                     </div>
                                                     @if ($phong->trang_thai === 1)
-                                                    <div class="row pb-2">
-                                                        <div class="col-5 d-flex justify-content-center">
-                                                            <button class="tru-water btn btn-danger "
-                                                                style="border-radius: 50%; height: 50px; width: 50px; display: flex; justify-content: center; align-items: center;"
-                                                                data-nhatro-id="{{ $nhatro->id }}"
-                                                                data-id="{{ $phong->id }}">
-                                                                - Nước
-                                                            </button>
+                                                        <div class="row pb-2">
+                                                            <div class="col-5 d-flex justify-content-center">
+                                                                <button class="tru-water btn btn-danger "
+                                                                    style="border-radius: 50%; height: 50px; width: 50px; display: flex; justify-content: center; align-items: center;"
+                                                                    data-nhatro-id="{{ $nhatro->id }}"
+                                                                    data-id="{{ $phong->id }}">
+                                                                    - Nước
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-2 d-flex justify-content-center">
+                                                                <p class="updateP h5" style="text-align: center;"
+                                                                    data-id="{{ $phong->id }}">
+                                                                    {{ $phong->mua_nuoc }}
+                                                                </p>
+                                                            </div>
+                                                            <div class="col-5 d-flex justify-content-center">
+                                                                <button class="buy-water btn btn-success"
+                                                                    style="border-radius: 50%; height: 50px; width: 50px; display: flex; justify-content: center; align-items: center;"
+                                                                    data-nhatro-id="{{ $nhatro->id }}"
+                                                                    data-id="{{ $phong->id }}">
+                                                                    + Nước
+                                                                </button>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-2 d-flex justify-content-center">
-                                                            <p class="updateP h5" style="text-align: center;"
-                                                                data-id="{{ $phong->id }}">
-                                                                {{ $phong->mua_nuoc }}
-                                                            </p>
-                                                        </div>
-                                                        <div class="col-5 d-flex justify-content-center">
-                                                            <button class="buy-water btn btn-success"
-                                                                style="border-radius: 50%; height: 50px; width: 50px; display: flex; justify-content: center; align-items: center;"
-                                                                data-nhatro-id="{{ $nhatro->id }}"
-                                                                data-id="{{ $phong->id }}">
-                                                                + Nước
-                                                            </button>
-                                                        </div>
-                                                    </div>
                                                     @endif
                                                     <div class=" d-flex justify-content-center">
                                                         <a href="{{ route('nhatro.phong.show.info', ['id' => $thongtin->id, 'id_phong' => $phong->id]) }}"

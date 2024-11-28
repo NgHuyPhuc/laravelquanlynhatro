@@ -149,13 +149,13 @@
                                                     {{ number_format($cpdv->tien_dien_int) }} VNĐ
                                                 </td>
                                                 <td>
-                                                    {{ number_format($cpdv->tien_nuoc_int ) }} VNĐ
+                                                    {{ number_format($cpdv->tien_nuoc_int) }} VNĐ
                                                 </td>
                                                 <td>
-                                                    {{ number_format($cpdv->tien_mang_int ) }} VNĐ
+                                                    {{ number_format($cpdv->tien_mang_int) }} VNĐ
                                                 </td>
                                                 <td>
-                                                    {{ number_format($cpdv->tien_binh_nuoc ) }} VNĐ
+                                                    {{ number_format($cpdv->tien_binh_nuoc) }} VNĐ
                                                 </td>
                                                 <td>
                                                     <img src="/uploads/img/{{ $cpdv->anh_qr_code }}" alt="">
@@ -173,7 +173,7 @@
                             </div>
                             <form
                                 action="{{ route('phongtro.hoadon.storehoadon', ['id' => $nhatro->id, 'id_phong' => $phong->id]) }}"
-                                method="POST"> 
+                                method="POST">
                                 <div class="container">
                                     <div id='capture' class="invoice"
                                         style="padding: 20px;border: 1px solid #ddd;border-radius: 5px;margin:20px;">
@@ -204,15 +204,22 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
+                                                        @php
+                                                            $stt = 1; // Khởi tạo số thứ tự
+                                                        @endphp
                                                         <tr>
-                                                            <td>1</td>
+                                                            <td>{{ $stt++ }}</td>
                                                             <td>Tiền Phòng</td>
-                                                            <td>{{$phong->ten_phong }} Tháng {{\Carbon\Carbon::parse($sdnLast->date)->format('m')}} năm {{\Carbon\Carbon::parse($sdnLast->date)->format('Y')}}</td>
+                                                            <td>{{ $phong->ten_phong }} Tháng
+                                                                {{ \Carbon\Carbon::parse($sdnLast->date)->format('m') }}
+                                                                năm
+                                                                {{ \Carbon\Carbon::parse($sdnLast->date)->format('Y') }}
+                                                            </td>
                                                             <td><label> {{ number_format($phong->gia_phong) }} VND
                                                                 </label></td>
                                                         </tr>
                                                         <tr>
-                                                            <td>2</td>
+                                                            <td>{{ $stt++ }}</td>
                                                             <td>Điện</td>
                                                             <td> ( {{ $sdnLast->so_dien }} - {{ $sdnSecond->so_dien }} ) =
                                                                 {{ number_format($sdnLast->so_dien - $sdnSecond->so_dien) }}
@@ -222,7 +229,7 @@
                                                                 </label></td>
                                                         </tr>
                                                         <tr>
-                                                            <td>3</td>
+                                                            <td>{{ $stt++ }}</td>
                                                             <td>Nước</td>
                                                             <td> ( {{ $sdnLast->so_nuoc }} - {{ $sdnSecond->so_nuoc }} ) =
                                                                 {{ number_format($sdnLast->so_nuoc - $sdnSecond->so_nuoc) }}m³
@@ -231,30 +238,36 @@
                                                                 </label></td>
                                                         </tr>
                                                         <tr>
-                                                            <td>4</td>
+                                                            <td>{{ $stt++ }}</td>
                                                             <td>Internet</td>
                                                             <td>{{ $phong->dung_mang }}</td>
                                                             <td><label> {{ number_format($tien_mang) }} VNĐ</label></td>
                                                         </tr>
+                                                        @if ($sdnLast->tien_phat_sinh > 0)
+                                                            <tr>
+                                                                <td>{{ $stt++ }}</td>
+                                                                <td>Chi phí phát sinh</td>
+                                                                <td>{{ $sdnLast->chi_phi_phat_sinh }}</td>
+                                                                <td><label> {{ number_format($sdnLast->tien_phat_sinh) }}
+                                                                        VNĐ</label></td>
+                                                            </tr>
+                                                        @endif
                                                         @if ($phong->mua_nuoc != 0)
                                                             <tr>
-                                                                <td>5</td>
+                                                                <td>{{ $stt++ }}</td>
                                                                 <td>Mua Nước</td>
-                                                                <td>{{ $phong->mua_nuoc }} * {{ number_format($cpdv->tien_binh_nuoc) }}</td>
-                                                                <td><label> {{ number_format($tong_tien_binh_nuoc) }} VNĐ</label></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>6</td>
-                                                                <td></td>
-                                                                <td> Tổng Cộng </td>
-                                                                <td><label> {{ number_format($tong_cong) }} VNĐ </label></td>
+                                                                <td>{{ $phong->mua_nuoc }} *
+                                                                    {{ number_format($cpdv->tien_binh_nuoc) }}</td>
+                                                                <td><label> {{ number_format($tong_tien_binh_nuoc) }}
+                                                                        VNĐ</label></td>
                                                             </tr>
                                                         @else
                                                             <tr>
-                                                                <td>5</td>
+                                                                <td>{{ $stt++ }}</td>
                                                                 <td></td>
                                                                 <td> Tổng Cộng </td>
-                                                                <td><label> {{ number_format($tong_cong) }} VNĐ </label></td>
+                                                                <td><label> {{ number_format($tong_cong) }} VNĐ </label>
+                                                                </td>
                                                             </tr>
                                                         @endif
                                                     </tbody>
@@ -272,20 +285,21 @@
                                                         <h5 class="text-danger">2. Chuyển khoản ngân hàng</h5>
                                                     </li>
                                                     <li>
-                                                        <h5 class="text-danger">Chủ tài khoản: {{$cpdv->ten_chu_tk}}</h5>
+                                                        <h5 class="text-danger">Chủ tài khoản: {{ $cpdv->ten_chu_tk }}</h5>
                                                     </li>
                                                     <li>
-                                                        <h5 class="text-danger">{{$cpdv->chi_nhanh}}
+                                                        <h5 class="text-danger">{{ $cpdv->chi_nhanh }}
                                                         </h5>
                                                     </li>
                                                     <li>
-                                                        <h5 class="text-danger">{{$cpdv->noi_dung_ck}}</h5>
+                                                        <h5 class="text-danger">{{ $cpdv->noi_dung_ck }}</h5>
                                                     </li>
                                                 </ul>
                                             </div>
                                             <div class="col-lg-5">
                                                 <div class="qr-code" style=" text-align: center; margin-top: 20px;">
-                                                    <img style="width: 350px; height: 350px;" src="/uploads/img/{{ $cpdv->anh_qr_code }}"
+                                                    <img style="width: 350px; height: 350px;"
+                                                        src="/uploads/img/{{ $cpdv->anh_qr_code }}"
                                                         alt="QR Code Thanh Toán" />
                                                     <p style="text-align: center;"><strong>Mã QR Code Thanh Toán</strong>
                                                     </p>
@@ -298,105 +312,120 @@
                                     <label class="col-sm-3 col-form-label">id_phong_tro </label>
                                     <div class="col-sm-9">
                                         <input class="form-control" name="id_phong_tro" type="number"
-                                        value="{{ $phong->id }}">
+                                            value="{{ $phong->id }}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">dung_mang </label>
                                     <div class="col-sm-9">
                                         <input class="form-control" name="dung_mang" type="number"
-                                    value="{{ $phong->dung_mang }}">
+                                            value="{{ $phong->dung_mang }}">
                                     </div>
-                                </div> <div class="form-group row">
+                                </div>
+                                <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">tien_dien_string </label>
                                     <div class="col-sm-9">
                                         <input class="form-control" name="tien_dien_string" type="text"
-                                    value="( {{ $sdnLast->so_dien }} - {{ $sdnSecond->so_dien }} ) = {{ number_format($sdnLast->so_dien - $sdnSecond->so_dien) }} kWhx {{ number_format($cpdv->tien_dien_int) }} VNĐ/kWh">
+                                            value="( {{ $sdnLast->so_dien }} - {{ $sdnSecond->so_dien }} ) = {{ number_format($sdnLast->so_dien - $sdnSecond->so_dien) }} kWhx {{ number_format($cpdv->tien_dien_int) }} VNĐ/kWh">
                                     </div>
-                                
+
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">tien_nuoc_string </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" name="tien_nuoc_string" type="text" value="( {{ $sdnLast->so_nuoc }} - {{ $sdnSecond->so_nuoc }} ) ={{ number_format($sdnLast->so_nuoc - $sdnSecond->so_nuoc) }}m³ x {{ number_format($cpdv->tien_nuoc_int) }} VNĐ/m³">
+                                        <input class="form-control" name="tien_nuoc_string" type="text"
+                                            value="( {{ $sdnLast->so_nuoc }} - {{ $sdnSecond->so_nuoc }} ) ={{ number_format($sdnLast->so_nuoc - $sdnSecond->so_nuoc) }}m³ x {{ number_format($cpdv->tien_nuoc_int) }} VNĐ/m³">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">chi_phi_phat_sinh </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" name="chi_phi_phat_sinh" type="text" value="{{$sdnLast->chi_phi_phat_sinh}}">
+                                        <input class="form-control" name="chi_phi_phat_sinh" type="text"
+                                            value="{{ $sdnLast->chi_phi_phat_sinh }}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">tien_phong_string </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" name="tien_phong_string" type="text" value="{{$phong->ten_phong }} Tháng {{\Carbon\Carbon::parse($sdnLast->date)->format('m')}} năm {{\Carbon\Carbon::parse($sdnLast->date)->format('Y')}}">
+                                        <input class="form-control" name="tien_phong_string" type="text"
+                                            value="{{ $phong->ten_phong }} Tháng {{ \Carbon\Carbon::parse($sdnLast->date)->format('m') }} năm {{ \Carbon\Carbon::parse($sdnLast->date)->format('Y') }}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">thang </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" name="thang" type="text" value="Tháng {{ \Carbon\Carbon::parse($sdnLast->date)->format('m') }} năm {{ \Carbon\Carbon::parse($sdnLast->date)->format('Y') }}">
+                                        <input class="form-control" name="thang" type="text"
+                                            value="Tháng {{ \Carbon\Carbon::parse($sdnLast->date)->format('m') }} năm {{ \Carbon\Carbon::parse($sdnLast->date)->format('Y') }}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">thong_bao </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" name="thong_bao" type="text" value="Xin thông báo tới anh (chị): Phí dịch vụ trong tháng {{ \Carbon\Carbon::parse($sdnSecond->date)->format('m/Y') }} và tiền thuê phòng tháng {{ \Carbon\Carbon::parse($sdnLast->date)->format('m/Y') }}. Cụ thể như sau:">
+                                        <input class="form-control" name="thong_bao" type="text"
+                                            value="Xin thông báo tới anh (chị): Phí dịch vụ trong tháng {{ \Carbon\Carbon::parse($sdnSecond->date)->format('m/Y') }} và tiền thuê phòng tháng {{ \Carbon\Carbon::parse($sdnLast->date)->format('m/Y') }}. Cụ thể như sau:">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">tien_binh_nuoc_string </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" name="tien_binh_nuoc_string" type="text" value="{{ $phong->mua_nuoc }}* {{ number_format($cpdv->tien_binh_nuoc) }}">
+                                        <input class="form-control" name="tien_binh_nuoc_string" type="text"
+                                            value="{{ $phong->mua_nuoc }}* {{ number_format($cpdv->tien_binh_nuoc) }}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">tien_binh_nuoc_int </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" name="tien_binh_nuoc_int" type="text" value="{{$tong_tien_binh_nuoc}}">
+                                        <input class="form-control" name="tien_binh_nuoc_int" type="text"
+                                            value="{{ $tong_tien_binh_nuoc }}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">tien_phong_int </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" name="tien_phong_int" type="text" value="{{$phong->gia_phong }}">
+                                        <input class="form-control" name="tien_phong_int" type="text"
+                                            value="{{ $phong->gia_phong }}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">tien_dien_int </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" name="tien_dien_int" type="number" value="{{$tien_dien}}">
+                                        <input class="form-control" name="tien_dien_int" type="number"
+                                            value="{{ $tien_dien }}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">tien_mang </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" name="tien_mang" type="number" value="{{ $phong->dung_mang == 1 ? $cpdv->tien_mang_int : 0 }}">
+                                        <input class="form-control" name="tien_mang" type="number"
+                                            value="{{ $phong->dung_mang == 1 ? $cpdv->tien_mang_int : 0 }}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">tien_nuoc_int </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" name="tien_nuoc_int" type="number" value="{{$tien_nuoc}}">
+                                        <input class="form-control" name="tien_nuoc_int" type="number"
+                                            value="{{ $tien_nuoc }}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">tien_phat_sinh </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" name="tien_phat_sinh" type="number" value="{{$sdnLast->tien_phat_sinh}}">
+                                        <input class="form-control" name="tien_phat_sinh" type="number"
+                                            value="{{ $sdnLast->tien_phat_sinh }}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">so_tien_phai_tra </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" name="so_tien_phai_tra" type="number" value="{{$tong_cong}}">
+                                        <input class="form-control" name="so_tien_phai_tra" type="number"
+                                            value="{{ $tong_cong }}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">so_tien_da_thanh_toan </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" name="so_tien_da_thanh_toan" type="number" value="0">
+                                        <input class="form-control" name="so_tien_da_thanh_toan" type="number"
+                                            value="0">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -414,7 +443,9 @@
                                 @csrf
                                 <button type="submit" class="btn btn-success float-sm-right">Lưu hóa đơn</button>
                             </form>
-                            <button id="capture-btn" data-phong="{{ $phong->ten_phong }} - Tháng {{ \Carbon\Carbon::parse($sdnSecond->date)->format('m-Y')}}">Chụp màn hình</button>
+                            <button class="btn btn-success" id="capture-btn"
+                                data-phong="{{ $phong->ten_phong }} - Tháng {{ \Carbon\Carbon::parse($sdnSecond->date)->format('m-Y') }}">Chụp
+                                màn hình</button>
 
                         </div>
                     </div>
@@ -422,28 +453,16 @@
             </div>
         </div>
     </div>
-    <script src="js/html2canvas.js"></script> 
+    <script src="js/html2canvas.js"></script>
     <script>
-        // Khi nhấn vào nút "Xác nhận"
-        // document.getElementById('openModalButton').addEventListener('click', function() {
-        //     // Mở modal xác nhận
-        //     new bootstrap.Modal(document.getElementById('confirmationModal')).show();
-        // });
-
-        // // Khi người dùng nhấn vào nút "Đúng, thực hiện"
-        // document.getElementById('confirmButton').addEventListener('click', function() {
-        //     // Gửi form
-        //     document.getElementById('your-form').submit();
-        // });
-
         // chup man hinh
         var phongName = document.getElementById("capture-btn").getAttribute("data-phong");
-        console.log(phongName); 
+        console.log(phongName);
         document.getElementById("capture-btn").onclick = function() {
             html2canvas(document.getElementById("capture")).then(function(canvas) {
                 // Chuyển đổi canvas thành hình ảnh
                 var img = canvas.toDataURL("image/png");
-                
+
                 // Tạo một liên kết tải về ảnh
                 var link = document.createElement("a");
                 link.href = img;

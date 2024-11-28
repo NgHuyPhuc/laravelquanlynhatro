@@ -20,6 +20,8 @@
                                         @else
                                             <a href="{{ route('phong.nguoithue.dangthue', ['id' => $id, 'id_phong' => $phongtro->id]) }}"
                                                 class="btn btn-info">Xem thông tin người thuê phòng</a>
+                                            <a href="{{ route('danh.sach.so.dien.nuoc', ['id' => $nhatro->id, 'id_phong' => $phongtro->id]) }}"
+                                                class="btn btn-success">Danh sách số điện nước</a>
                                             <a href="{{ route('sodien.nuoc.theophong.get', ['id' => $nhatro->id, 'id_phong' => $phongtro->id]) }}"
                                                 class="btn btn-success">Nhập số điện nước</a>
                                             <a href="{{ route('phongtro.hoadon.themhoadon', ['id' => $nhatro->id, 'id_phong' => $phongtro->id]) }}"

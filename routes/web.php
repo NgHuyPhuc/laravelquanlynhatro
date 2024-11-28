@@ -38,6 +38,8 @@ Route::middleware('fetch.nhatro')->prefix('nhatro/{id}')->group(function () {
     Route::get('/nhaptatcasdn', [SoDienNuocTheoPhongController::class, 'nhaptatcasdn'])->name('get.nhaptatcasdn');
     Route::post('/nhaptatcasdn', [SoDienNuocTheoPhongController::class, 'nhaptatcasdnPost'])->name('post.nhaptatcasdn');
     Route::get('/danhsachsdn', [SoDienNuocTheoPhongController::class, 'danhsachsdn'])->name('get.danhsachsdn');
+    Route::get('/getTatCaHoaDon', [HoaDonPhongTroController::class, 'getTatCaHoaDon'])->name('Tao.tat.ca.hoa.don');
+    Route::get('/hoadonall', [HoaDonPhongTroController::class, 'listall'])->name('phong.hoadon.danhsach.all');
 
     Route::prefix('tang')->group(function () {
         Route::get('/', [TangController::class, 'index'])->name('nhatro.tang.show');
@@ -94,10 +96,8 @@ Route::middleware('fetch.nhatro')->prefix('nhatro/{id}')->group(function () {
         
         Route::prefix('/{id_phong}/hoadon')->group(function () {
             Route::get('/', [HoaDonPhongTroController::class, 'index'])->name('nhatro.phong.hoadon.show.all.info');
-            Route::get('/all', [HoaDonPhongTroController::class, 'infoall'])->name('phong.hoadon.danhsach.all');
             Route::get('/chonsdntheothang', [HoaDonPhongTroController::class, 'createMonth'])->name('phongtro.hoadon.chonsdntheothang');
             Route::get('/themhoadontheothang', [HoaDonPhongTroController::class, 'getcreateMonth'])->name('phongtro.hoadon.themhoadontheothang');
-            // Route::post('/themhoadontheothang', [HoaDonPhongTroController::class, 'createMonth'])->name('phongtro.hoadon.themhoadontheothang');
             Route::get('/themhoadon', [HoaDonPhongTroController::class, 'create'])->name('phongtro.hoadon.themhoadon');
             Route::post('/themhoadon', [HoaDonPhongTroController::class, 'store'])->name('phongtro.hoadon.storehoadon');
             Route::get('/detail/{id_hoadon}', [HoaDonPhongTroController::class, 'showHoaDonPhong'])->name('phongtro.hoadon.detailhoadon');

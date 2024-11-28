@@ -24,7 +24,7 @@ class FetchNhaTroMiddleware
 
             if (!$thongtinnhatro) {
                 // Nếu không tìm thấy nhà trọ, có thể redirect về trang khác hoặc báo lỗi
-                return redirect()->back()->withErrors(['error' => 'Không tìm thấy nhà trọ']);
+                return redirect()->back()->withErrors(['errors' => 'Không tìm thấy nhà trọ']);
             }
 
             // Chia sẻ dữ liệu nhà trọ cho toàn bộ view

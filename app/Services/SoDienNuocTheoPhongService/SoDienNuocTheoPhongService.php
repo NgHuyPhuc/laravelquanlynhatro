@@ -29,8 +29,8 @@ class SoDienNuocTheoPhongService
             'date' => $request->date,
             'so_dien' => $request->so_dien,
             'so_nuoc' => $request->so_nuoc,
-            'chi_phi_phat_sinh' => $request->tong_chi_phi_dich_vu ?? 'Không có',
-            'tien_phat_sinh' => $request->tong_chi_phi_dich_vu ?? 0,
+            'chi_phi_phat_sinh' => $request->chi_phi_phat_sinh ?? 'Không có',
+            'tien_phat_sinh' => $request->tien_phat_sinh ?? 0,
         ];
         return $this->soDienNuoc->create($data);
     }

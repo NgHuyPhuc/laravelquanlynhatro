@@ -3,15 +3,18 @@
 namespace App\Services\HoaDonService;
 
 use App\Repositories\Repository\HoaDonRepository;
+use App\Services\PhongTroService\PhongTroService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class HoaDonService
 {
     protected $hoaDon;
-    public function __construct(HoaDonRepository $hoaDonRepository)
+    protected $phongTroService;
+    public function __construct(HoaDonRepository $hoaDonRepository, PhongTroService $phongTroService)
     {
         $this->hoaDon = $hoaDonRepository;
+        $this->phongTroService = $phongTroService;
     }
     public function getall()
     {
@@ -89,32 +92,36 @@ class HoaDonService
     {
         foreach ($nhaTro->tangdesc as $item) {
             foreach ($item->phongtro as $phong) {
-                $soDienNuocNow = $phong->getLastestSdn();
-                $soDienNuocPrev = $phong->getLastestSdn();
-                if ($soDienNuocNow && $soDienNuocPrev) {
-                    $data = [
-                        'id_phong_tro' => $phong->id,
-                        'dung_mang' => $phong->dung_mang,
-                        'tien_mang' => $cpdv->tien_mang_int,
-                        'tien_dien_string' => $this->tinhTienDienString($soDienNuocPrev, $soDienNuocNow, $cpdv),
-                        'tien_nuoc_string' => $this->tinhTienNuocString($soDienNuocPrev, $soDienNuocNow, $cpdv),
-                        'chi_phi_phat_sinh' => null, // Có thể cập nhật thêm nếu cần
-                        'tien_phong_string' => $this->tienPhongString($soDienNuocPrev, $soDienNuocNow, $phong, $cpdv),
-                        'thang' => $this->thangString($soDienNuocNow),
-                        'thong_bao' => $this->thongBaoString($soDienNuocPrev, $soDienNuocNow),
-                        'tien_binh_nuoc_string' => $this->tienBinhNuocString($phong,$cpdv),
-                        'tien_binh_nuoc_int' => $this->tienBinhNuocInt($phong,$cpdv),
-                        'tien_phong_int' => (int) $phong->gia_phong,
-                        'tien_dien_int' => $this->tinhTienDienInt($soDienNuocPrev, $soDienNuocNow, $cpdv),
-                        'tien_nuoc_int' => $this->tinhTienNuocInt($soDienNuocPrev, $soDienNuocNow, $cpdv),
-                        'tien_phat_sinh' => 0,
-                        'so_tien_phai_tra' => $this->tinhTongTien($soDienNuocPrev, $soDienNuocNow, $phong, $cpdv),
-                        'so_tien_da_thanh_toan' => 0,
-                        'so_du' => 0,
-                        'trang_thai' => 0,
-                    ];
-                    // Tạo hóa đơn
-                    $this->hoaDon->create($data);
+                if($phong->trang_thai == 1)
+                {
+                    $soDienNuocNow = $phong->getLastestSdn();
+                    $soDienNuocPrev = $phong->getSecondSdn();
+                    if ($soDienNuocNow && $soDienNuocPrev) {
+                        $data = [
+                            'id_phong_tro' => $phong->id,
+                            'dung_mang' => $phong->dung_mang,
+                            'tien_mang' => $cpdv->tien_mang_int,
+                            'tien_dien_string' => $this->tinhTienDienString($soDienNuocPrev, $soDienNuocNow, $cpdv),
+                            'tien_nuoc_string' => $this->tinhTienNuocString($soDienNuocPrev, $soDienNuocNow, $cpdv),
+                            'chi_phi_phat_sinh' => $soDienNuocNow->chi_phi_phat_sinh, // Có thể cập nhật thêm nếu cần
+                            'tien_phong_string' => $this->tienPhongString($soDienNuocPrev, $soDienNuocNow, $phong, $cpdv),
+                            'thang' => $this->thangString($soDienNuocNow),
+                            'thong_bao' => $this->thongBaoString($soDienNuocPrev, $soDienNuocNow),
+                            'tien_binh_nuoc_string' => $this->tienBinhNuocString($phong,$cpdv),
+                            'tien_binh_nuoc_int' => $this->tienBinhNuocInt($phong,$cpdv),
+                            'tien_phong_int' => (int) $phong->gia_phong,
+                            'tien_dien_int' => $this->tinhTienDienInt($soDienNuocPrev, $soDienNuocNow, $cpdv),
+                            'tien_nuoc_int' => $this->tinhTienNuocInt($soDienNuocPrev, $soDienNuocNow, $cpdv),
+                            'tien_phat_sinh' => $soDienNuocNow->tien_phat_sinh,
+                            'so_tien_phai_tra' => $this->tinhTongTien($soDienNuocPrev, $soDienNuocNow, $phong, $cpdv),
+                            'so_tien_da_thanh_toan' => 0,
+                            'so_du' => 0,
+                            'trang_thai' => 0,
+                        ];
+                        // Tạo hóa đơn
+                        $this->hoaDon->create($data);
+                        $this->phongTroService->resetMuaNuoc($phong->id);
+                    }
                 }
             }
         }
@@ -142,6 +149,7 @@ class HoaDonService
     public function thongBaoString($soDienNuocPrev, $soDienNuocNow)
     {
         $thongBao = 'Xin thông báo tới anh (chị): Phí dịch vụ trong tháng' . Carbon::parse($soDienNuocPrev->date)->format('m/Y') . ' và tiền thuê phòng tháng ' . Carbon::parse($soDienNuocNow->date)->format('m/Y') . '. Cụ thể như sau:';
+        return $thongBao;
     }
     function tinhTienDienString($soDienNuocPrev, $soDienNuocNow, $cpdv)
     {
@@ -171,5 +179,10 @@ class HoaDonService
         $muaNuoc = $phong->mua_nuoc * $cpdv->tien_binh_nuoc;
         $tongTien = $this->tinhTienDienInt($soDienNuocPrev, $soDienNuocNow, $cpdv) + $this->tinhTienNuocInt($soDienNuocPrev, $soDienNuocNow, $cpdv)  + $tienPhong + $muaNuoc;
         return $tongTien;
+    }
+
+    function getallnow()
+    {
+        return $this->hoaDon->getallnow();
     }
 }

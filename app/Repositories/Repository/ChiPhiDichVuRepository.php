@@ -13,7 +13,7 @@ class ChiPhiDichVuRepository extends BaseRepository implements ChiPhiDichVuRepos
         parent::__construct($chiPhiDichVu);
     }
     public function getByNhaTroID($id_nha_tro){
-        return ChiPhiDichVu::where('id_nha_tro', $id_nha_tro);
+        return ChiPhiDichVu::where('id_nha_tro', $id_nha_tro)->first();
     }
 }
 ?>

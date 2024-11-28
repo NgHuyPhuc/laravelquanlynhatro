@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\HoaDonPhongTro;
 
 use App\Http\Controllers\Controller;
+use App\Models\ChiPhiDichVu;
 use App\Services\ChiPhiDichVuService\ChiPhiDichVuService;
 use App\Services\HoaDonService\HoaDonService;
 use App\Services\NhaTroService\NhaTroService;
@@ -53,7 +54,7 @@ class HoaDonPhongTroController extends Controller
         $data['tien_nuoc'] = ($data['sdnLast']->so_nuoc - $data['sdnSecond']->so_nuoc) * $data['cpdv']->tien_nuoc_int;
         $data['tien_mang'] = $data['phong']->dung_mang * $data['cpdv']->tien_mang_int;
         $data['tong_tien_binh_nuoc'] = $data['phong']->mua_nuoc * $data['cpdv']->tien_binh_nuoc;
-        $data['tong_cong'] = $data['tien_dien'] + $data['tien_nuoc'] + $data['tien_mang'] + $data['phong']->gia_phong + $data['tong_tien_binh_nuoc'];
+        $data['tong_cong'] = $data['tien_dien'] + $data['tien_nuoc'] + $data['tien_mang'] + $data['phong']->gia_phong + $data['tong_tien_binh_nuoc'] + $data['sdnLast']->tien_phat_sinh;
         return view('backend.hoadon.create', $data);
     }
 
@@ -121,13 +122,16 @@ class HoaDonPhongTroController extends Controller
         $this->hoaDon->update($request, $id_hoadon, $id_phong);
         return redirect()->route('phongtro.hoadon.detailhoadon', ['id' => $id, 'id_phong' => $id_phong, 'id_hoadon' => $id_hoadon]);
     }
-    public function postTatCaHoaDon($id)
+    public function getTatCaHoaDon($id)
     {    
         $nhaTro = $this->nhaTro->getone($id);
         $cpdv = $this->chiPhiDichVu->getByNhaTroID($id);
         $this->hoaDon->createAllHoaDon($id, $nhaTro, $cpdv);
         return redirect()->route('phong.hoadon.danhsach.all',['id' => $id]);
     }
-    public function getDanhSachHoaDon($id) {}
+    public function listall($id) {
+        $data['hoadon'] = $this->hoaDon->getallnow();
+        return view('backend.hoadon.listall', $data);
+    }
     public function destroy($id, $id_phong) {}
 }

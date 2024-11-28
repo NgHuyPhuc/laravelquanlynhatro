@@ -45,8 +45,8 @@ class SoDienNuocTheoPhongController extends Controller
         // dd($request);
         $data['thongtin'] = $this->nhatroService->getTangandPhongTro($id);
         $data['checkCpdv'] = $this->chiPhiDichVuService->getByNhaTroID($id)->count();
-        return $this->soDienNuoc->createMultiple($request,$id);
-        return view('backend.sodiennuoc.nhaptatcasdn', $data);
+        $this->soDienNuoc->createMultiple($request,$id);
+        return redirect()->route('get.danhsachsdn', ['id' => $id]);
     }
     public function create(Request $request, $id, $id_phong){
         $data['id'] = $id;
