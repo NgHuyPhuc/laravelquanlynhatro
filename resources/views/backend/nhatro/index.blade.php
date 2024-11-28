@@ -57,7 +57,7 @@
                                         @foreach ($item->phongtro as $phong)
                                             <div class="col-md-3 grid-margin stretch-card">
                                                 <div class="card">
-                                                    <div class="card-body d-flex flex-column ">
+                                                    <div class="card-body d-flex flex-column pb-0">
                                                         <div class="mb-2">
                                                             <h4 class="mb-0 ">{{ $phong->ten_phong }}</h4>
                                                         </div>
@@ -81,12 +81,32 @@
                                                             </div>
                                                         @endif
                                                     </div>
-                                                    <button class="buy-water" data-nhatro-id="{{ $nhatro->id }}"
-                                                        data-id="{{ $phong->id }}">+ Nuoc</button>
-                                                    <a href="javascript:void(0)">{{ $phong->mua_nuoc }}</a>
-                                                    <button class="tru-water" data-nhatro-id="{{ $nhatro->id }}"
-                                                        data-id="{{ $phong->id }}">- Nuoc</button>
-
+                                                    @if ($phong->trang_thai === 1)
+                                                    <div class="row pb-2">
+                                                        <div class="col-5 d-flex justify-content-center">
+                                                            <button class="tru-water btn btn-danger "
+                                                                style="border-radius: 50%; height: 50px; width: 50px; display: flex; justify-content: center; align-items: center;"
+                                                                data-nhatro-id="{{ $nhatro->id }}"
+                                                                data-id="{{ $phong->id }}">
+                                                                - Nước
+                                                            </button>
+                                                        </div>
+                                                        <div class="col-2 d-flex justify-content-center">
+                                                            <p class="updateP h5" style="text-align: center;"
+                                                                data-id="{{ $phong->id }}">
+                                                                {{ $phong->mua_nuoc }}
+                                                            </p>
+                                                        </div>
+                                                        <div class="col-5 d-flex justify-content-center">
+                                                            <button class="buy-water btn btn-success"
+                                                                style="border-radius: 50%; height: 50px; width: 50px; display: flex; justify-content: center; align-items: center;"
+                                                                data-nhatro-id="{{ $nhatro->id }}"
+                                                                data-id="{{ $phong->id }}">
+                                                                + Nước
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    @endif
                                                     <div class=" d-flex justify-content-center">
                                                         <a href="{{ route('nhatro.phong.show.info', ['id' => $thongtin->id, 'id_phong' => $phong->id]) }}"
                                                             type="button"
@@ -158,6 +178,7 @@
                         .then(data => {
                             if (data.message === 'Mua bình nước thành công!') {
                                 alert('Mua bình nước thành công! Số lần mua: ' + data.mua_nuoc);
+                                updateHtml(idPhong, data.mua_nuoc)
                             } else {
                                 alert(data.message); // Hiển thị lỗi nếu không thành công
                             }
@@ -199,6 +220,7 @@
                         .then(data => {
                             if (data.message === 'Trừ bình nước thành công!') {
                                 alert('Trừ bình nước thành công! Số lần mua: ' + data.mua_nuoc);
+                                updateHtml(idPhong, data.mua_nuoc)
                             } else {
                                 alert(data.message); // Hiển thị lỗi nếu không thành công
                             }
@@ -211,32 +233,12 @@
             });
         });
 
-        // document.getElementById('tru-water').addEventListener('click', function() {
-        //     // Lấy id của phòng từ thuộc tính data-id
-        //     const idPhong = this.getAttribute('data-id');
-        //     const nhatroId = this.getAttribute('data-nhatro-id');
-        //     // Gửi yêu cầu POST đến backend để mua nước
-        //     // fetch(`/mua-nuoc/${idPhong}`, {
-        //     fetch(`/nhatro/${nhatroId}/phong/${idPhong}/trunuoc`, {
-        //             method: 'POST',
-        //             headers: {
-        //                 'Content-Type': 'application/json',
-        //                 // Nếu cần, bạn có thể thêm token CSRF ở đây
-        //                 'X-CSRF-TOKEN': csrf_token
-        //             }
-        //         })
-        //         .then(response => response.json())
-        //         .then(data => {
-        //             if (data.message === 'Mua nước thành công!') {
-        //                 alert('Mua nước thành công! Số lần mua: ' + data.mua_nuoc);
-        //             } else {
-        //                 alert(data.message); // Hiển thị lỗi nếu không thành công
-        //             }
-        //         })
-        //         .catch(error => {
-        //             console.error('Có lỗi xảy ra:', error);
-        //             alert('Có lỗi xảy ra khi thực hiện hành động.');
-        //         });
-        // });
+        function updateHtml(idPhong, soLanMua) {
+            const data = document.querySelector('.updateP[data-id="' + idPhong +
+                '"]'); // Tìm thẻ <p> theo data-id của phòng
+            if (data) {
+                data.innerHTML = soLanMua; // Cập nhật nội dung trong thẻ <p>
+            }
+        }
     </script>
 @endsection
