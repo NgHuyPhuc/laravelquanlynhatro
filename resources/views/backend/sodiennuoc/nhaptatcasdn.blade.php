@@ -88,30 +88,30 @@
                                                                     value="{{ $phong->id }}" hidden>
                                                                 <div class="form-group row">
                                                                     <label for="so_dien_{{ $phong->id }}"
-                                                                        class="col-sm-7 col-form-label">Nhập
+                                                                        class="col-sm-6 col-form-label pr-0 pl-0">Nhập
                                                                         số điện
                                                                         :</label>
-                                                                    <div class="col-sm-5">
+                                                                    <div class="col-sm-6 pr-0 pl-0">
                                                                         <input name="so_dien[]" type="number"
                                                                             class="form-control"
                                                                             id="so_dien_{{ $phong->id }}"
                                                                             min="{{ $phong->getLastestSdn()->so_dien }}"
-                                                                            placeholder="Số điện T {{ $month }}"
+                                                                            placeholder="Số điện T{{ $month }}"
                                                                             value="{{ old('so_dien.' . $loop->index) }}"
                                                                             required>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row">
                                                                     <label for="so_nuoc_{{ $phong->id }}"
-                                                                        class="col-sm-7 col-form-label">Nhập
+                                                                        class="col-sm-6 col-form-label pr-0 pl-0">Nhập
                                                                         số nước
                                                                         :</label>
-                                                                    <div class="col-sm-5">
+                                                                    <div class="col-sm-6 pr-0 pl-0">
                                                                         <input name="so_nuoc[]" type="number"
                                                                             class="form-control"
                                                                             id="so_nuoc_{{ $phong->id }}"
                                                                             min="{{ $phong->getLastestSdn()->so_nuoc }}"
-                                                                            placeholder="Số nước T {{ $month }}"
+                                                                            placeholder="Số nước T{{ $month }}"
                                                                             value="{{ old('so_nuoc.' . $loop->index) }}"
                                                                             required>
                                                                     </div>
@@ -132,7 +132,7 @@
                                 </div>
                             </div>
                         @endforeach
-                        <button type="submit" class="btn btn-primary mr-2 float-right">Submit</button>
+                        <button type="submit" class="btn btn-primary mr-2 float-right">Lưu Tất Cả Số Điện Nước Tháng {{$month}}</button>
                         @csrf
                     </form>
                 </div>

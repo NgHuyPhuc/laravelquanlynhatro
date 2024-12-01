@@ -11,15 +11,12 @@
                                 <div class="card-body">
                                     <h4 class="card-title">Chức năng phòng : {{ $phongtro->ten_phong }}</h4>
                                     <div class="template-demo">
-                                        <a href="{{ route('phongtro.nguoithue.themnguoi', ['id' => $nhatro->id, 'id_phong' => $phongtro->id]) }}"
-                                            class="btn btn-info">Thêm mới người
-                                            thuê phòng</a>
                                         @if ($check == 0)
                                             <a href="{{ route('phongtro.hoadon.sodiennuoc1', ['id' => $nhatro->id, 'id_phong' => $phongtro->id]) }}"
                                                 class="btn btn-success">Thêm mới số tiền điện nước hiện tại</a>
                                         @else
                                             <a href="{{ route('phong.nguoithue.dangthue', ['id' => $id, 'id_phong' => $phongtro->id]) }}"
-                                                class="btn btn-info">Xem thông tin người thuê phòng</a>
+                                                class="btn btn-info">Quản lý thông tin người thuê phòng</a>
                                             <a href="{{ route('danh.sach.so.dien.nuoc', ['id' => $nhatro->id, 'id_phong' => $phongtro->id]) }}"
                                                 class="btn btn-success">Danh sách số điện nước</a>
                                             <a href="{{ route('sodien.nuoc.theophong.get', ['id' => $nhatro->id, 'id_phong' => $phongtro->id]) }}"
@@ -31,10 +28,8 @@
                                             class="btn btn-success">Xem hóa đơn tiền phòng</a>
                                         <a href="{{ route('phongtro.suaphong.get', ['id' => $nhatro->id, 'id_phong' => $phongtro->id]) }}"
                                             class="btn btn-danger">Chỉnh sửa thông tin phòng</a>
-                                        {{-- <a href="{{ route('phongtro.xoaphong', ['id' => $nhatro->id, 'id_phong' => $phongtro->id]) }}"
-                                            class="btn btn-danger float-right">Xóa phòng</a> --}}
                                         <!-- Button trigger modal -->
-                                        <button type="button" class="btn btn-danger float-right" data-toggle="modal"
+                                        <button hidden type="button" class="btn btn-danger float-right" data-toggle="modal"
                                             data-target="#exampleModal">
                                             Xóa phòng
                                         </button>

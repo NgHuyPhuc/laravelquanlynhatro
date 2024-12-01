@@ -38,7 +38,8 @@ Route::middleware('fetch.nhatro')->prefix('nhatro/{id}')->group(function () {
     Route::get('/nhaptatcasdn', [SoDienNuocTheoPhongController::class, 'nhaptatcasdn'])->name('get.nhaptatcasdn');
     Route::post('/nhaptatcasdn', [SoDienNuocTheoPhongController::class, 'nhaptatcasdnPost'])->name('post.nhaptatcasdn');
     Route::get('/danhsachsdn', [SoDienNuocTheoPhongController::class, 'danhsachsdn'])->name('get.danhsachsdn');
-    Route::get('/getTatCaHoaDon', [HoaDonPhongTroController::class, 'getTatCaHoaDon'])->name('Tao.tat.ca.hoa.don');
+    // Route::get('/danhsachsdn/{m}', [SoDienNuocTheoPhongController::class, 'danhsachsdn'])->name('get.danhsachsdn');
+    Route::get('/TaoTatCaHoaDon', [HoaDonPhongTroController::class, 'getTatCaHoaDon'])->name('Tao.tat.ca.hoa.don');
     Route::get('/hoadonall', [HoaDonPhongTroController::class, 'listall'])->name('phong.hoadon.danhsach.all');
 
     Route::prefix('tang')->group(function () {

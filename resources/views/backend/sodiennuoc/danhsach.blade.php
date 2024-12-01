@@ -56,13 +56,19 @@
                     <div class="col-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
-                                <div class="form-group row">
-                                    <label for="date" class="col-sm-3 col-form-label">Tháng :</label>
-                                    <div class="col-sm-9">
-                                        <input name="date" type="date" class="form-control" id="date"
-                                            value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" required>
+                                <form action="" method="get">
+                                    <div class="form-group row">
+                                        <label for="date" class="col-sm-3 col-form-label">Tháng :</label>
+                                        <div class="col-sm-9">
+                                            <input name="month" type="month" class="form-control" id="date"
+                                                value="{{ \Carbon\Carbon::parse($monthYear)->format('Y-m') }}" required>
+                                            {{-- @dd($monthYear) --}}
+                                        </div>
+                                        <button type="submit" class="btn btn-success">
+                                            Tìm kiếm
+                                        </button>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -79,7 +85,8 @@
                                                         <div class="mb-2">
                                                             <h4 class="mb-0 ">{{ $phong->ten_phong }}</h4>
                                                         </div>
-                                                        <h5 class="mb-3">Giá phòng: {{ number_format($phong->gia_phong) }} đ</h5>
+                                                        <h5 class="mb-3">Giá phòng:
+                                                            {{ number_format($phong->gia_phong) }} đ</h5>
                                                         @if ($phong->trang_thai === 0)
                                                             <div type="button"
                                                                 class="btn btn-danger btn-rounded btn-fw mb-4">Chưa cho
@@ -91,19 +98,37 @@
                                                             <div class="form-group row">
                                                                 <label for="so_dien_{{ $phong->id }}"
                                                                     class="col-sm-7 col-form-label">
-                                                                    Số điện tháng {{ $month }}
+                                                                    Số điện tháng {{ $monthf }}
                                                                     :</label>
-                                                                <div class="col-sm-5">
+                                                                {{-- <label for="so_dien_{{ $phong->id }}"
+                                                                    class="col-sm-7 col-form-label">
+                                                                    Số điện tháng {{ $month }}
+                                                                    :</label> --}}
+                                                                {{-- <div class="col-sm-5">
                                                                     <input name="so_dien[]" type="number"
                                                                         class="form-control"
                                                                         id="so_dien_{{ $phong->id }}"
                                                                         placeholder="Số điện T {{ $month }}"
                                                                         value="{{$phong->getLastestSdn()->so_dien}}"
                                                                         required>
-                                                                </div>
+                                                                </div> --}}
+                                                                @if ($phong->getSdnByMonthYear($yearf, $monthf)->first()== null)
+                                                                    <div class="alert alert-warning">
+                                                                        Không có bản ghi nào cho tháng và năm này.
+                                                                    </div>
+                                                                @else
+                                                                    <div class="col-sm-5">
+                                                                        <input name="so_dien[]" type="number"
+                                                                            class="form-control"
+                                                                            id="so_dien_{{ $phong->id }}"
+                                                                            placeholder="Số điện T{{ $monthf }}"
+                                                                            value="{{ $phong->getSdnByMonthYear($yearf, $monthf)->first()->so_dien }}"
+                                                                            required>
+                                                                    </div>
+                                                                @endif
                                                             </div>
                                                             <div class="form-group row">
-                                                                <label for="so_nuoc_{{ $phong->id }}"
+                                                                {{-- <label for="so_nuoc_{{ $phong->id }}"
                                                                     class="col-sm-7 col-form-label">
                                                                     Số nước tháng {{ $month }}
                                                                     :</label>
@@ -114,7 +139,26 @@
                                                                         placeholder="Số nước T {{ $month }}"
                                                                         value="{{$phong->getLastestSdn()->so_nuoc}}"
                                                                         required>
-                                                                </div>
+                                                                </div> --}}
+                                                                <label for="so_nuoc_{{ $phong->id }}"
+                                                                    class="col-sm-7 col-form-label">
+                                                                    Số nước tháng {{ $monthf }}
+                                                                    :</label>
+                                                                @if ($phong->getSdnByMonthYear($yearf, $monthf)->first() == null)
+                                                                    <div class="alert alert-warning">
+                                                                        Không có bản ghi nào cho tháng và năm này.
+                                                                    </div>
+                                                                @else
+                                                                    <div class="col-sm-5">
+                                                                        <input name="so_nuoc[]" type="number"
+                                                                            class="form-control"
+                                                                            id="so_nuoc_{{ $phong->id }}"
+                                                                            placeholder="Số nước T {{ $monthf }}"
+                                                                            value="{{ $phong->getLastestSdn()->first()->so_nuoc }}"
+                                                                            required>
+                                                                    </div>
+                                                                @endif
+
                                                             </div>
                                                         @endif
                                                     </div>

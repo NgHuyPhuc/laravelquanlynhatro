@@ -51,4 +51,11 @@ class PhongTro extends Model
     public function getSecondSdn(){
         return $this->sodiennuoc()->orderBy('created_at', 'desc')->skip(1)->take(1)->first();
     }
+    public function getSdnByMonthYear($year, $month){
+        $data = $this->sodiennuoc()->whereYear('created_at', $year)->whereMonth('created_at', $month);
+        if ($data->get()->isEmpty()) {
+            return collect();
+        }
+        return $data;
+    }
 }

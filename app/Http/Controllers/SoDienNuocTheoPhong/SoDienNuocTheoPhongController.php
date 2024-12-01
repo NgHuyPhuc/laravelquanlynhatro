@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\SoDienNuocTheoPhong;
 
 use App\Http\Controllers\Controller;
+use App\Models\SoDienNuocTheoPhong;
 use App\Services\ChiPhiDichVuService\ChiPhiDichVuService;
 use App\Services\NhaTroService\NhaTroService;
 use App\Services\PhongTroService\PhongTroService;
@@ -27,12 +28,34 @@ class SoDienNuocTheoPhongController extends Controller
         $data['phong'] = $this->phongTro->getone($id_phong);
         return view('backend.sodiennuoc.all', $data);
     }
-    public function danhsachsdn($id){
-        $monthNow = Carbon::now()->month;
-        $data['month'] = $monthNow - 1;
-        $data['thongtin'] = $this->nhatroService->getTangandPhongTro($id);
-        $data['checkCpdv'] = $this->chiPhiDichVuService->getByNhaTroID($id)->count();
-        return view('backend.sodiennuoc.danhsach', $data);
+    public function danhsachsdn(Request $request,$id){
+        // dd($request);
+        $monthYear = $request->input('month');
+        if ($monthYear) {
+            // Tách năm và tháng
+            list($year, $month) = explode('-', $monthYear);
+            // Truy vấn dữ liệu theo tháng và năm
+            $data['thongtin'] = $this->nhatroService->getTangandPhongTro($id);
+            // $data['thongtin'] = SoDienNuocTheoPhong::whereYear('created_at', $year)
+            //                     ->whereMonth('created_at', $month)
+            //                     ;
+                                // ->get();
+            $monthNow = Carbon::now()->month;
+            $data['month'] = $monthNow;
+            $data['monthYear'] = $request->month;
+
+            $data['yearf'] = $year;
+            $data['monthf'] = $month;
+            $data['checkCpdv'] = $this->chiPhiDichVuService->getByNhaTroID($id)->count();
+            return view('backend.sodiennuoc.danhsach', $data);
+        }
+        else{
+            $monthNow = Carbon::now()->month;
+            $data['month'] = $monthNow - 1;
+            $data['thongtin'] = $this->nhatroService->getTangandPhongTro($id);
+            $data['checkCpdv'] = $this->chiPhiDichVuService->getByNhaTroID($id)->count();
+            return view('backend.sodiennuoc.danhsach', $data);
+        }
     }
     public function nhaptatcasdn($id) {
         $monthNow = Carbon::now()->month;
