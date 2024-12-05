@@ -4,6 +4,7 @@ namespace App\Http\Controllers\ThongTinNguoiThue;
 
 use App\Http\Controllers\Controller;
 use App\Services\PhongTroService\PhongTroService;
+use App\Services\SoDienNuocTheoPhongService\SoDienNuocTheoPhongService;
 use App\Services\ThongTinNguoiThueService\ThongTinNguoiThueService;
 use Illuminate\Http\Request;
 
@@ -12,31 +13,41 @@ class ThongTinNguoiThueController extends Controller
     //
     protected $phongService;
     protected $nguoiThueService;
-    public function __construct(PhongTroService $phongService, ThongTinNguoiThueService $nguoiThueService)
+    protected $soDienNuoc;
+    public function __construct(PhongTroService $phongService, ThongTinNguoiThueService $nguoiThueService, SoDienNuocTheoPhongService $soDienNuoc)
     {
         $this->phongService = $phongService;
         $this->nguoiThueService = $nguoiThueService;
+        $this->soDienNuoc = $soDienNuoc;
     }
     public function index($id, $id_phong)
     {
         $data['phong'] = $this->phongService->getone($id_phong);
+        $data['id'] = $id;
+        $data['check'] = $this->soDienNuoc->count($id_phong);
         $data['nguoidangthue'] = $data['phong']->nguoidangthue()->paginate(3);
         return view('backend.nguoithue.index', $data);
     }
     public function detail($id, $id_phong, $id_nguoi_thue)
     {
+        $data['id'] = $id;
+        $data['check'] = $this->soDienNuoc->count($id_phong);
         $data['nguoi'] = $this->nguoiThueService->getone($id_nguoi_thue);
         $data['phong'] = $this->phongService->getone($id_phong);
         return view('backend.nguoithue.detail', $data);
     }
     public function infoall($id, $id_phong)
     {
+        $data['id'] = $id;
+        $data['check'] = $this->soDienNuoc->count($id_phong);
         $data['phong'] = $this->phongService->getone($id_phong);
         $data['nguoi'] = $this->phongService->getone($id_phong)->nguoithue()->orderby('id','desc')->paginate(3);
         return view('backend.nguoithue.all', $data);
     }
     public function create($id, $id_phong)
     {
+        $data['id'] = $id;
+        $data['check'] = $this->soDienNuoc->count($id_phong);
         $data['phong'] = $this->phongService->getone($id_phong);
         return view('backend.nguoithue.create', $data, ['id' => $id, 'id_phong' => $id_phong]);
     }
@@ -47,6 +58,7 @@ class ThongTinNguoiThueController extends Controller
     }
     public function edit($id, $id_phong, $id_nguoi_thue)
     {
+        $data['check'] = $this->soDienNuoc->count($id_phong);
         $data['nguoithue'] = $this->nguoiThueService->getone($id_nguoi_thue);
         $data['phong'] = $this->phongService->getone($id_phong);
         $data['id'] = $id;

@@ -100,7 +100,7 @@ class HoaDonService
                         $data = [
                             'id_phong_tro' => $phong->id,
                             'dung_mang' => $phong->dung_mang,
-                            'tien_mang' => $cpdv->tien_mang_int,
+                            'tien_mang' => $this->tien_mang($phong,$cpdv),
                             'tien_dien_string' => $this->tinhTienDienString($soDienNuocPrev, $soDienNuocNow, $cpdv),
                             'tien_nuoc_string' => $this->tinhTienNuocString($soDienNuocPrev, $soDienNuocNow, $cpdv),
                             'chi_phi_phat_sinh' => $soDienNuocNow->chi_phi_phat_sinh, // Có thể cập nhật thêm nếu cần
@@ -126,6 +126,15 @@ class HoaDonService
             }
         }
     }
+    public function tien_mang($phong, $cpdv){
+        $tien_mang = 0;
+        if($phong->dung_mang == 1)
+        {
+            $tien_mang = $cpdv->tien_mang_int;
+            return $tien_mang;
+        }
+        return $tien_mang;
+    }
     public function tienBinhNuocString($phong, $cpdv)
     {
         $tien_binh_nuoc_string = ''. $phong->mua_nuoc . '*' . $cpdv->tien_binh_nuoc;
@@ -143,12 +152,12 @@ class HoaDonService
     }
     public function thangString($soDienNuocNow)
     {
-        $thangString =  'Tháng ' . Carbon::parse($soDienNuocNow->date)->format('m') . 'năm' . Carbon::parse($soDienNuocNow->date)->format('Y');
+        $thangString =  'Tháng ' . Carbon::parse($soDienNuocNow->date)->format('m') . ' năm ' . Carbon::parse($soDienNuocNow->date)->format('Y');
         return $thangString;
     }
     public function thongBaoString($soDienNuocPrev, $soDienNuocNow)
     {
-        $thongBao = 'Xin thông báo tới anh (chị): Phí dịch vụ trong tháng' . Carbon::parse($soDienNuocPrev->date)->format('m/Y') . ' và tiền thuê phòng tháng ' . Carbon::parse($soDienNuocNow->date)->format('m/Y') . '. Cụ thể như sau:';
+        $thongBao = 'Xin thông báo tới anh (chị): Phí dịch vụ trong tháng ' . Carbon::parse($soDienNuocPrev->date)->format('m/Y') . ' và tiền thuê phòng tháng ' . Carbon::parse($soDienNuocNow->date)->format('m/Y') . '. Cụ thể như sau:';
         return $thongBao;
     }
     function tinhTienDienString($soDienNuocPrev, $soDienNuocNow, $cpdv)
@@ -158,7 +167,7 @@ class HoaDonService
     }
     function tinhTienNuocString($soDienNuocPrev, $soDienNuocNow, $cpdv)
     {
-        $soNuocString = '( ' . $soDienNuocNow->so_nuoc . ' - ' . $soDienNuocPrev->so_nuoc . ' ) = ' . number_format($soDienNuocNow->so_nuoc - $soDienNuocPrev->so_nuoc) . ' kWh x ' . number_format($cpdv->tien_nuoc_int) . ' VNĐ/kWh';
+        $soNuocString = '( ' . $soDienNuocNow->so_nuoc . ' - ' . $soDienNuocPrev->so_nuoc . ' ) = ' . number_format($soDienNuocNow->so_nuoc - $soDienNuocPrev->so_nuoc) . ' m³ x ' . number_format($cpdv->tien_nuoc_int) . ' VNĐ/m³';
         return $soNuocString;
     }
     function tinhTienDienInt($soDienNuocPrev, $soDienNuocNow, $cpdv)
@@ -170,14 +179,15 @@ class HoaDonService
     function tinhTienNuocInt($soDienNuocPrev, $soDienNuocNow, $cpdv)
     {
         $soNuoc = $soDienNuocNow->so_nuoc - $soDienNuocPrev->so_nuoc;
-        $tienNuoc = $soNuoc * $cpdv->so_nuoc_int;
+        $tienNuoc = $soNuoc * $cpdv->tien_nuoc_int;
         return $tienNuoc;
     }
     function tinhTongTien($soDienNuocPrev, $soDienNuocNow, $phong, $cpdv)
     {
         $tienPhong = $phong->gia_phong;
         $muaNuoc = $phong->mua_nuoc * $cpdv->tien_binh_nuoc;
-        $tongTien = $this->tinhTienDienInt($soDienNuocPrev, $soDienNuocNow, $cpdv) + $this->tinhTienNuocInt($soDienNuocPrev, $soDienNuocNow, $cpdv)  + $tienPhong + $muaNuoc;
+        $tien_mang = $phong->dung_mang * $cpdv->tien_mang_int;
+        $tongTien = $this->tinhTienDienInt($soDienNuocPrev, $soDienNuocNow, $cpdv) + $this->tinhTienNuocInt($soDienNuocPrev, $soDienNuocNow, $cpdv)  + $tienPhong + $muaNuoc + $tien_mang;
         return $tongTien;
     }
 

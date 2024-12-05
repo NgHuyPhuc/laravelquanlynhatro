@@ -94,7 +94,7 @@
                 </div>
                 <div class="d-flex justify-content-end align-items-center">
                     <p class="mr-3">Trang:  </p>
-                    {{-- {{ $hoadon->links('backend.pagination.pagination') }} --}}
+                    {{ $hoadon->links('backend.pagination.pagination') }}
                 </div>
             </div>
               </div>

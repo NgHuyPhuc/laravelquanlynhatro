@@ -130,7 +130,7 @@ class HoaDonPhongTroController extends Controller
         return redirect()->route('phong.hoadon.danhsach.all',['id' => $id]);
     }
     public function listall($id) {
-        $data['hoadon'] = $this->hoaDon->getallnow();
+        $data['hoadon'] = $this->hoaDon->getallnow()->paginate(12);
         return view('backend.hoadon.listall', $data);
     }
     public function destroy($id, $id_phong) {}

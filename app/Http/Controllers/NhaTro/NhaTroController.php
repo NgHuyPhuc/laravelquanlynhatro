@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\NhaTro;
 
 use App\Http\Controllers\Controller;
+use App\Models\ChiPhiDichVu;
 use App\Models\NhaTro;
 use App\Services\ChiPhiDichVuService\ChiPhiDichVuService;
 use App\Services\NhaTroService\NhaTroService;
@@ -44,7 +45,7 @@ class NhaTroController extends Controller
             $data['checkCpdv'] = 0;
         }
         else{
-            $data['checkCpdv'] = $cpdv->count();
+            $data['checkCpdv'] = 1;
         }
         return view('backend.nhatro.index', $data);
     }

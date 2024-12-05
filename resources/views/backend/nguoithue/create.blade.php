@@ -4,43 +4,7 @@
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="row">
-            <div class="col-12 grid-margin stretch-card">
-                <div class="card">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card-body">
-                                {{-- <h4 class="card-title">Thêm mới người thuê phòng 301</h4> --}}
-                                <h4 class="card-title">Thêm mới người thuê {{$phong->ten_phong}}</h4>
-                                <div class="template-demo">
-                                    <a href="{{route('phongtro.nguoithue.themnguoi',['id' => $nhatro->id, 'id_phong' => $phong->id])}}" class="btn btn-info">Thêm mới người
-                                        thuê phòng</a>
-                                    <a href="{{route('phong.nguoithue.danhsach.all',['id' => $nhatro->id, 'id_phong' => $phong->id])}}" class="btn btn-info">Danh sách tất cả người từng thuê</a>
-                                    <a href="./taohoadontiennha.html" class="btn btn-success">Tạo hóa đơn tiền phòng</a>
-                                    <a href="./xemhoadontiennha.html" class="btn btn-success">Xem hóa đơn tiền phòng</a>
-                                    <a href="{{route('phongtro.suaphong.get',['id' => $nhatro->id, 'id_phong' => $phong->id])}}" class="btn btn-danger">Chỉnh sửa thông tin phòng</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- <div class="col-12 grid-margin stretch-card">
-                <div class="card">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card-body">
-                                <h4 class="card-title">Thông tin phòng 301</h4>
-                                <div class="template-demo mt-3">
-                                    <h6>Số người thuê: 3</h6>
-                                    <h6>Tiền phòng: 2.000.000</h6>
-                                    <h6>Dùng internet: Có</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
+            {!! generateMenuNguoiThue($nhatro, $phong, $check) !!}
             <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">

@@ -32,7 +32,14 @@
                 <div class="col-lg-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h3 class="card-title">Hóa đơn phòng {{ $phong->ten_phong }}</h3>
+                            <div class="" style="display: flex;align-items: center;justify-content: space-between;">
+                                <h3 class="card-title">Hóa đơn phòng {{ $phong->ten_phong }}</h3>
+                                <button class="btn btn-success" id="capture-btn"
+                                    {{-- data-phong="{{ $phong->ten_phong }} - Tháng {{ \Carbon\Carbon::parse($hoadon->created_at)->format('m-Y') }}" --}}
+                                    data-phong="{{ $phong->ten_phong }} - Tiền phòng{{$hoadon->tien_phong_string}}"
+                                    >Chụp
+                                    màn hình</button>
+                            </div>
                                 <div class="container">
                                     <div id="capture" class="invoice"
                                         style="padding: 20px;border: 1px solid #ddd;border-radius: 5px;margin:20px;">
@@ -149,9 +156,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button class="btn btn-success" id="capture-btn"
-                                data-phong="{{ $phong->ten_phong }} - Tháng {{ \Carbon\Carbon::parse($hoadon->created_at)->format('m-Y') }}">Chụp
-                                màn hình</button>
+                                
                         </div>
                     </div>
                 </div>

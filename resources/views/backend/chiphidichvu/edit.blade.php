@@ -37,7 +37,7 @@
                                         action="{{ route('nhatro.suachiphi.post', ['id' => $nhatro->id , 'id_chiphi' => $chiphi->id]) }}"
                                         enctype="multipart/form-data">
 
-                                        <input name="id_nha_tro" type="number" class="form-control" id="id_nha_tro"
+                                        <input hidden name="id_nha_tro" type="number" class="form-control" id="id_nha_tro"
                                             value="{{ $nhatro->id }}" placeholder="Nhập số điện Tháng 10">
                                         <div class="form-group row">
                                             <label for="tien_dien_int" class="col-sm-3 col-form-label">Tiền điện / 1 kwh

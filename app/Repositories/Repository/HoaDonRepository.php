@@ -22,7 +22,7 @@ class HoaDonRepository extends BaseRepository implements HoaDonRepositoryInterfa
     {
         $month = Carbon::now()->month;
         $year = Carbon::now()->year;
-        return HoaDonPhongTro::whereYear('created_at', $year)->whereMonth('created_at', $month)->get();
+        return HoaDonPhongTro::whereYear('created_at', $year)->whereMonth('created_at', $month);
     }
 }
 ?>

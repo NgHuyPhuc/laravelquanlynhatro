@@ -54,6 +54,8 @@
                         <div class="col-12 grid-margin stretch-card">
                             <div class="card">
                                 <div class="card-body">
+                                    <h2 class="text-uppercase text-danger"> chú ý chọn tháng của lần nhập này</h2>
+                                    <br>
                                     <div class="form-group row">
                                         <label for="date" class="col-sm-3 col-form-label">Tháng :</label>
                                         <div class="col-sm-9">
@@ -132,7 +134,7 @@
                                 </div>
                             </div>
                         @endforeach
-                        <button type="submit" class="btn btn-primary mr-2 float-right">Lưu Tất Cả Số Điện Nước Tháng {{$month}}</button>
+                        <button type="submit" class="btn btn-primary mr-2 float-right">Lưu Tất Cả Số Điện Nước</button>
                         @csrf
                     </form>
                 </div>
