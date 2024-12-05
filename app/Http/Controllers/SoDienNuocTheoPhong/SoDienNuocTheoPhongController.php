@@ -102,15 +102,18 @@ class SoDienNuocTheoPhongController extends Controller
         $this->soDienNuoc->firstCreate($request, $id_phong);
         return redirect()->route('nhatro.phong.show.info', ['id' => $id, 'id_phong' => $id_phong]);
     }
-    public function edit($id, $id_phong){
+    public function edit($id, $id_phong, $id_sdn){
         $data['id_phong'] = $id_phong;
         $data['phong'] = $this->phongTro->getone($id_phong);
+        $data['sdn'] = $this->soDienNuoc->getone($id_sdn);
         return view('backend.sodiennuoc.edit',$data);
     }
     public function update(Request $request, $id, $id_phong){
-        
+        $this->soDienNuoc->update($request, $id_phong);
+        return redirect()->route('danh.sach.so.dien.nuoc', ['id' => $id, 'id_phong' => $id_phong]);
     }
-    public function destroy($id, $id_phong){
-        
+    public function delete($id, $id_phong, $id_sdn){
+        $this->soDienNuoc->delete($id_sdn);
+        return redirect()->route('danh.sach.so.dien.nuoc', ['id' => $id, 'id_phong' => $id_phong]);
     }
 }

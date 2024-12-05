@@ -82,6 +82,7 @@ Route::middleware('fetch.nhatro')->prefix('nhatro/{id}')->group(function () {
             Route::post('/store', [SoDienNuocTheoPhongController::class, 'store'])->name('sodien.nuoc.theophong');
             Route::get('/edit/{id_sdn}', [SoDienNuocTheoPhongController::class, 'edit'])->name('sodien.nuoc.theophong.edit');
             Route::post('/update/{id_sdn}', [SoDienNuocTheoPhongController::class, 'update'])->name('sodien.nuoc.theophong.update');
+            Route::get('/delete/{id_sdn}', [SoDienNuocTheoPhongController::class, 'delete'])->name('sodien.nuoc.theophong.delete');
         });
 
         Route::prefix('/{id_phong}/nguoithue')->group(function () {

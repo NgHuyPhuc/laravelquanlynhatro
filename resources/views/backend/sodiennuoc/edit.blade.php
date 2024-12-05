@@ -36,26 +36,26 @@
                             <div class="row">
                                 <div class="col-lg-8">
                                     <form id="your-form" method="POST" class="forms-sample"
-                                        action="{{ route('sodien.nuoc.theophong', ['id' => $nhatro->id, 'id_phong' => $phong->id]) }}">
+                                        action="{{ route('sodien.nuoc.theophong.update', ['id' => $nhatro->id, 'id_phong' => $phong->id, 'id_sdn' => $sdn->id]) }}">
                                         <div class="form-group row">
                                             <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Nhập số điện :</label>
                                             <div class="col-sm-9">
                                                 <input name="so_dien" type="number" class="form-control"
-                                                    id="exampleInputUsername2" placeholder="Nhập số điện Tháng 10" required>
+                                                    id="exampleInputUsername2" placeholder="Nhập số điện Tháng 10" value="{{$sdn->so_dien}}" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Nhập số nước :</label>
                                             <div class="col-sm-9">
                                                 <input name="so_nuoc" type="number" class="form-control"
-                                                    id="exampleInputEmail2" placeholder="Nhập số nước Tháng 10" required>
+                                                    id="exampleInputEmail2" placeholder="Nhập số nước Tháng 10" value="{{$sdn->so_nuoc}}" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Tháng này :</label>
                                             <div class="col-sm-9">
                                                 <input name="date" type="date" class="form-control"
-                                                    id="exampleInputEmail2" value="{{\Carbon\Carbon::now()->format('Y-m-d')}}" required>
+                                                    id="exampleInputEmail2" value="{{\Carbon\Carbon::parse($sdn->date)->format('Y-m-d')}}" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -63,7 +63,7 @@
                                                 phí thêm (nếu có) :</label>
                                             <div class="col-sm-9">
                                                 <input name="chi_phi_phat_sinh" type="text" class="form-control"
-                                                    id="exampleInputMobile" placeholder="Thông tin chi phí thêm (nếu có)">
+                                                    id="exampleInputMobile" placeholder="Thông tin chi phí thêm (nếu có)" value="{{$sdn->chi_phi_phat_sinh}}">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -71,7 +71,7 @@
                                                 (nếu có) :</label>
                                             <div class="col-sm-9">
                                                 <input name="tien_phat_sinh" type="number" class="form-control"
-                                                    id="exampleInputMobile" placeholder="Chi phí thêm (nếu có)">
+                                                    id="exampleInputMobile" placeholder="Chi phí thêm (nếu có)" value="{{$sdn->tien_phat_sinh}}">
                                             </div>
                                         </div>
                                         {{-- @if ($checksdn)
@@ -122,7 +122,9 @@
             // Mở modal xác nhận
             new bootstrap.Modal(document.getElementById('confirmationModal')).show();
         });
-
+        document.getElementById('CancelButton').addEventListener('click', function() {
+            new bootstrap.Modal(document.getElementById('confirmationModal')).hide();
+        });
         // Khi người dùng nhấn vào nút "Đúng, thực hiện"
         document.getElementById('confirmButton').addEventListener('click', function() {
             // Gửi form

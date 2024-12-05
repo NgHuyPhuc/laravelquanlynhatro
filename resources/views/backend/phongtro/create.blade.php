@@ -41,7 +41,7 @@
                         </div>
                     </div> --}}
                     {{-- @dd($phongtro) --}}
-                    {!! generateMenuPhong($nhatro) !!}
+                    {!! generateMenuPhongCE($nhatro) !!}
 
                     <div class="col-12 grid-margin stretch-card">
                         <div class="card">

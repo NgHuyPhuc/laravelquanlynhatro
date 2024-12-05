@@ -75,14 +75,18 @@
                                             <label for="so_dien" class="col-sm-3 col-form-label">Nhập số điện :</label>
                                             <div class="col-sm-9">
                                                 <input name="so_dien" type="number" class="form-control"
-                                                    id="so_dien" min="{{$sdnSecond->so_dien}}" placeholder="Nhập số điện Tháng {{$month}}" required>
+                                                    id="so_dien" 
+                                                    {{-- min="{{$sdnSecond->so_dien}}" --}}
+                                                     placeholder="Nhập số điện Tháng {{$month}}" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="so_nuoc" class="col-sm-3 col-form-label">Nhập số nước :</label>
                                             <div class="col-sm-9">
                                                 <input name="so_nuoc" type="number" class="form-control"
-                                                    id="so_nuoc"  min="{{$sdnSecond->so_nuoc}}" placeholder="Nhập số nước Tháng {{$month}}" required>
+                                                    id="so_nuoc"  
+                                                    {{-- min="{{$sdnSecond->so_nuoc}}" --}}
+                                                     placeholder="Nhập số nước Tháng {{$month}}" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">

@@ -30,7 +30,46 @@ if (!function_exists('MenuTang')) {
 }
 
 if (!function_exists('MenuPhong')) {
-    function generateMenuPhong($nhatro)
+    function generateMenuPhong($nhatro, $phongtro, $check)
+    {
+        $html = '<div class="col-12 grid-margin stretch-card">';
+        $html .= '<div class="card">';
+        $html .= '<div class="row">';
+        $html .= '<div class="col-md-12">';
+        $html .= '<div class="card-body">';
+        $html .= '<h4 class="card-title">Chức năng phòng : ' . htmlspecialchars($phongtro->ten_phong) . '</h4>';
+        $html .= '<div class="template-demo">';
+
+        // Điều kiện check
+        if ($check == 0) {
+            $html .= '<a href="' . route('phongtro.hoadon.sodiennuoc1', ['id' => $nhatro->id, 'id_phong' => $phongtro->id]) . '" class="btn btn-success">Thêm mới số tiền điện nước hiện tại</a>';
+        } else {
+            $html .= '<a href="' . route('phong.nguoithue.dangthue', ['id' => $nhatro->id, 'id_phong' => $phongtro->id]) . '" class="btn btn-info">Quản lý thông tin người thuê phòng</a>';
+            $html .= '<a href="' . route('danh.sach.so.dien.nuoc', ['id' => $nhatro->id, 'id_phong' => $phongtro->id]) . '" class="btn btn-success">Danh sách số điện nước</a>';
+            $html .= '<a href="' . route('sodien.nuoc.theophong.get', ['id' => $nhatro->id, 'id_phong' => $phongtro->id]) . '" class="btn btn-success">Nhập số điện nước</a>';
+            $html .= '<a href="' . route('phongtro.hoadon.themhoadon', ['id' => $nhatro->id, 'id_phong' => $phongtro->id]) . '" class="btn btn-success">Tạo hóa đơn tiền phòng</a>';
+        }
+
+        // Các nút luôn hiển thị
+        $html .= '<a href="' . route('nhatro.phong.hoadon.show.all.info', ['id' => $nhatro->id, 'id_phong' => $phongtro->id]) . '" class="btn btn-success">Xem hóa đơn tiền phòng</a>';
+        $html .= '<a href="' . route('phongtro.suaphong.get', ['id' => $nhatro->id, 'id_phong' => $phongtro->id]) . '" class="btn btn-danger">Chỉnh sửa thông tin phòng</a>';
+
+        // Nút ẩn (Xóa phòng)
+        $html .= '<button hidden type="button" class="btn btn-danger float-right" data-toggle="modal" data-target="#exampleModal">Xóa phòng</button>';
+
+        $html .= '</div>'; // Kết thúc template-demo
+        $html .= '</div>'; // Kết thúc card-body
+        $html .= '</div>'; // Kết thúc col-md-12
+        $html .= '</div>'; // Kết thúc row
+        $html .= '</div>'; // Kết thúc card
+        $html .= '</div>'; // Kết thúc col-12
+
+        return $html;
+    }
+}
+
+if (!function_exists('MenuPhongCE')) {
+    function generateMenuPhongCE($nhatro)
     {
         $html = '<div class="col-12 grid-margin stretch-card">';
         $html .= '<div class="card">';

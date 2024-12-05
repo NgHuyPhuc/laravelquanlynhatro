@@ -47,8 +47,9 @@ class PhongTroController extends Controller
     }
     public function store(Request $request, $id)
     {
-        $this->phongTroService->create($request, $id);
-        return redirect()->route('nhatro.show', ['id' => $id]);
+        $create = $this->phongTroService->create($request, $id);
+        $newid = $create->id;
+        return redirect()->route('nhatro.phong.show.info', ['id' => $id, 'id_phong' => $newid]);
     }
     public function edit($id, $id_phong)
     {
@@ -69,6 +70,7 @@ class PhongTroController extends Controller
         $this->sdn->getbyphong($id_phong)->delete();
         $this->hoaDon->getByIdPhong($id_phong)->delete();
         $this->phongTroService->delete($id_phong);
+        return redirect()->route('nhatro.show', ['id' => $id]);
     }
     public function muaNuoc($id, $id_phong)
     {

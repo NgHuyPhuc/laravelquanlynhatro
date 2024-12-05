@@ -46,13 +46,13 @@ class PhongTro extends Model
         return $this->hasMany(SoDienNuocTheoPhong::class ,"id_phong_tro","id");
     }
     public function getLastestSdn(){
-        return $this->sodiennuoc()->orderBy('created_at', 'desc')->take(1)->first();
+        return $this->sodiennuoc()->orderBy('date', 'desc')->take(1)->first();
     }
     public function getSecondSdn(){
-        return $this->sodiennuoc()->orderBy('created_at', 'desc')->skip(1)->take(1)->first();
+        return $this->sodiennuoc()->orderBy('date', 'desc')->skip(1)->take(1)->first();
     }
     public function getSdnByMonthYear($year, $month){
-        $data = $this->sodiennuoc()->whereYear('created_at', $year)->whereMonth('created_at', $month);
+        $data = $this->sodiennuoc()->whereYear('date', $year)->whereMonth('date', $month);
         if ($data->get()->isEmpty()) {
             return collect();
         }

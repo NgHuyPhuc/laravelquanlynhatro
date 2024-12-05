@@ -38,10 +38,14 @@ class NhaTroController extends Controller
     }
 
     public function show($id){
-        // $data['tang'] = $this->tangService->getall($id);
-        // $data['phong_tro'] = $this->phongTroService->getall($id);
         $data['thongtin'] = $this->nhatroService->getTangandPhongTro($id);
-        $data['checkCpdv'] = $this->chiPhiDichVuService->getByNhaTroID($id)->count();
+        $cpdv = $this->chiPhiDichVuService->getByNhaTroID($id);
+        if($cpdv == null){
+            $data['checkCpdv'] = 0;
+        }
+        else{
+            $data['checkCpdv'] = $cpdv->count();
+        }
         return view('backend.nhatro.index', $data);
     }
 

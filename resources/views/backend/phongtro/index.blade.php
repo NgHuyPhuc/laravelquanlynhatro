@@ -4,7 +4,7 @@
     <div class="main-panel">
         <div class="content-wrapper">
             <div class="row">
-                <div class="col-12 grid-margin stretch-card">
+                {{-- <div class="col-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="row">
                             <div class="col-md-12">
@@ -33,35 +33,39 @@
                                             data-target="#exampleModal">
                                             Xóa phòng
                                         </button>
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Xác nhận hành động Xóa</h5>
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        Bạn có chắc chắn muốn thực hiện hành động này không? Hành động này sẽ không thể hoàn tác.
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <a href="javascript:void(0)" type="button" class="btn btn-secondary"
-                                                            data-dismiss="modal">Close</a>
-                                                        <a href="{{ route('phongtro.xoaphong', ['id' => $nhatro->id, 'id_phong' => $phongtro->id]) }}" type="button" class="btn btn-primary">Save changes</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div> --}}
+                {!! generateMenuPhong($nhatro, $phongtro, $check) !!}
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Xác nhận hành động Xóa</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Bạn có chắc chắn muốn thực hiện hành động này không? Hành động này sẽ không thể hoàn tác.
+                            </div>
+                            <div class="modal-footer">
+                                <a href="javascript:void(0)" type="button" class="btn btn-secondary"
+                                    data-dismiss="modal">Close</a>
+                                <a href="{{ route('phongtro.xoaphong', ['id' => $nhatro->id, 'id_phong' => $phongtro->id]) }}"
+                                    type="button" class="btn btn-primary">Save changes</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                {{-- {!! generateMenuPhong($nhatro) !!} --}}
+
                 <div class="col-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="row">

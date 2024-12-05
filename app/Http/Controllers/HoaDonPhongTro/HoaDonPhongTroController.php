@@ -44,8 +44,8 @@ class HoaDonPhongTroController extends Controller
         $data['id'] = $id;
         $data['id_phong'] = $id_phong;
         $data['phong'] = $this->phongTro->getone($id_phong);
-        $monthNow = Carbon::now()->month;
-        $data['month'] = $monthNow - 1;
+        $monthNow = Carbon::now();
+        $data['month'] = $monthNow->subMonth(1);
         $data['sdnLast'] = $this->soDienNuoc->getLastest($id_phong);
         $data['sdnSecond'] = $this->soDienNuoc->getSecondLast($id_phong);
         $data['cpdv'] = $this->chiPhiDichVu->getone($id);
@@ -63,8 +63,8 @@ class HoaDonPhongTroController extends Controller
         $data['id'] = $id;
         $data['id_phong'] = $id_phong;
         $data['phong'] = $this->phongTro->getone($id_phong);
-        $monthNow = Carbon::now()->month;
-        $data['month'] = $monthNow - 1;
+        $monthNow = Carbon::now();
+        $data['month'] = $monthNow->subMonth(1);
         $data['sdnLast'] = $this->soDienNuoc->getLastest($id_phong);
         $data['sdnSecond'] = $this->soDienNuoc->getSecondLast($id_phong);
         $data['cpdv'] = $this->chiPhiDichVu->getone($id);
@@ -80,8 +80,8 @@ class HoaDonPhongTroController extends Controller
         $data['id'] = $id;
         $data['id_phong'] = $id_phong;
         $data['phong'] = $this->phongTro->getone($id_phong);
-        $monthNow = Carbon::now()->month;
-        $data['month'] = $monthNow - 1;
+        $monthNow = Carbon::now();
+        $data['month'] = $monthNow->subMonth(1);
         $data['sdnLast'] = $this->soDienNuoc->getone($request->id_last);
         $data['sdnSecond'] = $this->soDienNuoc->getone($request->id_second);
         $data['cpdv'] = $this->chiPhiDichVu->getone($id);
