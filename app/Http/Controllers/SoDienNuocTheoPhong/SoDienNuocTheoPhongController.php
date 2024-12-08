@@ -40,18 +40,20 @@ class SoDienNuocTheoPhongController extends Controller
             //                     ->whereMonth('created_at', $month)
             //                     ;
                                 // ->get();
-            $monthNow = Carbon::now()->month;
-            $data['month'] = $monthNow;
-            $data['monthYear'] = $request->month;
+            // $monthNow = Carbon::now()->month;
+            // $data['month'] = $monthNow;
+            // $data['monthYear'] = $request->month;
 
-            $data['yearf'] = $year;
-            $data['monthf'] = $month;
+            $data['year'] = $year;
+            $data['month'] = $month;
+            // dd($data['monthf']);
             $data['checkCpdv'] = $this->chiPhiDichVuService->getByNhaTroID($id)->count();
             return view('backend.sodiennuoc.danhsach', $data);
         }
         else{
-            $monthNow = Carbon::now()->month;
-            $data['month'] = $monthNow - 1;
+            $monthNow = Carbon::now();
+            $data['month'] = $monthNow->month - 1;
+            $data['year'] = $monthNow->year;
             $data['thongtin'] = $this->nhatroService->getTangandPhongTro($id);
             $data['checkCpdv'] = $this->chiPhiDichVuService->getByNhaTroID($id)->count();
             return view('backend.sodiennuoc.danhsach', $data);
@@ -109,6 +111,7 @@ class SoDienNuocTheoPhongController extends Controller
         return view('backend.sodiennuoc.edit',$data);
     }
     public function update(Request $request, $id, $id_phong){
+        // dd(123);
         $this->soDienNuoc->update($request, $id_phong);
         return redirect()->route('danh.sach.so.dien.nuoc', ['id' => $id, 'id_phong' => $id_phong]);
     }

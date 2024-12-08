@@ -137,7 +137,7 @@ class HoaDonService
     }
     public function tienBinhNuocString($phong, $cpdv)
     {
-        $tien_binh_nuoc_string = ''. $phong->mua_nuoc . '*' . $cpdv->tien_binh_nuoc;
+        $tien_binh_nuoc_string = ''. $phong->mua_nuoc . ' x ' . $cpdv->tien_binh_nuoc;
         return $tien_binh_nuoc_string;
     }
     public function tienBinhNuocInt($phong, $cpdv)

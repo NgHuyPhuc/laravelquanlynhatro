@@ -51,7 +51,11 @@
                                             <h1 class="text-danger" style="margin-left: 10%;">{{ $phong->ten_phong }}</h1>
                                         </div>
                                         <br>
-                                        <p style="font-size: 20px;"> {{$hoadon->thong_bao}}</p>
+                                        <div class="form-group">
+                                            <input name="thong_bao" type="text" class="form-control" id="exampleInputthong_bao" placeholder="thong_bao" value="{{ $hoadon->thong_bao }}">
+                                          </div>
+                                        {{-- <input type="text" name="thong_bao" id="" value="{{ $hoadon->thong_bao }}"> --}}
+                                        {{-- <p style="font-size: 20px;"> {{$hoadon->thong_bao}}</p> --}}
                                         <hr>
                                         <!-- <div class="card"> -->
                                         <div class="card-body">
@@ -108,6 +112,13 @@
                                                         </td>
                                                         <tr>
                                                             <td>6</td>
+                                                            <td>Nước uống (Bình): </td>
+                                                            <td><input style="width: 400px" type="text" name="tien_binh_nuoc_string" value="{{$hoadon->tien_binh_nuoc_string}}"></td>
+                                                            <td><label> <input style="width: auto" type="text" name="tien_binh_nuoc_int" value="{{$hoadon->tien_binh_nuoc_int}}"> VND
+                                                            </label>
+                                                        </td>
+                                                        <tr>
+                                                            <td>7</td>
                                                             <td></td>
                                                             <td> Tổng Cộng </td>
                                                             <td><label> <input style="width: auto" type="text" name="so_tien_phai_tra" value="{{$hoadon->so_tien_phai_tra}}"> VND
@@ -126,7 +137,7 @@
                                                         <h5 class="text-danger">1. Tiền mặt</h5>
                                                     </li>
                                                     <li>
-                                                        <h5 class="text-danger">2. Chuyển khoản ngân hàng</h5>
+                                                        <h5 class="text-danger">2. Chuyển khoản</h5>
                                                     </li>
                                                     <li>
                                                         <h5 class="text-danger">Chủ tài khoản: {{$cpdv->ten_chu_tk}}</h5>

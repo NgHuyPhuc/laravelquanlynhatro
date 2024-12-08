@@ -89,7 +89,8 @@ class HoaDonPhongTroController extends Controller
         $data['tien_dien'] = ($data['sdnLast']->so_dien - $data['sdnSecond']->so_dien) * $data['cpdv']->tien_dien_int;
         $data['tien_nuoc'] = ($data['sdnLast']->so_nuoc - $data['sdnSecond']->so_nuoc) * $data['cpdv']->tien_nuoc_int;
         $data['tien_mang'] = $data['phong']->dung_mang * $data['cpdv']->tien_mang_int;
-        $data['tong_cong'] = $data['tien_dien'] + $data['tien_nuoc'] + $data['tien_mang'] + $data['phong']->gia_phong;
+        $data['tong_tien_binh_nuoc'] = $data['phong']->mua_nuoc * $data['cpdv']->tien_binh_nuoc;
+        $data['tong_cong'] = $data['tien_dien'] + $data['tien_nuoc'] + $data['tien_mang'] + $data['phong']->gia_phong + $data['tong_tien_binh_nuoc'] + $data['sdnLast']->tien_phat_sinh;
         return view('backend.hoadon.getcreatemonth', $data);
     }
     public function store(Request $request, $id, $id_phong)

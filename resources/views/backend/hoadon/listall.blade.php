@@ -52,8 +52,12 @@
                             </th>
                           </tr>
                         </thead>
+                        @php
+                              $total = 0;
+                            @endphp
                         <tbody>
                             @foreach ($hoadon as $key => $item)
+                            
                             <tr>
                                 <td class="">
                                   {{$item->phongtro->ten_phong}}
@@ -63,6 +67,7 @@
                                 </td>
                                 <td>
                                   {{number_format($item->so_tien_phai_tra)}} VNĐ
+                                  <p hidden> {{$total = $total + $item->so_tien_phai_tra}}</p>
                                 </td>
                                 <td>
                                     @if ($item->so_du < 0)
@@ -92,6 +97,7 @@
                       </table>
                     </div>
                 </div>
+                <h3>Tổng tiền : {{$total}}</h3>
                 <div class="d-flex justify-content-end align-items-center">
                     <p class="mr-3">Trang:  </p>
                     {{ $hoadon->links('backend.pagination.pagination') }}

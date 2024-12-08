@@ -9,7 +9,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card-body">
-                                <h4 class="card-title">Chức năng phòng 301</h4>
+                                <h4 class="card-title">Chức năng {{$phong->ten_phong}}</h4>
                                 <div class="template-demo">
                                     <a href="{{route('phongtro.nguoithue.themnguoi',['id' => $nhatro->id, 'id_phong' => $phong->id])}}" class="btn btn-info">Thêm mới người
                                         thuê phòng</a>
@@ -26,7 +26,7 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Danh sách người Số Điện Nước Phòng 301</h4>
+                    <h4 class="card-title">Danh sách người Số Điện Nước {{$phong->ten_phong}}</h4>
                     <div class="table-responsive">
                       <table class="table table-striped">
                         <thead>

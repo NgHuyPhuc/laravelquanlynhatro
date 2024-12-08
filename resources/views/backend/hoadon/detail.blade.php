@@ -43,8 +43,12 @@
                                 <div class="container">
                                     <div id="capture" class="invoice"
                                         style="padding: 20px;border: 1px solid #ddd;border-radius: 5px;margin:20px;">
-                                        <h2 class="text-center">Hóa Đơn Tiền Phòng {{ $phong->ten_phong }}</h2>
+                                        <h2 class="text-center">Thông báo Tiền Phòng
+                                            {{-- {{ $phong->ten_phong }} --}}
+                                        </h2>
                                         <h3 class="text-center">{{$hoadon->thang}}</h3>
+                                        <br/>
+
                                         <div style="display: flex; align-items: center;">
                                             <h4>Kính gửi anh/chị phòng: </h4>
                                             <h1 class="text-danger" style="margin-left: 10%;">{{ $phong->ten_phong }}</h1>
@@ -58,10 +62,10 @@
                                                 <table class="table table-hover table-striped">
                                                     <thead>
                                                         <tr>
-                                                            <th>STT</th>
-                                                            <th>Khoản</th>
-                                                            <th>Chi tiết</th>
-                                                            <th>Thành tiền</th>
+                                                            <th class="custom-font-size font-weight-bold" >STT</th>
+                                                            <th class="custom-font-size font-weight-bold">Nội dung</th>
+                                                            <th class="custom-font-size font-weight-bold text-center">Chi tiết</th>
+                                                            <th class="custom-font-size font-weight-bold">Thành tiền</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -69,53 +73,55 @@
                                                             $stt = 1; // Khởi tạo số thứ tự
                                                         @endphp
                                                         <tr>
-                                                            <td>{{ $stt++ }}</td>
-                                                            <td>Tiền Phòng</td>
-                                                            <td>{{$hoadon->tien_phong_string}}</td>
-                                                            <td><label> {{ number_format($hoadon->tien_phong_int) }} VND
+                                                            <td class="custom-font-size">{{ $stt++ }}</td>
+                                                            <td class="custom-font-size">Tiền Phòng</td>
+                                                            <td class="custom-font-size text-center">{{$hoadon->tien_phong_string}}</td>
+                                                            <td class="custom-font-size text-center"><label> {{ number_format($hoadon->tien_phong_int) }}
                                                                 </label></td>
                                                         </tr>
                                                         <tr>
-                                                            <td>{{ $stt++ }}</td>
-                                                            <td>Điện</td>
-                                                            <td> {{$hoadon->tien_dien_string}}</td>
-                                                            <td><label> {{ number_format($hoadon->tien_dien_int) }} VNĐ
+                                                            <td class="custom-font-size">{{ $stt++ }}</td>
+                                                            <td class="custom-font-size">Điện</td>
+                                                            <td class="custom-font-size text-center"> {{$hoadon->tien_dien_string}}</td>
+                                                            <td class="custom-font-size text-center"><label> {{ number_format($hoadon->tien_dien_int) }} 
                                                                 </label></td>
                                                         </tr>
                                                         <tr>
-                                                            <td>{{ $stt++ }}</td>
-                                                            <td>Nước</td>
-                                                            <td> {{$hoadon->tien_nuoc_string}}</td>
-                                                            <td><label> {{ number_format($hoadon->tien_nuoc_int) }} VNĐ
+                                                            <td class="custom-font-size">{{ $stt++ }}</td>
+                                                            <td class="custom-font-size">Nước</td>
+                                                            <td class="custom-font-size text-center"> {{$hoadon->tien_nuoc_string}}</td>
+                                                            <td class="custom-font-size text-center"><label> {{ number_format($hoadon->tien_nuoc_int) }} 
                                                                 </label></td>
                                                         </tr>
                                                         <tr>
-                                                            <td>{{ $stt++ }}</td>
-                                                            <td>Internet</td>
-                                                            <td>{{ $hoadon->dung_mang }}</td>
-                                                            <td><label> {{ number_format($hoadon->tien_mang) }} VNĐ</label></td>
+                                                            <td class="custom-font-size">{{ $stt++ }}</td>
+                                                            <td class="custom-font-size">Internet</td>
+                                                            <td class="custom-font-size text-center">{{ $hoadon->dung_mang == 0 ? '-': $hoadon->dung_mang }}</td>
+                                                            <td class="custom-font-size text-center"><label> {{ $hoadon->tien_mang == 0 ? '-' : number_format($hoadon->tien_mang) }} </label></td>
                                                         </tr>
                                                         @if ($hoadon->tien_phat_sinh > 0)
                                                             <tr>
-                                                                <td>{{ $stt++ }}</td>
-                                                                <td>Chi phi phát sinh</td>
-                                                                <td>{{ $hoadon->chi_phi_phat_sinh }}</td>
-                                                                <td><label> {{ number_format($hoadon->tien_phat_sinh) }} VNĐ</label></td>
+                                                                <td class="custom-font-size">{{ $stt++ }}</td>
+                                                                <td class="custom-font-size">Chi phi phát sinh</td>
+                                                                <td class="custom-font-size text-center">{{ $hoadon->chi_phi_phat_sinh }}</td>
+                                                                <td class="custom-font-size text-center"><label> {{ number_format($hoadon->tien_phat_sinh) }} </label></td>
                                                             </tr>
                                                         @endif
                                                         @if ($hoadon->tien_binh_nuoc_int > 0)
                                                             <tr>
-                                                                <td>{{ $stt++ }}</td>
-                                                                <td>Mua Nước</td>
-                                                                <td>{{ $hoadon->tien_binh_nuoc_string }}</td>
-                                                                <td><label> {{ number_format($hoadon->tien_binh_nuoc_int) }} VNĐ</label></td>
+                                                                <td class="custom-font-size">{{ $stt++ }}</td>
+                                                                <td class="custom-font-size">Nước uống (Bình)</td>
+                                                                <td class="custom-font-size text-center">{{ $hoadon->tien_binh_nuoc_string }}</td>
+                                                                <td class="custom-font-size text-center"><label> {{ number_format($hoadon->tien_binh_nuoc_int) }} </label></td>
                                                             </tr>
                                                         @endif
                                                         <tr>
-                                                            <td>{{ $stt++ }}</td>
-                                                            <td></td>
-                                                            <td> Tổng Cộng </td>
-                                                            <td><label> {{ number_format($hoadon->so_tien_phai_tra) }} VNĐ </label></td>
+                                                            <td class="custom-font-size font-weight-bold" >
+                                                                {{-- {{ $stt++ }} --}}
+                                                            </td>
+                                                            <td class="custom-font-size font-weight-bold"></td>
+                                                            <td class="custom-font-size font-weight-bold text-center"> Tổng Cộng </td>
+                                                            <td class="custom-font-size font-weight-bold text-center"><label> {{ number_format($hoadon->so_tien_phai_tra) }} </label></td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -131,7 +137,7 @@
                                                         <h5 class="text-danger">1. Tiền mặt</h5>
                                                     </li>
                                                     <li>
-                                                        <h5 class="text-danger">2. Chuyển khoản ngân hàng</h5>
+                                                        <h5 class="text-danger">2. Chuyển khoản</h5>
                                                     </li>
                                                     <li>
                                                         <h5 class="text-danger">Chủ tài khoản: {{$cpdv->ten_chu_tk}}</h5>

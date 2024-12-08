@@ -197,10 +197,10 @@
                                                 <table class="table table-hover table-striped">
                                                     <thead>
                                                         <tr>
-                                                            <th>STT</th>
-                                                            <th>Khoản</th>
-                                                            <th>Chi tiết</th>
-                                                            <th>Thành tiền</th>
+                                                            <th class="custom-font-size font-weight-bold">STT</th>
+                                                            <th class="custom-font-size font-weight-bold">Khoản</th>
+                                                            <th class="custom-font-size font-weight-bold text-center">Chi tiết</th>
+                                                            <th class="custom-font-size font-weight-bold">Thành tiền</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -208,65 +208,67 @@
                                                             $stt = 1; // Khởi tạo số thứ tự
                                                         @endphp
                                                         <tr>
-                                                            <td>{{ $stt++ }}</td>
-                                                            <td>Tiền Phòng</td>
-                                                            <td>{{ $phong->ten_phong }} Tháng
+                                                            <td class="custom-font-size">{{ $stt++ }}</td>
+                                                            <td class="custom-font-size">Tiền Phòng</td>
+                                                            <td class="custom-font-size text-center">{{ $phong->ten_phong }} Tháng
                                                                 {{ \Carbon\Carbon::parse($sdnLast->date)->format('m') }}
                                                                 năm
                                                                 {{ \Carbon\Carbon::parse($sdnLast->date)->format('Y') }}
                                                             </td>
-                                                            <td><label> {{ number_format($phong->gia_phong) }} VND
+                                                            <td class="custom-font-size text-center"><label> {{ number_format($phong->gia_phong) }} 
                                                                 </label></td>
                                                         </tr>
                                                         <tr>
-                                                            <td>{{ $stt++ }}</td>
-                                                            <td>Điện</td>
-                                                            <td> ( {{ $sdnLast->so_dien }} - {{ $sdnSecond->so_dien }} ) =
+                                                            <td class="custom-font-size">{{ $stt++ }}</td>
+                                                            <td class="custom-font-size">Điện</td>
+                                                            <td class="custom-font-size text-center"> ( {{ $sdnLast->so_dien }} - {{ $sdnSecond->so_dien }} ) =
                                                                 {{ number_format($sdnLast->so_dien - $sdnSecond->so_dien) }}
                                                                 kWh
                                                                 x {{ number_format($cpdv->tien_dien_int) }} VNĐ/kWh</td>
-                                                            <td><label> {{ number_format($tien_dien) }} VNĐ
+                                                            <td class="custom-font-size text-center"><label> {{ number_format($tien_dien) }} 
                                                                 </label></td>
                                                         </tr>
                                                         <tr>
-                                                            <td>{{ $stt++ }}</td>
-                                                            <td>Nước</td>
-                                                            <td> ( {{ $sdnLast->so_nuoc }} - {{ $sdnSecond->so_nuoc }} ) =
+                                                            <td class="custom-font-size" class="custom-font-size">{{ $stt++ }}</td>
+                                                            <td class="custom-font-size" class="custom-font-size">Nước</td>
+                                                            <td class="custom-font-size text-center"> ( {{ $sdnLast->so_nuoc }} - {{ $sdnSecond->so_nuoc }} ) =
                                                                 {{ number_format($sdnLast->so_nuoc - $sdnSecond->so_nuoc) }}m³
                                                                 x {{ number_format($cpdv->tien_nuoc_int) }} VNĐ/m³</td>
-                                                            <td><label> {{ number_format($tien_nuoc) }} VNĐ
+                                                            <td class="custom-font-size text-center"><label> {{ number_format($tien_nuoc) }}
                                                                 </label></td>
                                                         </tr>
                                                         <tr>
-                                                            <td>{{ $stt++ }}</td>
-                                                            <td>Internet</td>
-                                                            <td>{{ $phong->dung_mang }}</td>
-                                                            <td><label> {{ number_format($tien_mang) }} VNĐ</label></td>
+                                                            <td class="custom-font-size">{{ $stt++ }}</td>
+                                                            <td class="custom-font-size">Internet</td>
+                                                            <td class="custom-font-size text-center">{{ $phong->dung_mang == 0 ? '-': $phong->dung_mang }}</td>
+                                                            <td class="custom-font-size text-center"><label> {{ $phong->dung_mang == 0 ? '-': number_format($tien_mang) }}</label></td>
                                                         </tr>
                                                         @if ($sdnLast->tien_phat_sinh > 0)
                                                             <tr>
-                                                                <td>{{ $stt++ }}</td>
-                                                                <td>Chi phí phát sinh</td>
-                                                                <td>{{ $sdnLast->chi_phi_phat_sinh }}</td>
-                                                                <td><label> {{ number_format($sdnLast->tien_phat_sinh) }}
-                                                                        VNĐ</label></td>
+                                                                <td class="custom-font-size">{{ $stt++ }}</td>
+                                                                <td class="custom-font-size">Chi phí phát sinh</td>
+                                                                <td class="custom-font-size text-center">{{ $sdnLast->chi_phi_phat_sinh }}</td>
+                                                                <td class="custom-font-size text-center"><label> {{ number_format($sdnLast->tien_phat_sinh) }}
+                                                                        </label></td>
                                                             </tr>
                                                         @endif
                                                         @if ($phong->mua_nuoc != 0)
                                                             <tr>
-                                                                <td>{{ $stt++ }}</td>
-                                                                <td>Mua Nước</td>
-                                                                <td>{{ $phong->mua_nuoc }} *
+                                                                <td class="custom-font-size">{{ $stt++ }}</td>
+                                                                <td class="custom-font-size">Mua Nước</td>
+                                                                <td class="custom-font-size text-center">{{ $phong->mua_nuoc }} x
                                                                     {{ number_format($cpdv->tien_binh_nuoc) }}</td>
-                                                                <td><label> {{ number_format($tong_tien_binh_nuoc) }}
-                                                                        VNĐ</label></td>
+                                                                <td class="custom-font-size text-center"><label> {{ number_format($tong_tien_binh_nuoc) }}
+                                                                        </label></td>
                                                             </tr>
                                                         @else
                                                             <tr>
-                                                                <td>{{ $stt++ }}</td>
-                                                                <td></td>
-                                                                <td> Tổng Cộng </td>
-                                                                <td><label> {{ number_format($tong_cong) }} VNĐ </label>
+                                                                <td class="custom-font-size font-weight-bold">
+                                                                    {{-- {{ $stt++ }} --}}
+                                                                </td>
+                                                                <td class="custom-font-size font-weight-bold"></td>
+                                                                <td class="custom-font-size font-weight-bold text-center"> Tổng Cộng </td>
+                                                                <td class="custom-font-size font-weight-bold text-center"><label> {{ number_format($tong_cong) }} </label>
                                                                 </td>
                                                             </tr>
                                                         @endif
@@ -282,7 +284,7 @@
                                                         <h5 class="text-danger">1. Tiền mặt</h5>
                                                     </li>
                                                     <li>
-                                                        <h5 class="text-danger">2. Chuyển khoản ngân hàng</h5>
+                                                        <h5 class="text-danger">2. Chuyển khoản</h5>
                                                     </li>
                                                     <li>
                                                         <h5 class="text-danger">Chủ tài khoản: {{ $cpdv->ten_chu_tk }}</h5>
@@ -369,7 +371,7 @@
                                     <label class="col-sm-3 col-form-label">tien_binh_nuoc_string </label>
                                     <div class="col-sm-9">
                                         <input class="form-control" name="tien_binh_nuoc_string" type="text"
-                                            value="{{ $phong->mua_nuoc }}* {{ number_format($cpdv->tien_binh_nuoc) }}">
+                                            value="{{ $phong->mua_nuoc }} x {{ number_format($cpdv->tien_binh_nuoc) }}">
                                     </div>
                                 </div>
                                 <div class="form-group row">

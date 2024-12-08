@@ -122,12 +122,13 @@ class SoDienNuocTheoPhongService
     public function update($request, $id){
         $data = [
             'id_phong_tro' => $request->id_phong,
-            'date' => $request->date, // Hoặc lấy từ $request->date nếu cần
-            'so_dien' => $request['so_dien'],
-            'so_nuoc' => $request['so_nuoc'],
+            'date' => $request->date,
+            'so_dien' => $request->so_dien,
+            'so_nuoc' => $request->so_nuoc,
             'chi_phi_phat_sinh' => $request->chi_phi_phat_sinh ?? 'Không có',
             'tien_phat_sinh' => $request->tien_phat_sinh ?? 0,
         ];
+        return $this->soDienNuoc->update($request->id_sdn, $data);
     }
     public function delete($id){
         $this->soDienNuoc->delete($id);
