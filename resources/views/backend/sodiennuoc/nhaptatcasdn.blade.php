@@ -1,5 +1,5 @@
 @extends('backend/master/master')
-@section('title', 'Nhà trọ')
+@section('title', 'Nhập tất cả số điện nước')
 @section('main')
     <div class="main-panel">
         <div class="content-wrapper">

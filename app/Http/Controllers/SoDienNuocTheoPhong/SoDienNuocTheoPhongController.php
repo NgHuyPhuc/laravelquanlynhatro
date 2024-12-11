@@ -26,6 +26,9 @@ class SoDienNuocTheoPhongController extends Controller
     public function index($id, $id_phong){
         $data['diennuoc'] = $this->soDienNuoc->getbyphong($id_phong)->orderby('date','desc')->paginate(2);
         $data['phong'] = $this->phongTro->getone($id_phong);
+        $data['check'] = $this->soDienNuoc->checkExists($id_phong);
+        
+        // dd($data['check']);
         return view('backend.sodiennuoc.all', $data);
     }
     public function danhsachsdn(Request $request,$id){
@@ -36,17 +39,8 @@ class SoDienNuocTheoPhongController extends Controller
             list($year, $month) = explode('-', $monthYear);
             // Truy vấn dữ liệu theo tháng và năm
             $data['thongtin'] = $this->nhatroService->getTangandPhongTro($id);
-            // $data['thongtin'] = SoDienNuocTheoPhong::whereYear('created_at', $year)
-            //                     ->whereMonth('created_at', $month)
-            //                     ;
-                                // ->get();
-            // $monthNow = Carbon::now()->month;
-            // $data['month'] = $monthNow;
-            // $data['monthYear'] = $request->month;
-
             $data['year'] = $year;
             $data['month'] = $month;
-            // dd($data['monthf']);
             $data['checkCpdv'] = $this->chiPhiDichVuService->getByNhaTroID($id)->count();
             return view('backend.sodiennuoc.danhsach', $data);
         }
@@ -73,7 +67,7 @@ class SoDienNuocTheoPhongController extends Controller
         $this->soDienNuoc->createMultiple($request,$id);
         return redirect()->route('get.danhsachsdn', ['id' => $id]);
     }
-    public function create(Request $request, $id, $id_phong){
+    public function create($id, $id_phong){
         $data['id'] = $id;
         $data['id_phong'] = $id_phong;
         $data['phong'] = $this->phongTro->getone($id_phong);
@@ -82,6 +76,7 @@ class SoDienNuocTheoPhongController extends Controller
         $data['month'] = $monthNow - 1;
         $data['checksdn'] = 0;
         $data['sdnSecond'] = $this->soDienNuoc->getLastest($id_phong);
+        $data['check'] = $this->soDienNuoc->checkExists($id_phong);
         if($monthNow == $monthSdnLast)
         {
             $data['checksdn'] = 1;
@@ -93,7 +88,7 @@ class SoDienNuocTheoPhongController extends Controller
         return redirect()->route('danh.sach.so.dien.nuoc', ['id' => $id, 'id_phong' => $id_phong]);
     }
     public function firstCreate($id, $id_phong){
-        $data['check'] = 0;
+        $data['check'] = false;
         $data['id'] = $id;
         $data['id_phong'] = $id_phong;
         $data['phong'] = $this->phongTro->getone($id_phong);
@@ -108,6 +103,7 @@ class SoDienNuocTheoPhongController extends Controller
         $data['id_phong'] = $id_phong;
         $data['phong'] = $this->phongTro->getone($id_phong);
         $data['sdn'] = $this->soDienNuoc->getone($id_sdn);
+        $data['check'] = $this->soDienNuoc->checkExists($id_phong);
         return view('backend.sodiennuoc.edit',$data);
     }
     public function update(Request $request, $id, $id_phong){

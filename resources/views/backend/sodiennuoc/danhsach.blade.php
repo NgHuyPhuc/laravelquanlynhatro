@@ -1,5 +1,5 @@
 @extends('backend/master/master')
-@section('title', 'Nhà trọ')
+@section('title', 'Danh sách số điện nước')
 @section('main')
     <div class="main-panel">
         <div class="content-wrapper">
@@ -60,7 +60,7 @@
                                     <div class="form-group row">
                                         <label for="date" class="col-sm-3 col-form-label">Tháng :</label>
                                         <div class="col-sm-9">
-                                            {{-- @dd((request()->has('month'))) --}}
+                                            {{-- @dd($_GET['month']) --}}
                                             @if (request()->has('month'))
                                                 <input name="month" type="month" class="form-control" id="date"
                                                 value="{{ \Carbon\Carbon::parse((request()->get('month')))->format('Y-m') }}" required>

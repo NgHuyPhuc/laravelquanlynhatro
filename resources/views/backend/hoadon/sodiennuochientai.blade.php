@@ -4,29 +4,7 @@
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="row">
-            <div class="col-12 grid-margin stretch-card">
-                <div class="card">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card-body">
-                                <h4 class="card-title">Chức năng phòng {{$phong->ten_phong}}</h4>
-                                <div class="template-demo">
-                                    <a href="./themmoinguoithue.html" class="btn btn-info">Thêm mới người
-                                        thuê phòng</a>
-                                    <a href="./xemthongtinnguoithue.html" class="btn btn-info">Xem thông tin
-                                        người thuê phòng</a>
-                                    <a href="./taohoadontiennha.html" class="btn btn-success">Tạo hóa đơn
-                                        tiền phòng</a>
-                                    <a href="./xemhoadontiennha.html" class="btn btn-success">Xem hóa đơn
-                                        tiền phòng</a>
-                                    <a href="./chinhsuathongtinphong.html" class="btn btn-danger">Chỉnh sửa
-                                        thông tin phòng</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {!! generateMenuPhong($nhatro, $phong, $check) !!}
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">

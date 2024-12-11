@@ -1,33 +1,10 @@
 @extends('backend/master/master')
-@section('title', 'Nhập số điện nước')
+@section('title', 'Thêm mới số điện nước')
 @section('main')
     <div class="main-panel">
         <div class="content-wrapper">
             <div class="row">
-                <div class="col-12 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="card-body">
-                                    <h4 class="card-title">Quản lý hóa đơn phòng : {{ $phong->ten_phong }}</h4>
-                                    <div class="template-demo">
-                                        <a href="{{ route('danh.sach.so.dien.nuoc', ['id' => $nhatro->id, 'id_phong' => $phong->id]) }}"
-                                            class="btn btn-info"> Danh sách số điện nước</a>
-                                        <a href="./themmoinguoithue.html" class="btn btn-info">Nhập số điện nước</a>
-                                        <a href="./xemthongtinnguoithue.html" class="btn btn-info">Danh sách hóa đơn
-                                            {{ $phong->ten_phong }}</a>
-                                        <a href="{{ route('phongtro.hoadon.themhoadon', ['id' => $nhatro->id, 'id_phong' => $phong->id]) }}" class="btn btn-success">Tạo hóa đơn
-                                            tiền phòng</a>
-                                        <a href="./xemhoadontiennha.html" class="btn btn-success">Xem hóa đơn
-                                            tiền phòng</a>
-                                        <a href="./chinhsuathongtinphong.html" class="btn btn-danger">Chỉnh sửa
-                                            thông tin phòng</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {!! generateMenuPhong($nhatro, $phong, $check) !!}
                 <div class="col-lg-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">

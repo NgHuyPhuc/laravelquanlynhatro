@@ -41,7 +41,7 @@ if (!function_exists('MenuPhong')) {
         $html .= '<div class="template-demo">';
 
         // Điều kiện check
-        if ($check == 0) {
+        if ($check == false) {
             $html .= '<a href="' . route('phongtro.hoadon.sodiennuoc1', ['id' => $nhatro->id, 'id_phong' => $phongtro->id]) . '" class="btn btn-success">Thêm mới số tiền điện nước hiện tại</a>';
         } else {
             $html .= '<a href="' . route('phong.nguoithue.dangthue', ['id' => $nhatro->id, 'id_phong' => $phongtro->id]) . '" class="btn btn-info">Quản lý thông tin người thuê phòng</a>';
@@ -107,7 +107,7 @@ if (!function_exists('MenuNguoiThue')) {
         $html .= '<div class="template-demo">';
 
         // Điều kiện check
-        if ($check == 0) {
+        if ($check == false) {
             $html .= '<a href="' . route('phongtro.hoadon.sodiennuoc1', ['id' => $nhatro->id, 'id_phong' => $phongtro->id]) . '" class="btn btn-success">Thêm mới số tiền điện nước hiện tại</a>';
         } else {
             $html .= '<a href="' . route('phong.nguoithue.dangthue', ['id' => $nhatro->id, 'id_phong' => $phongtro->id]) . '" class="btn btn-info">Quản lý thông tin người thuê phòng</a>';

@@ -32,6 +32,10 @@ class SoDienNuocTheoPhongRepository extends BaseRepository implements SoDienNuoc
     {
         return SoDienNuocTheoPhong::where('id_phong_tro', $id_phong)->latest()->first();
     }
+    public function checkExists($id_phong)
+    {
+        return SoDienNuocTheoPhong::where('id_phong_tro', $id_phong)->exists();
+    }
     public function createMany(array $data)
     {
         return SoDienNuocTheoPhong::insert($data);

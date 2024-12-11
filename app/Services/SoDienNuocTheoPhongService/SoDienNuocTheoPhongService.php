@@ -62,6 +62,10 @@ class SoDienNuocTheoPhongService
     {
         return $this->soDienNuoc->countdata($id_phong);
     }
+    public function checkExists($id_phong)
+    {
+        return $this->soDienNuoc->countdata($id_phong);
+    }
     public function createMultiple(Request $request)
     {
         $id_phongs = $request['id_phong'];
