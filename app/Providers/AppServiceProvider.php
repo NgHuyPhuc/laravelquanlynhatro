@@ -49,7 +49,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(\App\Services\HoaDonService\HoaDonService::class, function ($app) {
             return new \App\Services\HoaDonService\HoaDonService(
                 $app->make(\App\Repositories\Repository\HoaDonRepository::class),
-                $app->make(\App\Services\PhongTroService\PhongTroService::class)
+                $app->make(\App\Services\PhongTroService\PhongTroService::class),
+                $app->make(\App\Services\NhaTroService\NhaTroService::class)
             );
         });
         $this->app->bind(\App\Services\SoDienNuocTheoPhongService\SoDienNuocTheoPhongService::class, function ($app) {

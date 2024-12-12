@@ -18,11 +18,12 @@ class HoaDonRepository extends BaseRepository implements HoaDonRepositoryInterfa
     {
         return HoaDonPhongTro::where('id_phong_tro', $id_phong);
     }
-    public function getallnow()
+    public function getallnow($phongTros)
     {
         $month = Carbon::now()->month;
         $year = Carbon::now()->year;
-        return HoaDonPhongTro::whereYear('created_at', $year)->whereMonth('created_at', $month);
+        // HoaDonPhongTro::
+        return HoaDonPhongTro::whereIn('id_phong_tro', $phongTros->pluck('id'))->whereYear('created_at', $year)->whereMonth('created_at', $month);
     }
 }
 ?>

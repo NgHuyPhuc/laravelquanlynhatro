@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\HoaDonPhongTro;
 
 use App\Http\Controllers\Controller;
-use App\Models\ChiPhiDichVu;
 use App\Services\ChiPhiDichVuService\ChiPhiDichVuService;
 use App\Services\HoaDonService\HoaDonService;
 use App\Services\NhaTroService\NhaTroService;
@@ -131,7 +130,15 @@ class HoaDonPhongTroController extends Controller
         return redirect()->route('phong.hoadon.danhsach.all',['id' => $id]);
     }
     public function listall($id) {
-        $data['hoadon'] = $this->hoaDon->getallnow()->paginate(12);
+        $data['thongtin'] = $this->nhaTro->getTangandPhongTro($id);
+        $cpdv = $this->chiPhiDichVu->getByNhaTroID($id);
+        if($cpdv == null){
+            $data['checkCpdv'] = 0;
+        }
+        else{
+            $data['checkCpdv'] = 1;
+        }
+        $data['hoadon'] = $this->hoaDon->getallnow($id)->paginate(12);
         return view('backend.hoadon.listall', $data);
     }
     public function destroy($id, $id_phong) {}

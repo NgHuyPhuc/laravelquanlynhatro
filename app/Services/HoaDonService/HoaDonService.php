@@ -2,7 +2,9 @@
 
 namespace App\Services\HoaDonService;
 
+use App\Models\NhaTro;
 use App\Repositories\Repository\HoaDonRepository;
+use App\Services\NhaTroService\NhaTroService;
 use App\Services\PhongTroService\PhongTroService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -11,10 +13,12 @@ class HoaDonService
 {
     protected $hoaDon;
     protected $phongTroService;
-    public function __construct(HoaDonRepository $hoaDonRepository, PhongTroService $phongTroService)
+    protected $nhaTroService;
+    public function __construct(HoaDonRepository $hoaDonRepository, PhongTroService $phongTroService,NhaTroService $nhaTroService)
     {
         $this->hoaDon = $hoaDonRepository;
         $this->phongTroService = $phongTroService;
+        $this->nhaTroService = $nhaTroService;
     }
     public function getall()
     {
@@ -191,8 +195,15 @@ class HoaDonService
         return $tongTien;
     }
 
-    function getallnow()
+    function getallnow($id)
     {
-        return $this->hoaDon->getallnow();
+        $nhatro = $this->nhaTroService->getone($id);
+
+        // Lấy tất cả các phòng trọ thuộc nhà trọ này
+        $phongTros = $nhatro->tang->flatMap(function ($tang) {
+            return $tang->phongtro;
+        });
+        // dd($phongTros);
+        return $this->hoaDon->getallnow($phongTros);
     }
 }
