@@ -141,5 +141,22 @@ class HoaDonPhongTroController extends Controller
         $data['hoadon'] = $this->hoaDon->getallnow($id)->paginate(12);
         return view('backend.hoadon.listall', $data);
     }
+    public function chitietlistall($id) {
+        $data['thongtin'] = $this->nhaTro->getTangandPhongTro($id);
+        $cpdv = $this->chiPhiDichVu->getByNhaTroID($id);
+        if($cpdv == null){
+            $data['checkCpdv'] = 0;
+        }
+        else{
+            $data['checkCpdv'] = 1;
+        }
+        $data['cpdv'] = $this->chiPhiDichVu->getone($id);
+        $data['hoadon'] = $this->hoaDon->getallnow($id)->paginate(12);
+        $data['total'] = $data['hoadon']->sum('so_tien_phai_trả');
+        $data['tien_dien'] = $data['hoadon']->sum('tien_dien_int');
+        $data['tien_nuoc'] = $data['hoadon']->sum('tien_nuoc_int');
+
+        return view('backend.hoadon.detailListAll', $data);
+    }
     public function destroy($id, $id_phong) {}
 }

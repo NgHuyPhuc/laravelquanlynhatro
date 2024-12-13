@@ -95,7 +95,8 @@
                 <div class="col-lg-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Danh sách hóa đơn phòng 301</h4>
+                            <h4 class="card-title">Danh sách hóa đơn tiền nhà</h4>
+                            <a href="{{ route('phong.hoadon.danhsach.chitiet.all', ['id' => $nhatro->id]) }}" class="btn btn-success">Thông tin chi tiết tất cả hóa đơn</a>
                             <div class="table-responsive">
                                 <table class="table table-striped">
                                     <thead>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\AnhXe\AnhXeController;
 use App\Http\Controllers\ChiPhiDichVu\ChiPhiDichVuController;
 use App\Http\Controllers\HoaDonPhongTro\HoaDonPhongTroController;
 use App\Http\Controllers\NhaTro\NhaTroController;
@@ -41,6 +42,7 @@ Route::middleware('fetch.nhatro')->prefix('nhatro/{id}')->group(function () {
     // Route::get('/danhsachsdn/{m}', [SoDienNuocTheoPhongController::class, 'danhsachsdn'])->name('get.danhsachsdn');
     Route::get('/TaoTatCaHoaDon', [HoaDonPhongTroController::class, 'getTatCaHoaDon'])->name('Tao.tat.ca.hoa.don');
     Route::get('/hoadonall', [HoaDonPhongTroController::class, 'listall'])->name('phong.hoadon.danhsach.all');
+    Route::get('/chitiethoadonall', [HoaDonPhongTroController::class, 'chitietlistall'])->name('phong.hoadon.danhsach.chitiet.all');
 
     Route::prefix('tang')->group(function () {
         Route::get('/', [TangController::class, 'index'])->name('nhatro.tang.show');
@@ -106,6 +108,14 @@ Route::middleware('fetch.nhatro')->prefix('nhatro/{id}')->group(function () {
             Route::get('/suahoadon/{id_hoadon}', [HoaDonPhongTroController::class, 'edit'])->name('hoadontro.suahoadon.get');
             Route::post('/suahoadon/{id_hoadon}', [HoaDonPhongTroController::class, 'update'])->name('hoadontro.suahoadon.post');
             Route::get('/xoahoadon/{id_hoadon}', [HoaDonPhongTroController::class, 'destroy'])->name('hoadontro.xoahoadon');
+        });
+        Route::prefix('nguoithue/{id_nguoithue}/xe')->group(function () {
+            Route::get('/', [AnhXeController::class, 'index'])->name('ngthue.xe.show');
+            Route::get('/themxe', [AnhXeController::class, 'create'])->name('ngthue.themxe');
+            Route::post('/themxe', [AnhXeController::class, 'store'])->name('ngthue.storexe');
+            Route::get('/suaxe/{id_xe}', [AnhXeController::class, 'edit'])->name('ngthue.suaxe.get');
+            Route::post('/suaxe/{id_xe}', [AnhXeController::class, 'update'])->name('ngthue.suaxe.post');
+            Route::get('/xoaxe/{id_xe}', [AnhXeController::class, 'destroy'])->name('ngthue.xoaxe');
         });
     });
     
