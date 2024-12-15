@@ -33,11 +33,23 @@
                     $total = 0;
                 @endphp
                 @foreach ($hoadon as $item)
-                    <p hidden>{{$total = $total + $item->so_tien_phai_tra}}</p>
+                    <p hidden>{{ $total = $total + $item->so_tien_phai_tra }}</p>
                 @endforeach
                 <div class="d-flex justify-content-between col-12">
                     <div>
                         <button class="btn btn-primary" id="cap-all-btn">Chụp tất cả hóa đơn</button>
+                        <div id="progress-container" style="display: none; margin-top: 20px;">
+                            <div id="progress-bar"
+                                style="
+                                width: 0%; 
+                                height: 30px; 
+                                background-color: #4caf50; 
+                                text-align: center; 
+                                line-height: 30px; 
+                                color: white;
+                            ">
+                                0%</div>
+                        </div>
                     </div>
                     <div>
                         <h3>Tổng Tiền: {{ number_format($total) }}</h3>
@@ -59,7 +71,7 @@
                                 </div>
                                 <div class="container">
                                     <div id="capture-{{ $item->id }}"
-                                        data-phong="{{ $item->phongtro->ten_phong }} - Tiền phòng{{ $item->tien_phong_string }} - {{$item->id}}"
+                                        data-phong="{{ $item->phongtro->ten_phong }} - Tiền phòng{{ $item->tien_phong_string }} - {{ $item->id }}"
                                         class="invoice"
                                         style="padding: 20px;border: 1px solid #ddd;border-radius: 5px;margin:20px;">
                                         <h2 class="text-center">Thông báo Tiền Phòng
@@ -208,6 +220,10 @@
         </div>
     </div>
     <script src="js/html2canvas.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+
+    {{-- 1-1 + loading bar --}}
     {{-- <script>
         // chup man hinh
         document.getElementById("cap-all-btn").onclick = async function() {
@@ -216,6 +232,13 @@
 
             // Lấy tất cả các phần tử có chứa hóa đơn
             const invoices = document.querySelectorAll("[id^='capture']");
+            const progressBar = document.getElementById("progress-bar");
+            const progressContainer = document.getElementById("progress-container");
+
+            // Hiển thị thanh loading
+            progressContainer.style.display = "block";
+            const totalInvoices = invoices.length;
+            let processedCount = 0;
 
             // Duyệt qua từng hóa đơn và chụp ảnh
             for (let i = 0; i < invoices.length; i++) {
@@ -227,7 +250,10 @@
                     // Chụp màn hình từng hóa đơn
                     const canvas = await html2canvas(invoice);
                     const imgData = canvas.toDataURL("image/png");
-
+                    processedCount++;
+                    const progress = Math.round((processedCount / totalInvoices) * 100);
+                    progressBar.style.width = `${progress}%`;
+                    progressBar.textContent = `${progress}%`;
                     // Lưu hình ảnh vào zip
                     // zip.file(`hoadon-${id}.png`, imgData.split(",")[1], {
                     zip.file(`${name}.png`, imgData.split(",")[1], {
@@ -238,6 +264,8 @@
                 }
             }
 
+            // Ẩn thanh loading sau khi hoàn thành
+            progressContainer.style.display = "none";
             // Tải xuống file zip
             zip.generateAsync({
                 type: "blob"
@@ -250,7 +278,8 @@
         };
     </script> --}}
 
-    <script>
+    {{-- origin --}}
+    {{-- <script>
         // Chụp màn hình
         document.getElementById("cap-all-btn").onclick = async function () {
             // Tạo một đối tượng JSZip
@@ -289,6 +318,236 @@
                 link.click();
             });
         };
+    </script> --}}
+    
+    {{-- all no loading bar --}}
+    {{-- <script>
+        // Chụp màn hình
+        document.getElementById("cap-all-btn").onclick = async function () {
+            // Tạo một đối tượng JSZip
+            const zip = new JSZip();
+    
+            // Lấy tất cả các phần tử có chứa hóa đơn
+            const invoices = document.querySelectorAll("[id^='capture']");
+    
+            // Tạo danh sách các promise để chụp ảnh đồng thời
+            const capturePromises = Array.from(invoices).map(async (invoice) => {
+                const id = invoice.getAttribute("id");
+                const name = invoice.getAttribute("data-phong");
+    
+                try {
+                    // Chụp màn hình từng hóa đơn
+                    const canvas = await html2canvas(invoice);
+                    const imgData = canvas.toDataURL("image/png");
+    
+                    // Lưu hình ảnh vào zip
+                    zip.file(`${name}.png`, imgData.split(",")[1], {
+                        base64: true,
+                    });
+                } catch (error) {
+                    console.error(`Lỗi khi chụp hóa đơn ${id}:`, error);
+                }
+            });
+    
+            // Chờ tất cả các promise hoàn thành
+            await Promise.all(capturePromises);
+    
+            // Tải xuống file zip
+            zip.generateAsync({ type: "blob" }).then(function (content) {
+                const link = document.createElement("a");
+                link.href = URL.createObjectURL(content);
+                link.download = "hoa_don.zip";
+                link.click();
+            });
+        };
+    </script> --}}
+
+    {{-- all + loading bar --}}
+    {{-- <script>
+        // JavaScript
+        document.getElementById("cap-all-btn").onclick = async function() {
+            const zip = new JSZip();
+            const invoices = document.querySelectorAll("[id^='capture']");
+            const progressBar = document.getElementById("progress-bar");
+            const progressContainer = document.getElementById("progress-container");
+
+            // Hiển thị thanh loading
+            progressContainer.style.display = "block";
+
+            // Tổng số hóa đơn
+            const totalInvoices = invoices.length;
+            let processedCount = 0;
+
+            // Chụp từng hóa đơn và cập nhật thanh tiến trình
+            const capturePromises = Array.from(invoices).map(async (invoice) => {
+                const id = invoice.getAttribute("id");
+                const name = invoice.getAttribute("data-phong");
+
+                try {
+                    const canvas = await html2canvas(invoice);
+                    const imgData = canvas.toDataURL("image/png");
+
+                    // Lưu hình ảnh vào zip
+                    zip.file(`${name}.png`, imgData.split(",")[1], {
+                        base64: true
+                    });
+
+                    // Cập nhật tiến trình
+                    processedCount++;
+                    const progress = Math.round((processedCount / totalInvoices) * 100);
+                    progressBar.style.width = `${progress}%`;
+                    progressBar.textContent = `${progress}%`;
+                } catch (error) {
+                    console.error(`Lỗi khi chụp hóa đơn ${id}:`, error);
+                }
+            });
+
+            // Chờ tất cả các promise hoàn thành
+            await Promise.all(capturePromises);
+
+            // Ẩn thanh loading sau khi hoàn thành
+            progressContainer.style.display = "none";
+
+            // Tải xuống file zip
+            zip.generateAsync({
+                type: "blob"
+            }).then((content) => {
+                const link = document.createElement("a");
+                link.href = URL.createObjectURL(content);
+                link.download = "hoa_don.zip";
+                link.click();
+            });
+        };
+    </script> --}}
+
+    {{-- batch + loading bar --}}
+    <script>
+        document.getElementById("cap-all-btn").onclick = async function() {
+            const zip = new JSZip();
+            const invoices = document.querySelectorAll("[id^='capture']");
+            const progressBar = document.getElementById("progress-bar");
+            const progressContainer = document.getElementById("progress-container");
+
+            // Hiển thị thanh loading
+            progressContainer.style.display = "block";
+
+            const totalInvoices = invoices.length;
+            let processedCount = 0;
+
+            // Hàm xử lý từng hóa đơn
+            const processInvoice = async (invoice) => {
+                const id = invoice.getAttribute("id");
+                const name = invoice.getAttribute("data-phong");
+
+                try {
+                    const canvas = await html2canvas(invoice);
+                    const imgData = canvas.toDataURL("image/png");
+
+                    // Lưu hình ảnh vào zip
+                    zip.file(`${name}.png`, imgData.split(",")[1], {
+                        base64: true
+                    });
+
+                    // Cập nhật tiến trình
+                    processedCount++;
+                    const progress = Math.round((processedCount / totalInvoices) * 100);
+                    progressBar.style.width = `${progress}%`;
+                    progressBar.textContent = `${progress}%`;
+                } catch (error) {
+                    console.error(`Lỗi khi chụp hóa đơn ${id}:`, error);
+                }
+            };
+
+            // Hàm xử lý song song theo nhóm (batch)
+            const processInBatches = async (batchSize) => {
+                for (let i = 0; i < invoices.length; i += batchSize) {
+                    const batch = Array.from(invoices).slice(i, i + batchSize);
+                    await Promise.all(batch.map(processInvoice));
+                }
+            };
+
+            // Chạy xử lý theo nhóm (mỗi nhóm 5 hóa đơn)
+            // await processInBatches(12);
+            await processInBatches(4);
+
+            // Ẩn thanh loading sau khi hoàn thành
+            progressContainer.style.display = "none";
+
+            // Tải xuống file zip
+            zip.generateAsync({
+                type: "blob"
+            }).then((content) => {
+                const link = document.createElement("a");
+                link.href = URL.createObjectURL(content);
+                link.download = "hoa_don.zip";
+                link.click();
+            });
+        };
     </script>
+
+
+    {{-- dom to image --}}
+    {{-- <script>
+        document.getElementById("cap-all-btn").onclick = async function() {
+            const zip = new JSZip();
+            const invoices = document.querySelectorAll("[id^='capture']");
+            const progressBar = document.getElementById("progress-bar");
+            const progressContainer = document.getElementById("progress-container");
+    
+            // Hiển thị thanh loading
+            progressContainer.style.display = "block";
+    
+            const totalInvoices = invoices.length;
+            let processedCount = 0;
+    
+            // Hàm xử lý từng hóa đơn
+            const processInvoice = async (invoice) => {
+                const id = invoice.getAttribute("id");
+                const name = invoice.getAttribute("data-phong");
+    
+                try {
+                    // Sử dụng dom-to-image để chụp ảnh hóa đơn
+                    const imgData = await domtoimage.toPng(invoice);
+    
+                    // Lưu hình ảnh vào zip
+                    zip.file(`${name}.png`, imgData.split(",")[1], {
+                        base64: true
+                    });
+    
+                    // Cập nhật tiến trình
+                    processedCount++;
+                    const progress = Math.round((processedCount / totalInvoices) * 100);
+                    progressBar.style.width = `${progress}%`;
+                    progressBar.textContent = `${progress}%`;
+                } catch (error) {
+                    console.error(`Lỗi khi chụp hóa đơn ${id}:`, error);
+                }
+            };
+    
+            // Hàm xử lý song song theo nhóm (batch)
+            const processInBatches = async (batchSize) => {
+                for (let i = 0; i < invoices.length; i += batchSize) {
+                    const batch = Array.from(invoices).slice(i, i + batchSize);
+                    await Promise.all(batch.map(processInvoice));
+                }
+            };
+    
+            // Chạy xử lý theo nhóm (mỗi nhóm 5 hóa đơn)
+            await processInBatches(5);
+    
+            // Ẩn thanh loading sau khi hoàn thành
+            progressContainer.style.display = "none";
+    
+            // Tải xuống file zip
+            zip.generateAsync({
+                type: "blob"
+            }).then((content) => {
+                const link = document.createElement("a");
+                link.href = URL.createObjectURL(content);
+                link.download = "hoa_don.zip";
+                link.click();
+            });
+        };
+    </script> --}}
     
 @endsection
