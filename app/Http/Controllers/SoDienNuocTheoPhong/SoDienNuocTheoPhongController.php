@@ -27,12 +27,9 @@ class SoDienNuocTheoPhongController extends Controller
         $data['diennuoc'] = $this->soDienNuoc->getbyphong($id_phong)->orderby('date','desc')->paginate(2);
         $data['phong'] = $this->phongTro->getone($id_phong);
         $data['check'] = $this->soDienNuoc->checkExists($id_phong);
-        
-        // dd($data['check']);
         return view('backend.sodiennuoc.all', $data);
     }
     public function danhsachsdn(Request $request,$id){
-        // dd($request);
         $monthYear = $request->input('month');
         if ($monthYear) {
             // Tách năm và tháng
@@ -61,7 +58,6 @@ class SoDienNuocTheoPhongController extends Controller
         return view('backend.sodiennuoc.nhaptatcasdn', $data);
     }
     public function nhaptatcasdnPost(Request $request, $id) {
-        // dd($request);
         $data['thongtin'] = $this->nhatroService->getTangandPhongTro($id);
         $data['checkCpdv'] = $this->chiPhiDichVuService->getByNhaTroID($id)->count();
         $this->soDienNuoc->createMultiple($request,$id);
@@ -107,7 +103,6 @@ class SoDienNuocTheoPhongController extends Controller
         return view('backend.sodiennuoc.edit',$data);
     }
     public function update(Request $request, $id, $id_phong){
-        // dd(123);
         $this->soDienNuoc->update($request, $id_phong);
         return redirect()->route('danh.sach.so.dien.nuoc', ['id' => $id, 'id_phong' => $id_phong]);
     }

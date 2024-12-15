@@ -174,7 +174,6 @@
                                     <p style="font-size: 20px;"> Xin thông báo tới anh (chị): Phí dịch vụ trong tháng
                                         {{\Carbon\Carbon::parse($sdnSecond->date)->format('d/Y')}} và tiền thuê phòng tháng {{\Carbon\Carbon::parse($sdnLast->date)->format('d/Y')}}. Cụ thể như sau:</p>
                                     <hr>
-                                    <!-- <div class="card"> -->
                                     <div class="card-body">
                                         <div class="table-responsive">
                                             <table class="table table-hover table-striped">
@@ -226,7 +225,6 @@
                                                     </tr>
                                                 </tbody>
                                             </table>
-                                            <!-- </div> -->
                                         </div>
                                     </div>
 

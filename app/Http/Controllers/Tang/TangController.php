@@ -14,7 +14,6 @@ class TangController extends Controller
     public function __construct(TangService $tangService){
         $this->tangService = $tangService;
     }
-    //
     public function index($id){
         $data['tang'] = $this->tangService->getall($id);
         $data['id'] = $id;
@@ -25,8 +24,6 @@ class TangController extends Controller
         return view('backend.tang.create',$data);
     }
     public function store(TangCreateRequest $request,$id){
-    // public function store(Request $request,$id){
-
         try {
             $this->tangService->create($request,$id);
             return redirect()->route('nhatro.tang.show',['id' => $id]);

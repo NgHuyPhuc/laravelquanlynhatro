@@ -164,10 +164,7 @@
                             </div>
                         </div>
                     @endforeach
-                    {{-- end foreach o day --}}
                 </div>
-                <!-- content-wrapper ends -->
-                <!-- partial:partials/_footer.html -->
                 <footer class="footer">
                     <div class="card">
                         <div class="card-body">
@@ -183,14 +180,9 @@
                         </div>
                     </div>
                 </footer>
-                <!-- partial -->
             </div>
-            <!-- main-panel ends -->
         </div>
-        <!-- page-body-wrapper ends -->
     </div>
-    {{-- /nhatro/id/phong/id_phong/muanuoc
-            /nhatro/id/phong/id_phong/trunuoc --}}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Lấy tất cả các nút với class 'buy-water'

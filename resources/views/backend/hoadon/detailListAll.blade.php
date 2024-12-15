@@ -35,21 +35,14 @@
                 @foreach ($hoadon as $item)
                     <p hidden>{{$total = $total + $item->so_tien_phai_tra}}</p>
                 @endforeach
-                {{-- <div class="d-flex justify-content-between">
-                    <button class="btn btn-primary" id="cap-all-btn">Chụp tất cả hóa đơn</button>
-                    <h3>Tổng tiền : {{ number_format($total) }}</h3>
-                    <div class="d-flex ml-auto justify-content-end align-items-center">
-                        <p class="mr-3">Trang: </p>
-                        {{ $hoadon->links('backend.pagination.pagination') }}
-                    </div>
-                </div> --}}
                 <div class="d-flex justify-content-between col-12">
-                    <button class="btn btn-primary" id="cap-all-btn">Chụp tất cả hóa đơn</button>
                     <div>
-                        <h3 class="m-0">Tổng Tiền: {{ number_format($total) }}</h3>
-                        <h3 class="m-0">Tiền Tiền Điện: {{ number_format($tien_dien) }}</h3>
-                        <h3 class="m-0">Tổng Tiền Nước: {{ number_format($tien_nuoc) }}</h3>
-
+                        <button class="btn btn-primary" id="cap-all-btn">Chụp tất cả hóa đơn</button>
+                    </div>
+                    <div>
+                        <h3>Tổng Tiền: {{ number_format($total) }}</h3>
+                        <h3>Tiền Tiền Điện: {{ number_format($tien_dien) }}</h3>
+                        <h3>Tổng Tiền Nước: {{ number_format($tien_nuoc) }}</h3>
                     </div>
                     <div class="d-flex justify-content-end align-items-center">
                         <p class="mr-3">Trang: </p>
@@ -63,17 +56,13 @@
                                 <div class=""
                                     style="display: flex;align-items: center;justify-content: space-between;">
                                     <h3 class="card-title">Hóa đơn phòng {{ $item->phongtro->ten_phong }}</h3>
-                                    {{-- <button class="btn btn-success" id="capture-btn-{{ $item->id }}"
-                                        data-phong="{{ $item->phongtro->ten_phong }} - Tiền phòng{{ $item->tien_phong_string }}">Chụp
-                                        màn hình</button> --}}
                                 </div>
                                 <div class="container">
                                     <div id="capture-{{ $item->id }}"
-                                        data-phong="{{ $item->phongtro->ten_phong }} - Tiền phòng{{ $item->tien_phong_string }}"
+                                        data-phong="{{ $item->phongtro->ten_phong }} - Tiền phòng{{ $item->tien_phong_string }} - {{$item->id}}"
                                         class="invoice"
                                         style="padding: 20px;border: 1px solid #ddd;border-radius: 5px;margin:20px;">
                                         <h2 class="text-center">Thông báo Tiền Phòng
-                                            {{-- {{ $phong->ten_phong }} --}}
                                         </h2>
                                         <h3 class="text-center">{{ $item->thang }}</h3>
                                         <br />
@@ -86,7 +75,6 @@
                                         <br>
                                         <p style="font-size: 20px;"> {{ $item->thong_bao }}</p>
                                         <hr>
-                                        <!-- <div class="card"> -->
                                         <div class="card-body">
                                             <div class="table-responsive">
                                                 <table class="table table-hover table-striped">
@@ -163,7 +151,6 @@
                                                         @endif
                                                         <tr>
                                                             <td class="custom-font-size font-weight-bold">
-                                                                {{-- {{ $stt++ }} --}}
                                                             </td>
                                                             <td class="custom-font-size font-weight-bold"></td>
                                                             <td class="custom-font-size font-weight-bold text-center"> Tổng
@@ -175,7 +162,6 @@
                                                         </tr>
                                                     </tbody>
                                                 </table>
-                                                <!-- </div> -->
                                             </div>
                                         </div>
 
@@ -222,7 +208,7 @@
         </div>
     </div>
     <script src="js/html2canvas.js"></script>
-    <script>
+    {{-- <script>
         // chup man hinh
         document.getElementById("cap-all-btn").onclick = async function() {
             // Tạo một đối tượng JSZip
@@ -262,5 +248,47 @@
                 link.click();
             });
         };
+    </script> --}}
+
+    <script>
+        // Chụp màn hình
+        document.getElementById("cap-all-btn").onclick = async function () {
+            // Tạo một đối tượng JSZip
+            const zip = new JSZip();
+    
+            // Lấy tất cả các phần tử có chứa hóa đơn
+            const invoices = document.querySelectorAll("[id^='capture']");
+    
+            // Tạo danh sách các promise để chụp ảnh đồng thời
+            const capturePromises = Array.from(invoices).map(async (invoice) => {
+                const id = invoice.getAttribute("id");
+                const name = invoice.getAttribute("data-phong");
+    
+                try {
+                    // Chụp màn hình từng hóa đơn
+                    const canvas = await html2canvas(invoice);
+                    const imgData = canvas.toDataURL("image/png");
+    
+                    // Lưu hình ảnh vào zip
+                    zip.file(`${name}.png`, imgData.split(",")[1], {
+                        base64: true,
+                    });
+                } catch (error) {
+                    console.error(`Lỗi khi chụp hóa đơn ${id}:`, error);
+                }
+            });
+    
+            // Chờ tất cả các promise hoàn thành
+            await Promise.all(capturePromises);
+    
+            // Tải xuống file zip
+            zip.generateAsync({ type: "blob" }).then(function (content) {
+                const link = document.createElement("a");
+                link.href = URL.createObjectURL(content);
+                link.download = "hoa_don.zip";
+                link.click();
+            });
+        };
     </script>
+    
 @endsection

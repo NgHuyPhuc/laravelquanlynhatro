@@ -18,6 +18,8 @@
 <!-- endinject -->
 <!-- Custom js for this page-->
 <script src="js/dashboard.js"></script>
+
+<!-- add zip Js -->
 <script src="js/jszip.min.js"></script>
 <!-- End custom js for this page-->
 </body>

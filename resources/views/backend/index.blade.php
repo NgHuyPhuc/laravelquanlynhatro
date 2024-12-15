@@ -1,13 +1,6 @@
-{{-- @extends('backend/master/master')
-@section('title', 'Thêm mới nhà trọ')
-@section('main')
-
-@endsection --}}
-
 @extends('backend/master/master')
 @section('title', 'Trang chủ')
 @section('main')
-<!-- partial -->
 <div class="main-panel">
     <div class="content-wrapper">
 
@@ -412,10 +405,7 @@
           </div>
         </div>
       </div>
-
     </div>
-    <!-- content-wrapper ends -->
-    <!-- partial:partials/_footer.html -->
     <footer class="footer">
         <div class="card">
             <div class="card-body">
@@ -426,7 +416,5 @@
             </div>    
         </div>        
     </footer>
-    <!-- partial -->
   </div>
-  <!-- main-panel ends -->
 @endsection

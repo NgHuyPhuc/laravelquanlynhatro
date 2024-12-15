@@ -26,7 +26,6 @@ class HoaDonService
     }
     public function create(Request $request, $id_phong, $soDienNuocPrev, $soDienNuocNow)
     {
-        // dd($request);
         $data = [
             'id_phong_tro' => $request->id_phong_tro,
             'dung_mang' => $request->dung_mang,
@@ -107,7 +106,7 @@ class HoaDonService
                             'tien_mang' => $this->tien_mang($phong,$cpdv),
                             'tien_dien_string' => $this->tinhTienDienString($soDienNuocPrev, $soDienNuocNow, $cpdv),
                             'tien_nuoc_string' => $this->tinhTienNuocString($soDienNuocPrev, $soDienNuocNow, $cpdv),
-                            'chi_phi_phat_sinh' => $soDienNuocNow->chi_phi_phat_sinh, // Có thể cập nhật thêm nếu cần
+                            'chi_phi_phat_sinh' => $soDienNuocNow->chi_phi_phat_sinh,
                             'tien_phong_string' => $this->tienPhongString($soDienNuocPrev, $soDienNuocNow, $phong, $cpdv),
                             'thang' => $this->thangString($soDienNuocNow),
                             'thong_bao' => $this->thongBaoString($soDienNuocPrev, $soDienNuocNow),

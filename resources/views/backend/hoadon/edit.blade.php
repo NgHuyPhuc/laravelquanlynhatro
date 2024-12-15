@@ -54,10 +54,7 @@
                                         <div class="form-group">
                                             <input name="thong_bao" type="text" class="form-control" id="exampleInputthong_bao" placeholder="thong_bao" value="{{ $hoadon->thong_bao }}">
                                           </div>
-                                        {{-- <input type="text" name="thong_bao" id="" value="{{ $hoadon->thong_bao }}"> --}}
-                                        {{-- <p style="font-size: 20px;"> {{$hoadon->thong_bao}}</p> --}}
                                         <hr>
-                                        <!-- <div class="card"> -->
                                         <div class="card-body">
                                             <div class="table-responsive">
                                                 <table class="table table-hover table-striped">
@@ -169,13 +166,6 @@
                                         value="{{ $hoadon->so_tien_da_thanh_toan }}">
                                     </div>
                                 </div>
-                                {{-- <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Số tiền đã thanh toán: </label>
-                                    <div class="col-sm-9">
-                                        <input class="form-control" name="so_tien_da_thanh_toan" type="number"
-                                        value="{{ $hoadon->so_tien_da_thanh_toan }}">
-                                    </div>
-                                </div> --}}
                                 <div class="form-group">
                                     <label for="trang_thai">Trang thái thanh toán</label>
                                       <select name="trang_thai" style="color: black;" class="form-control" id="trang_thai">

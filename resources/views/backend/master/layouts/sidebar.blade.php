@@ -1,4 +1,3 @@
-<!-- partial:partials/_sidebar.html -->
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <ul class="nav">
         <li class="nav-item">
@@ -18,14 +17,12 @@
             <div class="collapse" id="form-nha-tro">
                 <ul class="nav flex-column sub-menu">
                     @foreach ($nhatroData as $item)
-                        {{-- <li>{{ $item->name }} - {{ $item->address }}</li> --}}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('nhatro.show', ['id' => $item->id]) }}">
                               {{ $item->ten }}
                             </a>
                         </li>
                     @endforeach
-                    {{-- <li class="nav-item"><a class="nav-link" href="./nhatro.html">Nhà trọ 27/9/34</a></li> --}}
                     <li class="nav-item"><a class="nav-link" href="{{ route('nhatro.create') }}">
                             <i class="menu-arrow mr-2"></i> Thêm mới nhà trọ</a>
                     </li>

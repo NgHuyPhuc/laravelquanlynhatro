@@ -77,13 +77,9 @@ class SoDienNuocTheoPhongService
             // Lấy bản ghi cuối cùng của số điện nước của phòng
             $lastRecord = $this->soDienNuoc->getLastest($id_phong);
             $ten_phong = $this->soDienNuoc->getOneWithIdPhong($id_phong)->phongtro->ten_phong;
-            // dd($ten_phong);
-
             if ($lastRecord) {
                 $lastSoDien = $lastRecord->so_dien ?? 0;
                 $lastSoNuoc = $lastRecord->so_nuoc ?? 0;
-                // dd($lastRecord);
-
                 // Kiểm tra số điện
                 if ($so_dien_inputs[$index] < $lastSoDien) {
                     $errors["so_dien.$index"] = "Số điện của phòng $ten_phong phải lớn hơn hoặc bằng $lastSoDien.";
@@ -102,7 +98,7 @@ class SoDienNuocTheoPhongService
         foreach ($request['id_phong'] as $key => $id_phong) {
             $dataToInsert[] = [
                 'id_phong_tro' => $id_phong,
-                'date' => $request->date, // Hoặc lấy từ $request->date nếu cần
+                'date' => $request->date,
                 'so_dien' => $request['so_dien'][$key],
                 'so_nuoc' => $request['so_nuoc'][$key],
                 'chi_phi_phat_sinh' => $request->chi_phi_phat_sinh[$key] ?? 'Không có',

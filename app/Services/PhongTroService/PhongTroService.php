@@ -43,7 +43,6 @@ class PhongTroService
     }
     public function update(Request $request, $id_phong)
     {
-        // dd($request);
         if($request->has('trang_thai') == 0)
         {
             $data = [

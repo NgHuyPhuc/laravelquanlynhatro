@@ -3,7 +3,6 @@
       <i class="typcn typcn-delete-outline" id="bannerClose" ></i>
     </div>
     <div class="container-scroller">
-      <!-- partial:partials/_navbar.html -->
       <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="navbar-brand-wrapper d-flex justify-content-center">
           <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">
@@ -142,7 +141,6 @@
           </button>
         </div>
       </nav>
-      <!-- partial -->
       <nav class="navbar-breadcrumb col-xl-12 col-12 d-flex flex-row p-0">
         <div class="navbar-links-wrapper d-flex align-items-stretch">
           <div class="nav-link">
@@ -186,9 +184,7 @@
         </div>
       </nav>
       <div class="container-fluid page-body-wrapper">
-        <!-- partial:partials/_settings-panel.html -->
         <div class="theme-setting-wrapper">
-          {{-- <div id="settings-trigger"><i class="typcn typcn-cog-outline"></i></div> --}}
           <div id="theme-settings" class="settings-panel">
             <i class="settings-close typcn typcn-times"></i>
             <p class="settings-heading">SIDEBAR SKINS</p>
@@ -205,5 +201,4 @@
             </div>
           </div>
         </div>
-        <!-- partial -->
         

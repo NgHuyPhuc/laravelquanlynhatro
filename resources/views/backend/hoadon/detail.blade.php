@@ -35,7 +35,6 @@
                             <div class="" style="display: flex;align-items: center;justify-content: space-between;">
                                 <h3 class="card-title">Hóa đơn phòng {{ $phong->ten_phong }}</h3>
                                 <button class="btn btn-success" id="capture-btn"
-                                    {{-- data-phong="{{ $phong->ten_phong }} - Tháng {{ \Carbon\Carbon::parse($hoadon->created_at)->format('m-Y') }}" --}}
                                     data-phong="{{ $phong->ten_phong }} - Tiền phòng{{$hoadon->tien_phong_string}}"
                                     >Chụp
                                     màn hình</button>
@@ -44,7 +43,6 @@
                                     <div id="capture" class="invoice"
                                         style="padding: 20px;border: 1px solid #ddd;border-radius: 5px;margin:20px;">
                                         <h2 class="text-center">Thông báo Tiền Phòng
-                                            {{-- {{ $phong->ten_phong }} --}}
                                         </h2>
                                         <h3 class="text-center">{{$hoadon->thang}}</h3>
                                         <br/>
@@ -56,7 +54,6 @@
                                         <br>
                                         <p style="font-size: 20px;"> {{$hoadon->thong_bao}}</p>
                                         <hr>
-                                        <!-- <div class="card"> -->
                                         <div class="card-body">
                                             <div class="table-responsive">
                                                 <table class="table table-hover table-striped">
@@ -117,7 +114,6 @@
                                                         @endif
                                                         <tr>
                                                             <td class="custom-font-size font-weight-bold" >
-                                                                {{-- {{ $stt++ }} --}}
                                                             </td>
                                                             <td class="custom-font-size font-weight-bold"></td>
                                                             <td class="custom-font-size font-weight-bold text-center"> Tổng Cộng </td>
@@ -125,7 +121,6 @@
                                                         </tr>
                                                     </tbody>
                                                 </table>
-                                                <!-- </div> -->
                                             </div>
                                         </div>
 
