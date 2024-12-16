@@ -30,7 +30,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [AdminController::class, 'index'])->name('dashboard');
 Route::get('/themmoinhatro', [NhaTroController::class, 'create'])->name('nhatro.create');
 Route::post('/postthemmoinhatro', [NhaTroController::class, 'store'])->name('nhatro.create.post');
-Route::get('/test/{id_phongtro}', [AdminController::class, 'test']);
+// Route::get('/test/{id_phongtro}', [AdminController::class, 'test']);
+Route::get('/test', [AdminController::class, 'test']);
 
 // Route::get('/nhatro/{id}', [AdminController::class, 'index']);
 // Route::get('/phongtro', [PhongTroController::class, 'index']);
@@ -38,6 +39,8 @@ Route::middleware('fetch.nhatro')->prefix('nhatro/{id}')->group(function () {
     Route::get('/', [NhaTroController::class, 'show'])->name('nhatro.show');
     Route::get('/nhaptatcasdn', [SoDienNuocTheoPhongController::class, 'nhaptatcasdn'])->name('get.nhaptatcasdn');
     Route::post('/nhaptatcasdn', [SoDienNuocTheoPhongController::class, 'nhaptatcasdnPost'])->name('post.nhaptatcasdn');
+    Route::get('/ImportSdnExcel', [SoDienNuocTheoPhongController::class, 'GetImportSdnExcel'])->name('get.ImportSdnExcel');
+    Route::post('/ImportSdnExcel', [SoDienNuocTheoPhongController::class, 'PostImportSdnExcel'])->name('post.ImportSdnExcel');
     Route::get('/danhsachsdn', [SoDienNuocTheoPhongController::class, 'danhsachsdn'])->name('get.danhsachsdn');
     // Route::get('/danhsachsdn/{m}', [SoDienNuocTheoPhongController::class, 'danhsachsdn'])->name('get.danhsachsdn');
     Route::get('/TaoTatCaHoaDon', [HoaDonPhongTroController::class, 'getTatCaHoaDon'])->name('Tao.tat.ca.hoa.don');

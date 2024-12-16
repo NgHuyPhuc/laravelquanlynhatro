@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\SoDienNuocTheoPhong;
 
 use App\Http\Controllers\Controller;
+use App\Imports\SoDienNuocTheoPhongImport;
 use App\Models\SoDienNuocTheoPhong;
 use App\Services\ChiPhiDichVuService\ChiPhiDichVuService;
 use App\Services\NhaTroService\NhaTroService;
@@ -10,6 +11,7 @@ use App\Services\PhongTroService\PhongTroService;
 use App\Services\SoDienNuocTheoPhongService\SoDienNuocTheoPhongService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SoDienNuocTheoPhongController extends Controller
 {
@@ -109,5 +111,24 @@ class SoDienNuocTheoPhongController extends Controller
     public function delete($id, $id_phong, $id_sdn){
         $this->soDienNuoc->delete($id_sdn);
         return redirect()->route('danh.sach.so.dien.nuoc', ['id' => $id, 'id_phong' => $id_phong]);
+    }
+    public function GetImportSdnExcel(Request $request, $id){
+        $data['thongtin'] = $this->nhatroService->getTangandPhongTro($id);
+        $data['checkCpdv'] = $this->chiPhiDichVuService->getByNhaTroID($id)->count();
+        return view('backend.sodiennuoc.sdnexcel', $data);
+    }
+    public function PostImportSdnExcel(Request $request){
+        // Excel::import(new SoDienNuocTheoPhongImport, request()->file('your_file'));
+        $request->validate([
+            'file' => 'required|mimes:xlsx,csv',
+        ]);
+
+        $file = $request->file('file');
+
+        // Thực hiện import
+        Excel::import(new SoDienNuocTheoPhongImport, $file);
+
+        // Trả về thông báo thành công
+        return back()->with('success', 'Dữ liệu đã được nhập thành công!');
     }
 }
