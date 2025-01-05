@@ -55,6 +55,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h2 class="text-uppercase text-danger"> Chọn file excel</h2>
+                                    <a href="">Tải file Excel mẫu</a>
                                     <br>
                                     <div class="form-group row">
                                         {{-- <label for="date" class="col-sm-3 col-form-label">Tháng :</label> --}}

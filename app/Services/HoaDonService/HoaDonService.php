@@ -190,7 +190,7 @@ class HoaDonService
         $tienPhong = $phong->gia_phong;
         $muaNuoc = $phong->mua_nuoc * $cpdv->tien_binh_nuoc;
         $tien_mang = $phong->dung_mang * $cpdv->tien_mang_int;
-        $tongTien = $this->tinhTienDienInt($soDienNuocPrev, $soDienNuocNow, $cpdv) + $this->tinhTienNuocInt($soDienNuocPrev, $soDienNuocNow, $cpdv)  + $tienPhong + $muaNuoc + $tien_mang;
+        $tongTien = $this->tinhTienDienInt($soDienNuocPrev, $soDienNuocNow, $cpdv) + $this->tinhTienNuocInt($soDienNuocPrev, $soDienNuocNow, $cpdv)  + $tienPhong + $muaNuoc + $tien_mang + $soDienNuocNow->tien_phat_sinh;
         return $tongTien;
     }
 

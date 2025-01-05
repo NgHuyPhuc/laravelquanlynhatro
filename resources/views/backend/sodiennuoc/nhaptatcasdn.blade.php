@@ -32,6 +32,9 @@
                                     <a href="{{ route('phongtro.themphong', ['id' => $nhatro->id]) }}" type="button"
                                         class="ml-3 btn btn-success mb-4">Nhập số điện nước
                                     </a>
+                                    <a href="{{ route('get.ImportSdnExcel', ['id' => $nhatro->id]) }}" type="button"
+                                        class="ml-3 btn btn-success mb-4">Nhập số điện nước Excel
+                                    </a>
                                     <div type="button" class="ml-3 btn btn-info mb-4"> Tìm kiếm
                                     </div>
                                     @if ($checkCpdv == 1)

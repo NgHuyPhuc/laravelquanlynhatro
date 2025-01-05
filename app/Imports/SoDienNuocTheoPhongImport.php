@@ -57,8 +57,6 @@ class SoDienNuocTheoPhongImport implements ToModel, WithHeadingRow, WithBatchIns
             'date' => $date,
             'chi_phi_phat_sinh' => $chiPhiPhatSinh,
             'tien_phat_sinh' => $tienPhatSinh,
-            // 'chi_phi_phat_sinh' => 'Không có',
-            // 'tien_phat_sinh' => 0,
         ]);
     }
 
