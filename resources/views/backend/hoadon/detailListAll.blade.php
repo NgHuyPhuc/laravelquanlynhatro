@@ -195,7 +195,7 @@
                                                         </h5>
                                                     </li>
                                                     <li>
-                                                        <h5 class="text-danger">{{ $cpdv->noi_dung_ck }}</h5>
+                                                        <h5 class="text-danger">{{ $cpdv->noi_dung_ck }} {{ $item->phongtro->ten_phong }} chuyển khoản </h5>
                                                     </li>
                                                 </ul>
                                             </div>
