@@ -66,7 +66,7 @@
                                                     <a href="" class="btn btn-danger ml-3">Xóa</a>
                                                     <br>
                                                     @if ($item->xe == 1)
-                                                        <a href="{{ route('nguoitro.suanguoi.get', ['id' => $nhatro->id, 'id_phong' => $phong->id, 'id_nguoi_thue' => $item->id]) }}"
+                                                        <a href="{{ route('ngthue.xe.show', ['id' => $nhatro->id, 'id_nguoithue' => $item->id]) }}"
                                                             class="btn btn-success ml-3 mt-3" style="color: white;">Thông
                                                             tin xe</a>
                                                     @endif

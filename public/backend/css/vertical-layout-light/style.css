@@ -25943,4 +25943,15 @@ div.tagsinput span.tag a {
 .custom-font-size {
   font-size: 20px !important;
 }
+.file-info {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.file-info img {
+  display: block;
+  max-width: 700px !important;
+  margin-top: 10px;
+}
 /*# sourceMappingURL=../maps/vertical-layout-light/style.css.map */

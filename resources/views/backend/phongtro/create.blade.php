@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="row">
                     <h4 class="card-title">Quản lý nhà cho thuê {{ $nhatro->ten }}</h4>
-                    <a href="./suatennhatro.html" class=" ml-3"> Sửa tên</a>
+                    <a href="{{ route('nhatro.edit', ['id' => $nhatro->id]) }}" class=" ml-3"> Sửa tên</a>
                     {{-- <div class="col-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">

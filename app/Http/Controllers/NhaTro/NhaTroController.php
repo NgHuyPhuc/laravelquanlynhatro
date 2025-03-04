@@ -51,11 +51,13 @@ class NhaTroController extends Controller
     }
 
     public function edit($id){
-        
+        $data['nhatro'] = $this->nhatroService->getone($id);
+        return view('backend.nhatro.edit', $data);
     }
 
     public function update(Request $request, $id){
-
+        $this->nhatroService->update($request, $id);
+        return redirect()->route('nhatro.edit', $id);
     }
 
     public function destroy($id){

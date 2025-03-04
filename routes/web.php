@@ -30,6 +30,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [AdminController::class, 'index'])->name('dashboard');
 Route::get('/themmoinhatro', [NhaTroController::class, 'create'])->name('nhatro.create');
 Route::post('/postthemmoinhatro', [NhaTroController::class, 'store'])->name('nhatro.create.post');
+Route::get('/suatennhatro/{id}', [NhaTroController::class, 'edit'])->name('nhatro.edit');
+Route::post('/postsuatennhatro/{id}', [NhaTroController::class, 'update'])->name('nhatro.edit.post');
 // Route::get('/test/{id_phongtro}', [AdminController::class, 'test']);
 Route::get('/test', [AdminController::class, 'test']);
 

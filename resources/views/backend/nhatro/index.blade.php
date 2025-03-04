@@ -6,13 +6,27 @@
             <div class="row">
                 <div class="row">
                     <h4 class="card-title">Quản lý nhà cho thuê: {{ $nhatro->ten }}</h4>
-                    <a href="./suatennhatro.html" class=" ml-3"> Sửa tên</a>
-                    @if ($errors->any())
+                    <a href="{{ route('nhatro.edit', ['id' => $nhatro->id]) }}" class=" ml-3"> Sửa tên</a>
+                    {{-- @if ($errors->any())
                         @foreach ($errors->all() as $error)
-                            <hr/>
+                            <hr />
                             <p class="btn-danger">{{ $error }}</p>
                         @endforeach
+                    @endif --}}
+                    <!-- Kiểm tra và hiển thị lỗi -->
+                    @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
                     @endif
+
+                    <!-- Kiểm tra và hiển thị thông báo thành công -->
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
                     @if ($checkCpdv == 0)
                         <div class="col-12 grid-margin stretch-card">
                             <div class="card">
@@ -38,7 +52,7 @@
                                     <a href="{{ route('get.nhaptatcasdn', ['id' => $nhatro->id]) }}" type="button"
                                         class="ml-3 btn btn-success mb-4">Nhập số điện nước
                                     </a>
-                                    
+
                                     @if ($checkCpdv == 1)
                                         <a href="{{ route('nhatro.chiphi.show', ['id' => $nhatro->id]) }}" type="button"
                                             class="ml-3 btn btn-success mb-4">Quản lý chi phí dịch vụ
@@ -53,35 +67,39 @@
                                     <a href="{{ route('get.nhaptatcasdn', ['id' => $nhatro->id]) }}" type="button"
                                         class="btn btn-success mb-4">Nhập số điện nước
                                     </a>
-                                    <button type="button" class="ml-3 btn btn-primary mb-4" data-toggle="modal" data-target="#exampleModal">
+                                    <button type="button" class="ml-3 btn btn-primary mb-4" data-toggle="modal"
+                                        data-target="#exampleModal">
                                         Tạo tất cả hóa đơn
                                     </button>
                                     <!-- Modal -->
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Xác nhận tạo tất cả hóa đơn cho lần nhập số điện nước này
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">Close</button>
+                                                    {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+                                                    <a href="{{ route('Tao.tat.ca.hoa.don', ['id' => $nhatro->id]) }}"
+                                                        type="button" class="ml-3 btn btn-success">Tạo tất cả hóa đơn
+                                                    </a>
+                                                </div>
                                             </div>
-                                            <div class="modal-body">
-                                            Xác nhận tạo tất cả hóa đơn cho lần nhập số điện nước này
-                                            </div>
-                                            <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
-                                            <a href="{{ route('Tao.tat.ca.hoa.don', ['id' => $nhatro->id]) }}" type="button"
-                                                class="ml-3 btn btn-success">Tạo tất cả hóa đơn
-                                            </a>
-                                            </div>
-                                        </div>
                                         </div>
                                     </div>
-                                    
-                                    <a href="{{ route('phong.hoadon.danhsach.all', ['id' => $nhatro->id]) }}" type="button"
-                                        class="ml-3 btn btn-success mb-4">Danh sách hóa đơn tháng này
+
+                                    <a href="{{ route('phong.hoadon.danhsach.all', ['id' => $nhatro->id]) }}"
+                                        type="button" class="ml-3 btn btn-success mb-4">Danh sách hóa đơn tháng này
                                     </a>
                                     <div type="button" class="ml-3 btn btn-info mb-4"> Tìm kiếm
                                     </div>
@@ -103,9 +121,9 @@
                                                         <div class="mb-2">
                                                             <h4 class="mb-0 ">{{ $phong->ten_phong }}</h4>
                                                         </div>
-                                                        <h6 class="mb-3">Giá phòng:
+                                                        <h5 class="mb-3">Giá phòng:
                                                             {{ number_format($phong->gia_phong) }}
-                                                            đ</h6>
+                                                            đ</h5>
                                                         @if ($phong->trang_thai === 0)
                                                             <div type="button"
                                                                 class="btn btn-danger btn-rounded btn-fw mb-4">Chưa cho thuê

@@ -27,6 +27,13 @@ class NhaTroService
     {
         return $this->nhatro->find($id);
     }
+    public function update($request, $id)
+    {
+        $data = [
+            'ten' => $request->name,
+        ];
+        return $this->nhatro->update($id, $data);
+    }
     public function getTangandPhongTro($id){
         return $this->nhatro->getTangAndPhongTro($id);
     }
