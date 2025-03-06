@@ -53,7 +53,7 @@
                     </div>
                     <div>
                         <h3>Tổng Tiền: {{ number_format($total) }}</h3>
-                        <h3>Tiền Tiền Điện: {{ number_format($tien_dien) }}</h3>
+                        <h3>Tổng Tiền Điện: {{ number_format($tien_dien) }}</h3>
                         <h3>Tổng Tiền Nước: {{ number_format($tien_nuoc) }}</h3>
                     </div>
                     <div class="d-flex justify-content-end align-items-center">
@@ -195,7 +195,9 @@
                                                         </h5>
                                                     </li>
                                                     <li>
-                                                        <h5 class="text-danger">{{ $cpdv->noi_dung_ck }} {{ $item->phongtro->ten_phong }} chuyển khoản </h5>
+                                                        <h5 class="text-danger">{{ $cpdv->noi_dung_ck }}
+                                                            {{-- {{ $item->phongtro->ten_phong }} chuyển khoản  --}}
+                                                        </h5>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -319,7 +321,7 @@
             });
         };
     </script> --}}
-    
+
     {{-- all no loading bar --}}
     {{-- <script>
         // Chụp màn hình
@@ -477,9 +479,16 @@
             zip.generateAsync({
                 type: "blob"
             }).then((content) => {
+                const today = new Date();
+                const day = String(today.getDate()).padStart(2, '0'); // Đảm bảo luôn có 2 chữ số
+                const month = String(today.getMonth() + 1).padStart(2, '0'); // Tháng bắt đầu từ 0
+                const year = today.getFullYear();
+
+                // Định dạng ngày tháng năm (ví dụ: dd_mm_yyyy)
+                const formattedDate = `${day}-${month}-${year}`;
                 const link = document.createElement("a");
                 link.href = URL.createObjectURL(content);
-                link.download = "hoa_don.zip";
+                link.download = `Hóa Đơn ${formattedDate}.zip`;
                 link.click();
             });
         };
@@ -549,5 +558,5 @@
             });
         };
     </script> --}}
-    
+
 @endsection

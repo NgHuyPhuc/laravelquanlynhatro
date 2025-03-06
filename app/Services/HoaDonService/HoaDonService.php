@@ -51,6 +51,8 @@ class HoaDonService
     }
     public function getone($id)
     {
+        // return 'abc';
+        // dd($this->hoaDon->find($id));
         return $this->hoaDon->find($id);
     }
     public function getByIdPhong($id_phong)

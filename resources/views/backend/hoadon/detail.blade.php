@@ -1,6 +1,7 @@
 @extends('backend/master/master')
 @section('title', 'Tạo mới hóa đơn')
 @section('main')
+{{-- @dd($data) --}}
     <div class="main-panel">
         <div class="content-wrapper">
             <div class="row">
