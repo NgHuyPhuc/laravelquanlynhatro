@@ -26,7 +26,7 @@ class SoDienNuocTheoPhongController extends Controller
         $this->chiPhiDichVuService = $chiPhiDichVuService;
     }
     public function index($id, $id_phong){
-        $data['diennuoc'] = $this->soDienNuoc->getbyphong($id_phong)->orderby('date','desc')->paginate(2);
+        $data['diennuoc'] = $this->soDienNuoc->getbyphong($id_phong)->orderby('date','desc')->paginate(4);
         $data['phong'] = $this->phongTro->getone($id_phong);
         $data['check'] = $this->soDienNuoc->checkExists($id_phong);
         return view('backend.sodiennuoc.all', $data);

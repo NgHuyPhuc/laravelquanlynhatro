@@ -35,7 +35,7 @@ class HoaDonPhongTroController extends Controller
     }
     public function index($id, $id_phong)
     {
-        $data['hoadon'] = $this->hoaDon->getByIdPhong($id_phong)->paginate(5);
+        $data['hoadon'] = $this->hoaDon->getByIdPhong($id_phong)->orderByDesc('id')->paginate(5);
         $data['id_phong'] = $id_phong;
         return view('backend.hoadon.index', $data);
     }

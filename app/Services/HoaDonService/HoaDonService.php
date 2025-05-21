@@ -150,7 +150,7 @@ class HoaDonService
         $tien_binh_nuoc_string = $phong->mua_nuoc * $cpdv->tien_binh_nuoc;
         return $tien_binh_nuoc_string;
     }
-    public function tienPhongString($soDienNuocNow, $phong)
+    public function tienPhongString($soDienNuocPrev, $soDienNuocNow, $phong, $cpdv)
     {
         $tienPhong = '' . $phong->ten_phong . ' Tháng ' . Carbon::parse($soDienNuocNow->date)->format('m') . ' năm ' . Carbon::parse($soDienNuocNow->date)->format('Y');
         return $tienPhong;
